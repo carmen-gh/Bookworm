@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-02-27T11:53:17.697Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Safari/605.1.15" etag="8vXpopiRztDwDc6FfYjz" version="16.6.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-02-27T11:56:10.837Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.2 Safari/605.1.15" etag="e3nXmCRMfTjiXcpjgnyp" version="16.6.4" type="github">
   <diagram name="Page-1" id="03018318-947c-dd8e-b7a3-06fadd420f32">
     <mxGraphModel dx="1306" dy="1676" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="none" math="0" shadow="0">
       <root>
@@ -181,12 +181,6 @@
         <mxCell id="GRDT87PzaCO0oU7K1cTU-26" value="Kategorie" style="text;html=1;points=[];align=left;verticalAlign=top;spacingTop=-4;fontSize=14;fontFamily=Comic Sans MS;" vertex="1" parent="1">
           <mxGeometry x="120" y="-420" width="60" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="GRDT87PzaCO0oU7K1cTU-27" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.navigation.scrollBar;strokeColor=#999999;barPos=20;fillColor2=#99ddff;strokeColor2=none;direction=north;labelBackgroundColor=default;labelBorderColor=none;fontFamily=Comic Sans MS;fontColor=none;fillColor=#67AB9F;" vertex="1" parent="1">
-          <mxGeometry x="540" y="-350" width="20" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="GRDT87PzaCO0oU7K1cTU-28" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.misc.loading_circle_1;pointerEvents=1;labelBackgroundColor=default;labelBorderColor=none;fontFamily=Comic Sans MS;fontColor=none;fillColor=#67AB9F;" vertex="1" parent="1">
-          <mxGeometry x="450" y="-290" width="140" height="90" as="geometry" />
-        </mxCell>
         <mxCell id="GRDT87PzaCO0oU7K1cTU-29" value="Filter" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.callout;linkText=;textSize=17;textColor=#666666;callDir=NE;callStyle=line;fontSize=17;fontColor=#666666;align=right;verticalAlign=top;strokeColor=#666666;labelBackgroundColor=default;labelBorderColor=none;fontFamily=Comic Sans MS;fillColor=#67AB9F;" vertex="1" parent="1">
           <mxGeometry x="315" y="-650" width="85" height="100" as="geometry" />
         </mxCell>
@@ -213,6 +207,12 @@
         </mxCell>
         <mxCell id="GRDT87PzaCO0oU7K1cTU-43" value="Progess (read)" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.callout;linkText=;textSize=17;textColor=#666666;callDir=NE;callStyle=line;fontSize=17;fontColor=#666666;align=right;verticalAlign=top;strokeColor=#666666;labelBackgroundColor=default;labelBorderColor=none;fontFamily=Comic Sans MS;fillColor=#67AB9F;" vertex="1" parent="1">
           <mxGeometry x="300" y="-490" width="205" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="GRDT87PzaCO0oU7K1cTU-44" value="&lt;p style=&quot;margin: 0px 0px 2px; font-style: normal; font-variant-caps: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: menlo;&quot;&gt;169&lt;/p&gt;" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.graphics.simpleIcon;strokeColor=#999999;rounded=0;labelBackgroundColor=none;fontFamily=Verdana;fontSize=14;fontColor=none;comic=1;noLabel=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="-559.37" width="40" height="28.75" as="geometry" />
+        </mxCell>
+        <mxCell id="GRDT87PzaCO0oU7K1cTU-45" value="Add" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.text.callout;linkText=;textSize=17;textColor=#666666;callDir=NE;callStyle=line;fontSize=17;fontColor=#666666;align=right;verticalAlign=top;strokeColor=#666666;labelBackgroundColor=default;labelBorderColor=none;fontFamily=Comic Sans MS;fillColor=#67AB9F;" vertex="1" parent="1">
+          <mxGeometry x="40" y="-650" width="85" height="100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
