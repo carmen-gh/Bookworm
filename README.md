@@ -1,4 +1,4 @@
-# Bookworm 🪱
+# Bookworm 📚🪱
 
 An app to keep an overview of all your books.    
 
@@ -10,4 +10,6 @@ An app to keep an overview of all your books.
 - Kotlin
 - Hilt
 - Compose
+- Compose Navigation
 - Room
+- CameraX
