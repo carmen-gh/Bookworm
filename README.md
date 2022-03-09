@@ -13,3 +13,4 @@ An app to keep an overview of all your books.
 - Compose Navigation
 - Room
 - CameraX
+- MLKit
