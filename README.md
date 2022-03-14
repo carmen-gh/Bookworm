@@ -14,3 +14,4 @@ An app to keep an overview of all your books.
 - Room
 - CameraX
 - MLKit
+- ?? WorkManager, Animations with MotionLayout
