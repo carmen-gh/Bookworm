@@ -10,18 +10,16 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.presentation.theme.BookwormTheme
 
 
 @Composable
-fun TopAppBarBackNavigation(title: String, navController: NavController) {
+fun TopAppBarNavigationUp(title: String, onClick: () -> Unit) {
     TopAppBar(
         title = { Text(title) },
         navigationIcon = {
-            IconButton(onClick = { navController.navigateUp() }) {
+            IconButton(onClick = onClick) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
                     contentDescription = stringResource(id = R.string.top_app_bar_back)
@@ -36,14 +34,14 @@ fun TopAppBarBackNavigation(title: String, navController: NavController) {
 @Composable
 fun DefaultPreview() {
     BookwormTheme() {
-        TopAppBarBackNavigation(title = "Test", navController = rememberNavController())
+        TopAppBarNavigationUp(title = "TopAppBar Title", onClick = {})
     }
 }
 
-@Preview(showBackground = true, name = "ToppAppBar dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, name = "TopAppBar dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun DefaultPreviewDark() {
     BookwormTheme() {
-        TopAppBarBackNavigation(title = "Test", navController = rememberNavController())
+        TopAppBarNavigationUp(title = "TopAppBar Title", onClick = {})
     }
 }

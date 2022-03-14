@@ -20,7 +20,7 @@ class BookshelfViewModel @Inject constructor(
 
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(BookshelfUiState())
+    var uiState by mutableStateOf(BookshelfUiState(isLoading = true))
         private set
 
     private var fetchJob: Job? = null

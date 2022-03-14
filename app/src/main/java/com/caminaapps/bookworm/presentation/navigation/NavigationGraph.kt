@@ -7,8 +7,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.caminaapps.bookworm.presentation.screens.book.BookScreen
+import com.caminaapps.bookworm.presentation.screens.book.BookViewModel
 import com.caminaapps.bookworm.presentation.screens.bookshelf.BookshelfScreen
 import com.caminaapps.bookworm.presentation.screens.bookshelf.BookshelfViewModel
+import com.caminaapps.bookworm.presentation.screens.settings.SettingsScreen
+import com.caminaapps.bookworm.presentation.screens.settings.SettingsViewModel
+import com.caminaapps.bookworm.presentation.screens.wishlist.WishlistScreen
+import com.caminaapps.bookworm.presentation.screens.wishlist.WishlistViewModel
 
 @Composable
 fun BookwormNavHost(
@@ -26,12 +32,24 @@ fun BookwormNavHost(
 
         // Wishlist
         composable(BottomNavigationScreen.Wishlist.route) {
-            Text(text = "Wishlist")
+            WishlistScreen(
+                viewModel = hiltViewModel<WishlistViewModel>()
+            )
         }
 
         // Settings
         composable(BottomNavigationScreen.Settings.route) {
-            Text(text = "Settings")
+            SettingsScreen(
+                viewModel = hiltViewModel<SettingsViewModel>()
+            )
+        }
+
+
+        // Book details
+        composable(Screen.Book.route) {
+            BookScreen(viewModel = hiltViewModel<BookViewModel>()) {
+                navController.navigateUp()
+            }
         }
     }
 }
