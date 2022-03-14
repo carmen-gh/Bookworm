@@ -7,7 +7,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -33,11 +32,11 @@ fun BookwormBottomNavigation(
         val currentDestination = navBackStackEntry?.destination
 
         bottomNavigationItems.forEach { screen ->
-            val label = stringResource(id = screen.resourceId)
+
             BottomNavigationItem(
                 icon = { Icon(imageVector = screen.icon, contentDescription = null) },
                 modifier = Modifier.testTag(screen.route),
-                label = { Text(stringResource(id = screen.resourceId)) },
+                label = { Text(stringResource(id = screen.titleResourceId)) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
                     navController.navigate(screen.route) {
