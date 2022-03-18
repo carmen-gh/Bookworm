@@ -1,5 +1,7 @@
 package com.caminaapps.bookworm.presentation.screens.bookshelf
 
+import androidx.compose.material.FabPosition
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
@@ -7,9 +9,19 @@ import androidx.compose.runtime.Composable
 fun BookshelfScreen(
     viewModel: BookshelfViewModel
 ) {
-    if(viewModel.uiState.isLoading) {
-        Text("- Bookshelf loading -")
+    Scaffold(
+        floatingActionButtonPosition = FabPosition.End,
+        floatingActionButton = {
+            AddBookFloatingActionButton(
+                onManual = { /*TODO*/ },
+                onScan = {  /*TODO*/ }
+            )
+        }
+    ) {
+        Text("- Bookshelf -")
     }
-
-    Text("- Bookshelf -")
+//    if(viewModel.uiState.isLoading) {
+//        Text("- Bookshelf loading -")
+//    }
 }
+

@@ -22,7 +22,7 @@ fun TopAppBarNavigationUp(title: String, onClick: () -> Unit) {
             IconButton(onClick = onClick) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = stringResource(id = R.string.top_app_bar_back)
+                    contentDescription = stringResource(id = R.string.button_back)
                 )
             }
         }
