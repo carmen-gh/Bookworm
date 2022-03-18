@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Bookworm</string>
-    <string name="top_app_bar_back">Back</string>
     <string name="screen_title_bookshelf">Bookshelf</string>
     <string name="screen_title_wishlist">Wishlist</string>
     <string name="screen_title_settings">Settings</string>
+    <string name="button_back">back</string>
+    <string name="button_add">add</string>
+    <string name="button_edit">edit</string>
+    <string name="button_scan">scan</string>
 </resources>
