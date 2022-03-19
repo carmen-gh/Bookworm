@@ -42,7 +42,7 @@ fun BookList(
 fun PreviewBookList(
     @PreviewParameter(BooksPreviewParameterProvider::class) books: List<Book>
 ) {
-    BookwormTheme {
+    BookwormTheme() {
         BookList(books = books, onItemClick = {})
     }
 }

@@ -1,5 +1,6 @@
 package com.caminaapps.bookworm.presentation.screens.bookshelf.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -24,7 +25,10 @@ fun BookItem(
     imageUrl: String,
     onClick: () -> Unit
 ) {
-    Card(onClick = onClick) {
+    Card(
+        onClick = onClick,
+        border = BorderStroke(width = 1.dp, color = MaterialTheme.colors.onBackground)
+    ) {
         Row() {
             Image(
                 painter = rememberImagePainter(imageUrl),
