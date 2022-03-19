@@ -2,7 +2,25 @@ package com.caminaapps.bookworm.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
+
+val md_theme_light_primary = Color(0xFFFB8C00)
+val md_theme_light_onPrimary = Color(0xFFffffff)
+val md_theme_light_secondary = Color(0xFF00ACC1)
+val md_theme_light_onSecondary = Color(0xFFffffff)
+val md_theme_light_error = Color(0xFFB3261E)
+val md_theme_light_onError = Color(0xFFFFFFFF)
+val md_theme_light_background = Color(0xFFFFFBFE)
+val md_theme_light_onBackground = Color(0xFF1C1B1F)
+val md_theme_light_surface = Color(0xFFFFFBFE)
+val md_theme_light_onSurface = Color(0xFF1C1B1F)
+
+val md_theme_dark_primary = Color(0xFF6ad2ff)
+val md_theme_dark_onPrimary = Color(0xFF003548)
+val md_theme_dark_secondary = Color(0xFF93d95c)
+val md_theme_dark_onSecondary = Color(0xFF163800)
+val md_theme_dark_error = Color(0xFFF07069)
+val md_theme_dark_onError = Color(0xFF601410)
+val md_theme_dark_background = Color(0xFF1C1B1F)
+val md_theme_dark_onBackground = Color(0xFFE6E1E5)
+val md_theme_dark_surface = Color(0xFF1C1B1F)
+val md_theme_dark_onSurface = Color(0xFFE6E1E5)
