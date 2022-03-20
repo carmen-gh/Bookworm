@@ -12,6 +12,7 @@ An app to keep an overview of all your books.
 - Compose
 - Compose Navigation
 - Room
+- Permission Handling
 - CameraX
 - MLKit
 - ?? WorkManager, Animations with MotionLayout
