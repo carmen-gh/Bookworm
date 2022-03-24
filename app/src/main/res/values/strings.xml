@@ -7,4 +7,9 @@
     <string name="button_add">add</string>
     <string name="button_edit">edit</string>
     <string name="button_scan">scan</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_maybe_later">Maybe later</string>
+    <string name="camera_permission_title">Scan barcodes</string>
+    <string name="camera_permission_text">To be able to scan the barcodes on a book, the bookworm app needs Manifest.permission to access your camera.</string>
 </resources>

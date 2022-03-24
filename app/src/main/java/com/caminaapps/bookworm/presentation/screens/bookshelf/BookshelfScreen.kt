@@ -4,7 +4,10 @@ import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import com.caminaapps.bookworm.presentation.screens.bookshelf.components.AddBookFloatingActionButton
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
+@ExperimentalPermissionsApi
 @Composable
 fun BookshelfScreen(
     viewModel: BookshelfViewModel
@@ -12,16 +15,19 @@ fun BookshelfScreen(
     Scaffold(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
+
             AddBookFloatingActionButton(
                 onManual = { /*TODO*/ },
-                onScan = {  /*TODO*/ }
+                onScan = { }
             )
         }
     ) {
+
         Text("- Bookshelf -")
+
     }
-//    if(viewModel.uiState.isLoading) {
-//        Text("- Bookshelf loading -")
-//    }
 }
+
+
+
 

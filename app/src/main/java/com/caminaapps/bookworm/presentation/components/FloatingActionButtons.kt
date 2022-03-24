@@ -11,15 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 
+@Suppress("unused")
 @Composable
 fun ColumnScope.SpeedDialItem(
     onClick: () -> Unit,
-    icon: @Composable () -> Unit
+    content: @Composable () -> Unit
 ) {
     FloatingActionButton(
         modifier = Modifier.size(SpeedDialFloatingActionButtonSize),
         onClick = onClick,
-        content = icon
+        content = content
     )
 }
 
