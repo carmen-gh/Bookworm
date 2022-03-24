@@ -1,6 +1,5 @@
 package com.caminaapps.bookworm.presentation.navigation
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -15,7 +14,9 @@ import com.caminaapps.bookworm.presentation.screens.settings.SettingsScreen
 import com.caminaapps.bookworm.presentation.screens.settings.SettingsViewModel
 import com.caminaapps.bookworm.presentation.screens.wishlist.WishlistScreen
 import com.caminaapps.bookworm.presentation.screens.wishlist.WishlistViewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
+@ExperimentalPermissionsApi
 @Composable
 fun BookwormNavHost(
     navController: NavHostController,

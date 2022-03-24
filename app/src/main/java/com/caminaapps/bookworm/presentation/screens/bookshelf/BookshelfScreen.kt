@@ -1,12 +1,11 @@
 package com.caminaapps.bookworm.presentation.screens.bookshelf
 
-import android.Manifest
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import com.caminaapps.bookworm.presentation.screens.bookshelf.components.AddBookFloatingActionButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.rememberPermissionState
 
 @ExperimentalPermissionsApi
 @Composable
@@ -16,15 +15,19 @@ fun BookshelfScreen(
     Scaffold(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
+
             AddBookFloatingActionButton(
                 onManual = { /*TODO*/ },
-                onScan = { cameraPermissionState.launchPermissionRequest() }
+                onScan = { }
             )
         }
     ) {
-        Text("- Bookshelf -")
-    }
 
+        Text("- Bookshelf -")
+
+    }
 }
+
+
+
 
