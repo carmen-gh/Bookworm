@@ -10,6 +10,7 @@ import androidx.compose.ui.window.DialogProperties
 import com.caminaapps.bookworm.presentation.components.CameraPreview
 import com.caminaapps.bookworm.presentation.screens.bookshelf.components.AddBookFloatingActionButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import timber.log.Timber
 
 @ExperimentalComposeUiApi
 @ExperimentalPermissionsApi
@@ -22,7 +23,6 @@ fun BookshelfScreen(
     Scaffold(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-
             AddBookFloatingActionButton(
                 onManual = { /*TODO*/ },
                 onScan = { openCameraPreview = true }
@@ -41,7 +41,10 @@ fun BookshelfScreen(
                     usePlatformDefaultWidth = false
                 )
             ) {
-                CameraPreview()
+                CameraPreview(onBarcodeDetected = { barcode ->
+                    Timber.d(barcode)
+                    openCameraPreview = false
+                })
             }
         }
 
