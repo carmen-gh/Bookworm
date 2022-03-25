@@ -3,6 +3,7 @@ package com.caminaapps.bookworm.presentation.main
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
@@ -12,6 +13,7 @@ import com.caminaapps.bookworm.presentation.theme.BookwormTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 
+@ExperimentalComposeUiApi
 @ExperimentalPermissionsApi
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
@@ -31,6 +33,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
 }
 
 
+@ExperimentalComposeUiApi
 @ExperimentalPermissionsApi
 @Preview(showBackground = true)
 @Composable

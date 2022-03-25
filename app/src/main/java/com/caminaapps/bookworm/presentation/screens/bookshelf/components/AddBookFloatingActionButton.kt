@@ -54,13 +54,13 @@ fun ColumnScope.CameraSpeedDialItem(onScan: () -> Unit) {
     var openDialog by remember { mutableStateOf(false) }
 
     SpeedDialItem(onClick = {
-        if (!cameraPermissionState.permissionRequested) {
+        if (cameraPermissionState.hasPermission) {
+            Timber.d("start camera")
+            onScan()
+        } else if (!cameraPermissionState.permissionRequested) {
             cameraPermissionState.launchPermissionRequest()
         } else if (!cameraPermissionState.hasPermission) {
             openDialog = true
-        } else if (cameraPermissionState.hasPermission) {
-            Timber.d("start camera")
-            onScan()
         }
     }) {
         Icon(
