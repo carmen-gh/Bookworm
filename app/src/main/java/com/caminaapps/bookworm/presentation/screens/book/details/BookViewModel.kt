@@ -1,6 +1,5 @@
-package com.caminaapps.bookworm.presentation.screens.book
+package com.caminaapps.bookworm.presentation.screens.book.details
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,8 +8,6 @@ import androidx.lifecycle.ViewModel
 import com.caminaapps.bookworm.domain.model.Book
 import com.caminaapps.bookworm.domain.model.Message
 import com.caminaapps.bookworm.presentation.navigation.Screen
-import com.caminaapps.bookworm.presentation.screens.bookshelf.BookshelfUiState
-import com.caminaapps.bookworm.presentation.screens.settings.SettingsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

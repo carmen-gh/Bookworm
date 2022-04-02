@@ -34,7 +34,7 @@ fun BookwormBottomNavigation(
         bottomNavigationItems.forEach { screen ->
 
             BottomNavigationItem(
-                icon = { Icon(imageVector = screen.icon, contentDescription = null) },
+                icon = { Icon(imageVector = screen.icon, contentDescription = screen.route) },
                 modifier = Modifier.testTag(screen.route),
                 label = { Text(stringResource(id = screen.titleResourceId)) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,

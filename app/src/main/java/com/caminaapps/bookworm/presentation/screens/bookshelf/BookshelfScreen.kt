@@ -7,7 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.caminaapps.bookworm.presentation.components.CameraPreview
+import com.caminaapps.bookworm.presentation.barcodeScanner.CameraPreview
 import com.caminaapps.bookworm.presentation.screens.bookshelf.components.AddBookFloatingActionButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import timber.log.Timber

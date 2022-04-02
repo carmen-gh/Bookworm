@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.presentation.components
+package com.caminaapps.bookworm.presentation.barcodeScanner
 
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -13,7 +13,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import com.caminaapps.bookworm.presentation.barcodeScanner.BarcodeAnalyzer
 
 
 @Composable

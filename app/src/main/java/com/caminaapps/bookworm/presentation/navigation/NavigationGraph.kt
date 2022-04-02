@@ -7,8 +7,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.caminaapps.bookworm.presentation.screens.book.BookScreen
-import com.caminaapps.bookworm.presentation.screens.book.BookViewModel
+import com.caminaapps.bookworm.presentation.screens.book.details.BookScreen
+import com.caminaapps.bookworm.presentation.screens.book.details.BookViewModel
 import com.caminaapps.bookworm.presentation.screens.bookshelf.BookshelfScreen
 import com.caminaapps.bookworm.presentation.screens.bookshelf.BookshelfViewModel
 import com.caminaapps.bookworm.presentation.screens.settings.SettingsScreen
