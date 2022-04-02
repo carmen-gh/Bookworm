@@ -1,5 +1,7 @@
 package com.caminaapps.bookworm.presentation.theme
 
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
 
@@ -24,3 +26,30 @@ val md_theme_dark_background = Color(0xFF1C1B1F)
 val md_theme_dark_onBackground = Color(0xFFE6E1E5)
 val md_theme_dark_surface = Color(0xFF1C1B1F)
 val md_theme_dark_onSurface = Color(0xFFE6E1E5)
+
+
+internal val LightColorPalette = lightColors(
+    primary = md_theme_light_primary,
+    onPrimary = md_theme_light_onPrimary,
+    secondary = md_theme_light_secondary,
+    onSecondary = md_theme_light_onSecondary,
+    error = md_theme_light_error,
+    onError = md_theme_light_onError,
+    background = md_theme_light_background,
+    onBackground = md_theme_light_onBackground,
+    surface = md_theme_light_surface,
+    onSurface = md_theme_light_onSurface,
+)
+
+internal val DarkColorPalette = darkColors(
+    primary = md_theme_dark_primary,
+    onPrimary = md_theme_dark_onPrimary,
+    secondary = md_theme_dark_secondary,
+    onSecondary = md_theme_dark_onSecondary,
+    error = md_theme_dark_error,
+    onError = md_theme_dark_onError,
+    background = md_theme_dark_background,
+    onBackground = md_theme_dark_onBackground,
+    surface = md_theme_dark_surface,
+    onSurface = md_theme_dark_onSurface,
+)

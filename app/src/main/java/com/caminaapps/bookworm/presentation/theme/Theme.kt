@@ -1,39 +1,16 @@
 package com.caminaapps.bookworm.presentation.theme
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-
-
-private val LightColorPalette = lightColors(
-
-    primary = md_theme_light_primary,
-    onPrimary = md_theme_light_onPrimary,
-    secondary = md_theme_light_secondary,
-    onSecondary = md_theme_light_onSecondary,
-    error = md_theme_light_error,
-    onError = md_theme_light_onError,
-    background = md_theme_light_background,
-    onBackground = md_theme_light_onBackground,
-    surface = md_theme_light_surface,
-    onSurface = md_theme_light_onSurface,
-)
-
-private val DarkColorPalette = darkColors(
-
-    primary = md_theme_dark_primary,
-    onPrimary = md_theme_dark_onPrimary,
-    secondary = md_theme_dark_secondary,
-    onSecondary = md_theme_dark_onSecondary,
-    error = md_theme_dark_error,
-    onError = md_theme_dark_onError,
-    background = md_theme_dark_background,
-    onBackground = md_theme_dark_onBackground,
-    surface = md_theme_dark_surface,
-    onSurface = md_theme_dark_onSurface,
-)
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 
 @Composable
@@ -54,3 +31,29 @@ fun BookwormTheme(
         content = content
     )
 }
+
+@Preview(name = "Theme test", showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun ThemeTest() {
+    BookwormTheme {
+        Surface {
+            Column(
+                Modifier.padding(48.dp),
+            ) {
+
+                Button(onClick = {}) {
+                    Text("Button1")
+                }
+                Spacer(Modifier.height(16.dp))
+                Card {
+                    Column(
+                        Modifier.padding(16.dp)
+                    ) {
+                        Text("This is a card")
+                    }
+                }
+            }
+        }
+    }
+}
+
