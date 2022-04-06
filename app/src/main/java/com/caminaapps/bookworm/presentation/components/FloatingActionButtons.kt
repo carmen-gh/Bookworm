@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.presentation.theme.BookwormTheme
 
-
 @Suppress("unused")
 @Composable
 fun ColumnScope.SpeedDialItem(
@@ -68,33 +67,35 @@ fun SpeedDialFloatingActionButton(
                 enter = slideInVertically(initialOffsetY = { 200 }),
                 exit = slideOutVertically(targetOffsetY = { 300 })
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(SpeedDialFloatingActionButtonSpace)) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(SpeedDialFloatingActionButtonSpace)
+                ) {
                     content()
                 }
             }
         }
-        FloatingActionButton(onClick = {
-            expanded = !expanded
-            onClick()
-        }, content = icon)
+        FloatingActionButton(
+            onClick = {
+                expanded = !expanded
+                onClick()
+            }, content = icon
+        )
     }
 }
 
-private val SpeedDialFloatingActionButtonBoxMaxHeight =
-    40.dp * 6 + 24.dp * 5 // max amount of buttons should be 6
+// max amount of buttons should be 6
+private val SpeedDialFloatingActionButtonBoxMaxHeight = 40.dp * 6 + 24.dp * 5
 private val SpeedDialFloatingActionButtonSize = 40.dp
-private val SpeedDialFloatingActionButtonSpace =   24.dp
+private val SpeedDialFloatingActionButtonSpace = 24.dp
 
 enum class SpeedDialFloatingActionButtonValue {
     Closed,
     Expanded
 }
 
-
 @Preview
 @Composable
 fun SpeedDialFloatingActionButtonPreview() {
-
     BookwormTheme {
         Scaffold(
             floatingActionButtonPosition = FabPosition.End,
@@ -122,7 +123,5 @@ fun SpeedDialFloatingActionButtonPreview() {
                 }
             }
         ) { }
-
-
     }
 }
