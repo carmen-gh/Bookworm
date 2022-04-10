@@ -10,10 +10,10 @@ class GoogleBooksRepositoryImpl @Inject constructor(
     private val googleBooksApi: GoogleBooksApi,
 ) : GoogleBooksRepository {
 
-    override suspend fun getBookByISBN(isbn: String) : Book? =
-       googleBooksApi.getBooks(GoogleBooksApi.parameterISBN(isbn)).firstOrNull()?.toBook()
+    override suspend fun getBookByISBN(isbn: String): Book? =
+        googleBooksApi.getBooks(GoogleBooksApi.parameterISBN(isbn)).firstOrNull()?.toBook()
 
-    override suspend fun getBooksByTitle(title: String) : List<Book> {
+    override suspend fun getBooksByTitle(title: String): List<Book> {
         return if (title.isBlank()) {
             emptyList<Book>()
         } else {
@@ -21,5 +21,4 @@ class GoogleBooksRepositoryImpl @Inject constructor(
             searchResult.map { it.toBook() }
         }
     }
-
 }

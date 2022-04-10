@@ -7,27 +7,28 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RemoteDataSourceModule {
 
-    @OptIn(ExperimentalSerializationApi::class)
+    @ExperimentalSerializationApi
     @Provides
     @Singleton
     fun provideApi(okHttpClient: OkHttpClient): GoogleBooksApi {
         val contentType = "application/json".toMediaType()
+        val converterFactory = Json.asConverterFactory(contentType)
         return Retrofit.Builder()
             .baseUrl(GoogleBooksApi.BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(Json.asConverterFactory(contentType))
+            .addConverterFactory(converterFactory)
             .build()
             .create(GoogleBooksApi::class.java)
     }
