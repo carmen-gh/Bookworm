@@ -4,10 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.CalendarToday
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,25 +42,25 @@ fun AddBookContentView(
             value = title,
             onValueChange = { title = it },
             label = R.string.textfield_label_title,
-            imageVector = Icons.Filled.Book
+            imageResource = R.drawable.ic_baseline_book_24
         )
         IconTextField(
             value = subtitle,
             onValueChange = { subtitle = it },
             label = R.string.textfield_label_subtitle,
-            imageVector = Icons.Filled.Book
+            imageResource = R.drawable.ic_baseline_book_24
         )
         IconTextField(
             value = author,
             onValueChange = { author = it },
             label = R.string.textfield_label_author,
-            imageVector = Icons.Filled.Person
+            imageResource = R.drawable.ic_baseline_person_24
         )
         IconTextField(
             value = published,
             onValueChange = { published = it },
             label = R.string.textfield_label_published_date,
-            imageVector = Icons.Filled.CalendarToday
+            imageResource = R.drawable.ic_baseline_calendar_today_24
         )
 
     }

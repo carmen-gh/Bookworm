@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.caminaapps.bookworm.domain.model.Book
-import com.caminaapps.bookworm.domain.model.Message
+import com.caminaapps.bookworm.domain.model.UserMessage
 import com.caminaapps.bookworm.presentation.navigation.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -31,5 +31,5 @@ class BookViewModel @Inject constructor(
 data class BookUiState(
     val loading: Boolean = false,
     val book: Book? = null,
-    val userMessages: List<Message> = emptyList(),
+    val userMessages: List<UserMessage> = emptyList(),
 )

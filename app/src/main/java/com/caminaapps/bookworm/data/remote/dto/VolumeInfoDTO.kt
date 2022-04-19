@@ -4,24 +4,21 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class VolumeInfoDTO(
-    val allowAnonLogging: Boolean,
-    val authors: List<String>,
-    val averageRating: Int,
-    val canonicalVolumeLink: String,
-    val contentVersion: String,
-    val description: String,
-    val imageLinks: ImageLinksDTO,
-    val industryIdentifiers: List<IndustryIdentifierDTO>,
-    val infoLink: String,
-    val language: String,
-    val maturityRating: String,
-    val pageCount: Int,
-    val previewLink: String,
-    val printType: String,
+    val title: String,
+    val subtitle: String? = null,
+    val authors: List<String>? = null,
     val publishedDate: String,
-    val publisher: String,
-    val ratingsCount: Int,
-    val readingModes: ReadingModesDTO,
-    val subtitle: String,
-    val title: String
+    val industryIdentifiers: List<IndustryIdentifierDTO>? = null,
+    val readingModes: ReadingModesDTO? = null,
+    val pageCount: Long? = null,
+    val printType: String? = null,
+    val maturityRating: String? = null,
+    val allowAnonLogging: Boolean? = null,
+    val contentVersion: String? = null,
+    val imageLinks: ImageLinksDTO? = null,
+    val language: String? = null,
+    val previewLink: String? = null,
+    val infoLink: String? = null,
+    val canonicalVolumeLink: String? = null
 )
+

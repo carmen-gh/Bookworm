@@ -1,5 +1,6 @@
 package com.caminaapps.bookworm.presentation.components
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,12 +9,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,11 +26,11 @@ fun IconTextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     @StringRes label: Int,
-    imageVector: ImageVector
+    @DrawableRes imageResource: Int
 ) {
     Row(verticalAlignment = Alignment.Bottom, modifier = modifier) {
         Icon(
-            imageVector = imageVector,
+            painter = painterResource(id = imageResource),
             contentDescription = null,
             modifier = Modifier.padding(bottom = 18.dp)
         )
@@ -51,7 +50,7 @@ fun IconTextField_Preview() {
         IconTextField(
             value = "", onValueChange = {},
             label = R.string.textfield_label_author,
-            imageVector = Icons.Filled.Person
+            imageResource = R.drawable.ic_baseline_book_24
         )
     }
 }

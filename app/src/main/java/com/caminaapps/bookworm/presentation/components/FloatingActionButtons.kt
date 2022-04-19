@@ -15,7 +15,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.outlined.Camera
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +23,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -116,7 +116,7 @@ fun SpeedDialFloatingActionButtonPreview() {
                     }
                     SpeedDialItem(onClick = {}) {
                         Icon(
-                            imageVector = Icons.Outlined.Camera,
+                            painter = painterResource(id = R.drawable.ic_outline_photo_camera_24),
                             contentDescription = stringResource(id = R.string.button_edit)
                         )
                     }
