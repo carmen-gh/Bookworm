@@ -1,6 +1,6 @@
 package com.caminaapps.bookworm.data.remote
 
-import com.caminaapps.bookworm.data.remote.dto.BookDTO
+import com.caminaapps.bookworm.data.remote.dto.SearchResultDTO
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
@@ -8,7 +8,7 @@ import retrofit2.http.QueryMap
 interface GoogleBooksApi {
 
     @GET("volumes/")
-    suspend fun getBooks(@QueryMap(encoded = true) options: Map<String, String>) : List<BookDTO>
+    suspend fun getBooks(@QueryMap(encoded = true) options: Map<String, String>): SearchResultDTO
 
 
     companion object {

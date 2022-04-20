@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -34,7 +35,12 @@ fun BookwormBottomNavigation(
         bottomNavigationItems.forEach { screen ->
 
             BottomNavigationItem(
-                icon = { Icon(imageVector = screen.icon, contentDescription = null) },
+                icon = {
+                    Icon(
+                        painter = painterResource(id = screen.imageResourceId),
+                        contentDescription = screen.route
+                    )
+                },
                 modifier = Modifier.testTag(screen.route),
                 label = { Text(stringResource(id = screen.titleResourceId)) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,

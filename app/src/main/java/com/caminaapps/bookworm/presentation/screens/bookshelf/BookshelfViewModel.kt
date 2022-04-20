@@ -6,13 +6,12 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.domain.model.Book
-import com.caminaapps.bookworm.domain.model.Message
+import com.caminaapps.bookworm.domain.model.UserMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
-
 
 
 @HiltViewModel
@@ -44,5 +43,5 @@ class BookshelfViewModel @Inject constructor(
 data class BookshelfUiState(
     val isLoading: Boolean = false,
     val books: List<Book> = emptyList(),
-    val userMessages: List<Message> = emptyList()
+    val userMessages: List<UserMessage> = emptyList()
 )

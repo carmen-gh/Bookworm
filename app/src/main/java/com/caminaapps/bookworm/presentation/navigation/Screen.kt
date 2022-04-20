@@ -1,19 +1,33 @@
 package com.caminaapps.bookworm.presentation.navigation
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.caminaapps.bookworm.R
 
 sealed class BottomNavigationScreen(
     val route: String,
     @StringRes val titleResourceId: Int,
-    val icon: ImageVector
+    @DrawableRes val imageResourceId: Int,
 ) {
-    object Bookshelf : BottomNavigationScreen("bookshelf", R.string.screen_title_bookshelf, Icons.Rounded.Book)
-    object Wishlist : BottomNavigationScreen("wishlist", R.string.screen_title_wishlist, Icons.Rounded.ShoppingBasket)
-    object Settings : BottomNavigationScreen("settings", R.string.screen_title_settings, Icons.Rounded.Settings)
+    object Bookshelf :
+        BottomNavigationScreen(
+            route = "bookshelf",
+            titleResourceId = R.string.screen_title_bookshelf,
+            imageResourceId = R.drawable.ic_baseline_book_24
+        )
+
+    object Wishlist : BottomNavigationScreen(
+        route = "wishlist",
+        titleResourceId = R.string.screen_title_wishlist,
+        imageResourceId = R.drawable.ic_baseline_shopping_basket_24
+    )
+
+    object Settings :
+        BottomNavigationScreen(
+            route = "settings",
+            titleResourceId = R.string.screen_title_settings,
+            imageResourceId = R.drawable.ic_baseline_settings_24
+        )
 }
 
 
@@ -21,5 +35,11 @@ sealed class Screen(
     val route: String,
     val argumentKey: String
 ) {
-    object Book : Screen("book/{bookId}", "bookId")
+    object Book : Screen("book/{bookId}", "bookId") {
+        fun createRoute(bookId: String) = "book/$bookId"
+    }
+
+    object SearchIsbnBookResult : Screen(route = "searchBookResult/{isbn}", argumentKey = "isbn") {
+        fun createRoute(isbn: String) = "searchBookResult/$isbn"
+    }
 }

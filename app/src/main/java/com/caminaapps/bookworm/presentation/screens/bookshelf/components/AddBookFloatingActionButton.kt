@@ -6,11 +6,12 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material.icons.outlined.PhotoCamera
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.caminaapps.bookworm.R
@@ -32,14 +33,14 @@ fun AddBookFloatingActionButton(
     SpeedDialFloatingActionButton(
         icon = {
             Icon(
-                imageVector = Icons.Filled.Add,
+                painter = painterResource(id = R.drawable.ic_baseline_add_24),
                 contentDescription = stringResource(id = R.string.button_add)
             )
         }
     ) {
         SpeedDialItem(onClick = onManual) {
             Icon(
-                imageVector = Icons.Outlined.Edit,
+                painter = painterResource(id = R.drawable.ic_outline_edit_24),
                 contentDescription = stringResource(id = R.string.button_edit)
             )
         }
@@ -64,7 +65,7 @@ fun ColumnScope.CameraSpeedDialItem(onScan: () -> Unit) {
         }
     }) {
         Icon(
-            imageVector = Icons.Outlined.PhotoCamera,
+            painter = painterResource(id = R.drawable.ic_outline_photo_camera_24),
             contentDescription = stringResource(id = R.string.button_scan)
         )
     }

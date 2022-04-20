@@ -25,7 +25,8 @@ fun BookList(
             BookItem(
                 title = book.title,
                 author = book.author,
-                imageUrl = book.coverUrl, onClick = { onItemClick(book) }
+                imageUrl = book.coverUrl ?: "",
+                onClick = { onItemClick(book) }
             )
         }
     }
