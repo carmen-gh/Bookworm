@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.caminaapps.bookworm.domain.model.Book
 import com.caminaapps.bookworm.presentation.components.TopAppBarNavigationUp
@@ -28,7 +29,7 @@ import com.caminaapps.bookworm.presentation.theme.BookwormTheme
 
 @Composable
 fun BookScreen(
-    viewModel: BookViewModel,
+    viewModel: BookViewModel = hiltViewModel(),
     onUpNavigationClick: () -> Unit,
 ) {
     Scaffold(

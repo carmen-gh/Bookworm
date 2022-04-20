@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.domain.model.Book
 import com.caminaapps.bookworm.presentation.components.FullScreenLoading
@@ -28,7 +29,7 @@ import com.caminaapps.bookworm.searchBookOnline.presentation.common.SearchBookRe
 
 @Composable
 fun BookResultScreen(
-    viewModel: BookResultViewModel,
+    viewModel: BookResultViewModel = hiltViewModel(),
     onCloseScreenClick: () -> Unit,
 ) {
     Scaffold(
