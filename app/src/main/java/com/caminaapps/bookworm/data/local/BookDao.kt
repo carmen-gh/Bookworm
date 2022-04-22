@@ -1,6 +1,11 @@
 package com.caminaapps.bookworm.data.local
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -9,10 +14,14 @@ interface BookDao {
     @Query("SELECT * FROM book")
     fun getAllBooks(): Flow<List<BookEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Query("SELECT * FROM book WHERE id = :id")
+    suspend fun getBook(id: String): BookEntity
+
+    @Insert(onConflict = REPLACE)
     suspend fun insertBook(book: BookEntity)
 
-    // update
+    @Update
+    suspend fun updateBook(book: BookEntity)
 
     @Delete
     suspend fun delete(book: BookEntity)

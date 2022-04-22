@@ -1,5 +1,6 @@
 package com.caminaapps.bookworm.data.remote.dto
 
+import com.caminaapps.bookworm.domain.model.Book
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,3 +23,12 @@ data class VolumeInfoDTO(
     val canonicalVolumeLink: String? = null
 )
 
+fun VolumeInfoDTO.toBook(): Book {
+    return Book(
+        title = title,
+        subtitle = subtitle ?: "",
+        author = authors?.joinToString(separator = ", ") ?: "",
+        publishedDate = publishedDate,
+        coverUrl = imageLinks?.thumbnail?.replace("http", "https")
+    )
+}
