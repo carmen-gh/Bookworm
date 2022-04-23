@@ -6,6 +6,7 @@
     <string name="button_back">back</string>
     <string name="button_add">add</string>
     <string name="button_save">save</string>
+    <string name="button_save_scan">save and scan next book</string>
     <string name="button_edit">edit</string>
     <string name="button_scan">scan</string>
     <string name="button_ok">OK</string>

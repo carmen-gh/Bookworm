@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.di
 
-import com.caminaapps.bookworm.data.remote.GoogleBooksApi
-import com.caminaapps.bookworm.data.remote.interceptor.LoggingInterceptor
+import com.caminaapps.bookworm.core.data.remote.GoogleBooksApi
+import com.caminaapps.bookworm.core.data.remote.interceptor.LoggingInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides

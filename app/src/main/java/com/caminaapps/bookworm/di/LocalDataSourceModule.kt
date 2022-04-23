@@ -1,8 +1,8 @@
 package com.caminaapps.bookworm.di
 
 import android.content.Context
-import com.caminaapps.bookworm.data.local.AppDatabase
-import com.caminaapps.bookworm.data.local.BookDao
+import com.caminaapps.bookworm.core.data.local.AppDatabase
+import com.caminaapps.bookworm.core.data.local.BookDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
