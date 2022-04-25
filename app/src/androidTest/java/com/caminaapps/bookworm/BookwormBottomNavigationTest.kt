@@ -1,12 +1,15 @@
 package com.caminaapps.bookworm
 
 
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.printToLog
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.caminaapps.bookworm.presentation.navigation.BookwormBottomNavigation
-import com.caminaapps.bookworm.presentation.navigation.BottomNavigationScreen
+import com.caminaapps.bookworm.core.presentation.navigation.BookwormBottomNavigation
+import com.caminaapps.bookworm.core.presentation.navigation.BottomNavigationScreen
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
