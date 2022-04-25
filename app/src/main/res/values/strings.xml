@@ -3,9 +3,11 @@
     <string name="screen_title_bookshelf">Bookshelf</string>
     <string name="screen_title_wishlist">Wishlist</string>
     <string name="screen_title_settings">Settings</string>
+    <string name="screen_title_scan_barcode">Scan barcode</string>
     <string name="button_back">back</string>
     <string name="button_add">add</string>
     <string name="button_save">save</string>
+    <string name="button_save_scan">save and scan next book</string>
     <string name="button_edit">edit</string>
     <string name="button_scan">scan</string>
     <string name="button_ok">OK</string>

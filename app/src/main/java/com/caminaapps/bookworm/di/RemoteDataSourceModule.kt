@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.di
 
-import com.caminaapps.bookworm.data.remote.GoogleBooksApi
-import com.caminaapps.bookworm.data.remote.interceptor.LoggingInterceptor
+import com.caminaapps.bookworm.core.data.remote.GoogleBooksApi
+import com.caminaapps.bookworm.core.data.remote.interceptor.LoggingInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -24,7 +24,9 @@ object RemoteDataSourceModule {
     @Singleton
     fun provideApi(okHttpClient: OkHttpClient): GoogleBooksApi {
         val contentType = "application/json".toMediaType()
-        val converterFactory = Json.asConverterFactory(contentType)
+        val converterFactory = Json {
+            ignoreUnknownKeys = true
+        }.asConverterFactory(contentType)
         return Retrofit.Builder()
             .baseUrl(GoogleBooksApi.BASE_URL)
             .client(okHttpClient)
