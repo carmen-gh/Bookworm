@@ -30,6 +30,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
 
         showBottomBar = when (navBackStackEntry?.destination?.route) {
             Screen.SearchIsbnBookResult.route -> false
+            Screen.Camera.route -> false
             else -> true
         }
 

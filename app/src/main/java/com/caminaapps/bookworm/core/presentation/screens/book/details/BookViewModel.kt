@@ -19,10 +19,11 @@ class BookViewModel @Inject constructor(
     var uiState by mutableStateOf(BookUiState())
         private set
 
-
     init {
-        savedStateHandle.get<String>(Screen.Book.argumentKey)?.let {
-            // call use case
+        Screen.Book.argumentKey?.let { argumentKey ->
+            savedStateHandle.get<String>(argumentKey)?.let {
+                // call use case
+            }
         }
     }
 

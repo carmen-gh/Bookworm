@@ -3,6 +3,7 @@
     <string name="screen_title_bookshelf">Bookshelf</string>
     <string name="screen_title_wishlist">Wishlist</string>
     <string name="screen_title_settings">Settings</string>
+    <string name="screen_title_scan_barcode">Scan barcode</string>
     <string name="button_back">back</string>
     <string name="button_add">add</string>
     <string name="button_save">save</string>

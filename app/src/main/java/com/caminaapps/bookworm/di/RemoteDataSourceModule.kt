@@ -24,7 +24,9 @@ object RemoteDataSourceModule {
     @Singleton
     fun provideApi(okHttpClient: OkHttpClient): GoogleBooksApi {
         val contentType = "application/json".toMediaType()
-        val converterFactory = Json.asConverterFactory(contentType)
+        val converterFactory = Json {
+            ignoreUnknownKeys = true
+        }.asConverterFactory(contentType)
         return Retrofit.Builder()
             .baseUrl(GoogleBooksApi.BASE_URL)
             .client(okHttpClient)

@@ -9,19 +9,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner.CameraPreview
 import com.caminaapps.bookworm.presentation.screens.bookshelf.components.AddBookFloatingActionButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import timber.log.Timber
 
 @ExperimentalComposeUiApi
 @ExperimentalPermissionsApi
 @Composable
 fun BookshelfScreen(
-    showISBNSearchResult: (isbn: String) -> Unit,
+    onScanBarcode: () -> Unit,
     viewModel: BookshelfViewModel = hiltViewModel()
 ) {
     var openCameraPreview by remember { mutableStateOf(false) }
@@ -31,29 +27,29 @@ fun BookshelfScreen(
         floatingActionButton = {
             AddBookFloatingActionButton(
                 onManual = { /*TODO*/ },
-                onScan = { openCameraPreview = true }
+                onScan = onScanBarcode
             )
         }
     ) {
 
         Text("- Bookshelf -")
 
-        if (openCameraPreview) {
-            Dialog(
-                onDismissRequest = { openCameraPreview = false },
-                properties = DialogProperties(
-                    dismissOnBackPress = true,
-                    dismissOnClickOutside = false,
-                    usePlatformDefaultWidth = false
-                )
-            ) {
-                CameraPreview(onBarcodeDetected = { barcode ->
-                    Timber.d("barcode: $barcode")
-                    showISBNSearchResult(barcode)
-                    openCameraPreview = false
-                })
-            }
-        }
+//        if (openCameraPreview) {
+//            Dialog(
+//                onDismissRequest = { openCameraPreview = false },
+//                properties = DialogProperties(
+//                    dismissOnBackPress = true,
+//                    dismissOnClickOutside = false,
+//                    usePlatformDefaultWidth = false
+//                )
+//            ) {
+//                CameraPreview(onBarcodeDetected = { barcode ->
+//                    Timber.d("barcode: $barcode")
+//                    showISBNSearchResult(barcode)
+//                    openCameraPreview = false
+//                })
+//            }
+//        }
 
     }
 }

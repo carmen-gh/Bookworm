@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.caminaapps.bookworm.core.presentation.screens.book.details.BookScreen
 import com.caminaapps.bookworm.core.presentation.screens.settings.SettingsScreen
 import com.caminaapps.bookworm.core.presentation.screens.wishlist.WishlistScreen
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner.CameraScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.result.BookResultScreen
 import com.caminaapps.bookworm.presentation.screens.bookshelf.BookshelfScreen
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -25,8 +26,8 @@ fun BookwormNavHost(
         // Bookshelf -------------------------------------------------------------------------------
         composable(BottomNavigationScreen.Bookshelf.route) {
             BookshelfScreen(
-                showISBNSearchResult = { isbn ->
-                    navController.navigate(Screen.SearchIsbnBookResult.createRoute(isbn))
+                onScanBarcode = {
+                    navController.navigate(Screen.Camera.createRoute())
                 }
             )
         }
@@ -40,7 +41,22 @@ fun BookwormNavHost(
         composable(Screen.SearchIsbnBookResult.route) {
             BookResultScreen(
                 onCloseScreenClick = { navController.navigateUp() },
-                onScanClick = { TODO("not yet implemented") }
+                onScanClick = {
+                    navController.navigate(Screen.Camera.createRoute()) {
+                        popUpTo(Screen.SearchIsbnBookResult.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable(Screen.Camera.route) {
+            CameraScreen(
+                onClose = { navController.navigateUp() },
+                onBarcodeDetected = { isbn ->
+                    navController.navigate(Screen.SearchIsbnBookResult.createRoute(isbn)) {
+                        popUpTo(Screen.Camera.route) { inclusive = true }
+                    }
+                }
             )
         }
 

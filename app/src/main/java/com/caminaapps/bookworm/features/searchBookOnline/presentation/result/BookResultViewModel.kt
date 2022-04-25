@@ -27,8 +27,10 @@ class BookResultViewModel @Inject constructor(
         private set
 
     init {
-        savedStateHandle.get<String>(Screen.SearchIsbnBookResult.argumentKey)?.let { isbn ->
-            loadBook(isbn)
+        Screen.SearchIsbnBookResult.argumentKey?.let { argumentKey ->
+            savedStateHandle.get<String>(argumentKey)?.let { isbn ->
+                loadBook(isbn)
+            }
         }
     }
 
@@ -46,7 +48,7 @@ class BookResultViewModel @Inject constructor(
     }
 
     private fun onFailure(e: Throwable) {
-        TODO("proper error message to the user")
+//        TODO("proper error message to the user")
         uiState = SearchBookIsbnUiState(isLoading = false, errorOcured = true)
     }
 

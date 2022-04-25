@@ -51,23 +51,26 @@ fun BookResultScreen(
             BookResultContent(
                 modifier = Modifier.padding(24.dp),
                 book = book,
-                onSaveClick = viewModel::saveBook,
+                onSaveClick = {
+                    viewModel.saveBook()
+                    onCloseScreenClick()
+                },
                 onSaveAndScanClick = {
-                    viewModel::saveBook
-                    onScanClick
+                    viewModel.saveBook()
+                    onScanClick()
                 }
             )
         }
-
-        if (viewModel.uiState.book == null && !viewModel.uiState.isLoading) {
-            NoBookFoundView(modifier = Modifier.fillMaxSize())
-        }
-
-        if (viewModel.uiState.errorOcured) {
-            Text("Error", modifier = Modifier.fillMaxSize())
-        }
-
     }
+
+    if (viewModel.uiState.book == null && !viewModel.uiState.isLoading) {
+        NoBookFoundView(modifier = Modifier.fillMaxSize())
+    }
+
+    if (viewModel.uiState.errorOcured) {
+        Text("Error", modifier = Modifier.fillMaxSize())
+    }
+
 }
 
 
