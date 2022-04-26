@@ -9,9 +9,9 @@ import androidx.navigation.compose.composable
 import com.caminaapps.bookworm.core.presentation.screens.book.details.BookScreen
 import com.caminaapps.bookworm.core.presentation.screens.settings.SettingsScreen
 import com.caminaapps.bookworm.core.presentation.screens.wishlist.WishlistScreen
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner.CameraScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.result.BookResultScreen
-import com.caminaapps.bookworm.presentation.screens.bookshelf.BookshelfScreen
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 @ExperimentalComposeUiApi

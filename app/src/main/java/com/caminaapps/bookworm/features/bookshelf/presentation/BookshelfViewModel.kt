@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.presentation.screens.bookshelf
+package com.caminaapps.bookworm.features.bookshelf.presentation
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
