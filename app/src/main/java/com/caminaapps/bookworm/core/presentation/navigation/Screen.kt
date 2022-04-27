@@ -35,7 +35,7 @@ sealed class Screen(
     val route: String,
     val argumentKey: String?
 ) {
-    object Book : Screen("book/{bookId}", "bookId") {
+    object BookDetail : Screen("book/{bookId}", "bookId") {
         fun createRoute(bookId: String) = "book/$bookId"
     }
 

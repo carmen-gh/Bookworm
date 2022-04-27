@@ -6,12 +6,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.caminaapps.bookworm.core.presentation.screens.book.details.BookScreen
 import com.caminaapps.bookworm.core.presentation.screens.settings.SettingsScreen
 import com.caminaapps.bookworm.core.presentation.screens.wishlist.WishlistScreen
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner.CameraScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.result.BookResultScreen
-import com.caminaapps.bookworm.presentation.screens.bookshelf.BookshelfScreen
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 @ExperimentalComposeUiApi
@@ -26,22 +26,25 @@ fun BookwormNavHost(
         // Bookshelf -------------------------------------------------------------------------------
         composable(BottomNavigationScreen.Bookshelf.route) {
             BookshelfScreen(
+                onBookClick = { book ->
+                    navController.navigate(Screen.BookDetail.createRoute(bookId = book.id))
+                },
                 onScanBarcode = {
                     navController.navigate(Screen.Camera.createRoute())
                 }
             )
         }
 
-        composable(Screen.Book.route) {
-            BookScreen {
+        composable(Screen.BookDetail.route) {
+            BookDetailsScreen {
                 navController.navigateUp()
             }
         }
 
         composable(Screen.SearchIsbnBookResult.route) {
             BookResultScreen(
-                onCloseScreenClick = { navController.navigateUp() },
-                onScanClick = {
+                onCloseScreen = { navController.navigateUp() },
+                onScanBarcode = {
                     navController.navigate(Screen.Camera.createRoute()) {
                         popUpTo(Screen.SearchIsbnBookResult.route) { inclusive = true }
                     }
@@ -60,7 +63,7 @@ fun BookwormNavHost(
             )
         }
 
-        // Wishlist --------------------------------------------------------------------------------
+        // Wishlist -----------------------------------------------------------------------------------
         composable(BottomNavigationScreen.Wishlist.route) {
             WishlistScreen()
         }

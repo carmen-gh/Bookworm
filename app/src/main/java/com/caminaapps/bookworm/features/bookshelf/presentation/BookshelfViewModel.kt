@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.presentation.screens.bookshelf
+package com.caminaapps.bookworm.features.bookshelf.presentation
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,41 +7,30 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.domain.model.Book
 import com.caminaapps.bookworm.core.domain.model.UserMessage
+import com.caminaapps.bookworm.features.bookshelf.domain.GetBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.io.IOException
 import javax.inject.Inject
 
 
 @HiltViewModel
 class BookshelfViewModel @Inject constructor(
-
+    private val getBooks: GetBooksUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(BookshelfUiState(isLoading = true))
+    var uiState by mutableStateOf(BookshelfUiState())
         private set
 
-    private var fetchJob: Job? = null
-
-    fun fetchBooks(category: String) {
-        fetchJob?.cancel()
-        fetchJob = viewModelScope.launch {
-            try {
-//                val newsItems = repository.newsItemsForCategory(category)
-//                uiState = uiState.copy(newsItems = newsItems)
-            } catch (ioe: IOException) {
-                // Handle the error and notify the UI when appropriate.
-//                val messages = getMessagesFromThrowable(ioe)
-//                uiState = uiState.copy(userMessages = messages)
+    init {
+        viewModelScope.launch {
+            getBooks().collect { bookList ->
+                uiState = uiState.copy(books = bookList)
             }
         }
     }
-
 }
 
 data class BookshelfUiState(
-    val isLoading: Boolean = false,
     val books: List<Book> = emptyList(),
     val userMessages: List<UserMessage> = emptyList()
 )

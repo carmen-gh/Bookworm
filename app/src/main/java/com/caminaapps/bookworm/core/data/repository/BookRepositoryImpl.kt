@@ -18,6 +18,10 @@ class BookRepositoryImpl @Inject constructor(
                 listOfBookEntities.map { it.toBook() }
             }
 
+    override fun getBookDetails(id: String): Flow<Book> =
+        bookDao.getBook(id)
+            .map { it.toBook() }
+
     override suspend fun saveBook(book: Book) {
         val persistableBook = BookEntity.fromBook(book)
         bookDao.insertBook(persistableBook)

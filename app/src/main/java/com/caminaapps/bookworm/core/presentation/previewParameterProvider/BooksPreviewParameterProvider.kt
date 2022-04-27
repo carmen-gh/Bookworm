@@ -13,6 +13,8 @@ class BooksPreviewParameterProvider : PreviewParameterProvider<List<Book>> {
                     subtitle = "this is a subtitle",
                     author = "Stephen R. Covey",
                     publishedDate = "2016",
+                    finishedReading = false,
+                    isFavourite = true,
                     coverUrl = "https://books.google.com/books/content?id=f94S3a1SzvoC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
                 ),
                 Book(
@@ -20,6 +22,8 @@ class BooksPreviewParameterProvider : PreviewParameterProvider<List<Book>> {
                     subtitle = "Der Big Nerd Ranch Guide",
                     author = "Brian Hardy, Bill Phillips",
                     publishedDate = "2012",
+                    finishedReading = true,
+                    isFavourite = true,
                     coverUrl = "http://books.google.com/books/content?id=aiyrtgAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
                 ),
                 Book(
@@ -27,6 +31,8 @@ class BooksPreviewParameterProvider : PreviewParameterProvider<List<Book>> {
                     subtitle = "Der Big Nerd Ranch Guide",
                     author = "Brian Hardy, Bill Phillips",
                     publishedDate = "2012",
+                    finishedReading = true,
+                    isFavourite = false,
                     coverUrl = "http://books.google.com/books/content?id=aiyrtgAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api"
                 ),
             )
