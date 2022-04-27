@@ -31,14 +31,14 @@ import com.caminaapps.bookworm.searchBookOnline.presentation.result.NoBookFoundV
 @Composable
 fun BookResultScreen(
     viewModel: BookResultViewModel = hiltViewModel(),
-    onCloseScreenClick: () -> Unit,
-    onScanClick: () -> Unit
+    onCloseScreen: () -> Unit,
+    onScanBarcode: () -> Unit
 ) {
     Scaffold(
         topBar = {
             TopAppBarNavigationClose(
                 title = "Book details",
-                onClick = onCloseScreenClick
+                onClick = onCloseScreen
             )
         },
     ) {
@@ -53,11 +53,11 @@ fun BookResultScreen(
                 book = book,
                 onSaveClick = {
                     viewModel.saveBook()
-                    onCloseScreenClick()
+                    onCloseScreen()
                 },
                 onSaveAndScanClick = {
                     viewModel.saveBook()
-                    onScanClick()
+                    onScanBarcode()
                 }
             )
         }

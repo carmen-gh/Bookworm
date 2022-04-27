@@ -1,6 +1,5 @@
-package com.caminaapps.bookworm.core.presentation.screens.book.details
+package com.caminaapps.bookworm.features.bookshelf.presentation
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,27 +20,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImage
 import com.caminaapps.bookworm.core.domain.model.Book
 import com.caminaapps.bookworm.core.presentation.components.TopAppBarNavigationUp
 import com.caminaapps.bookworm.core.presentation.previewParameterProvider.BookPreviewParameterProvider
 import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
 
 @Composable
-fun BookScreen(
+fun BookDetailsScreen(
     viewModel: BookViewModel = hiltViewModel(),
     onUpNavigationClick: () -> Unit,
 ) {
-    Scaffold(
-        topBar = {
-            TopAppBarNavigationUp(
-                title = "Book details",
-                onClick = onUpNavigationClick
-            )
-        },
-    ) {
-        // check for ui state
-//        BookContent(B)
+    viewModel.uiState.book?.let { book ->
+        Scaffold(
+            topBar = {
+                TopAppBarNavigationUp(
+                    title = book.title,
+                    onClick = onUpNavigationClick
+                )
+            },
+        ) {
+            BookContent(book = book)
+        }
     }
 }
 
@@ -53,16 +53,14 @@ fun BookContent(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = rememberImagePainter(book.coverUrl),
+        AsyncImage(
+            model = book.coverUrl,
             contentDescription = "book cover",
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
-//                .fillMaxWidth()
                 .size(width = 315.dp, height = 480.dp)
                 .clip(RoundedCornerShape(16.dp))
                 .background(MaterialTheme.colors.secondary)
-
         )
         Spacer(modifier = Modifier.height(42.dp))
         Text(
@@ -80,6 +78,9 @@ fun BookContent(
         Text(text = book.author)
         Text(text = book.publishedDate)
     }
+    // Reading status
+    // isFavourite book
+    // tags
 }
 
 @Preview(showBackground = true, showSystemUi = true)

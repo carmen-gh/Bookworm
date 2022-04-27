@@ -2,10 +2,12 @@ package com.caminaapps.bookworm.presentation.screens.bookshelf.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -17,15 +19,21 @@ import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
 @ExperimentalMaterialApi
 @Composable
 fun BookList(
+    modifier: Modifier = Modifier,
     books: List<Book>,
     onItemClick: (Book) -> Unit
 ) {
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    LazyColumn(
+        contentPadding = PaddingValues(start = 8.dp, top = 8.dp, end = 8.dp, bottom = 80.dp),
+//        modifier = modifier.padding(horizontal = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         items(books) { book ->
-            BookItem(
+            BookListItem(
                 title = book.title,
                 author = book.author,
                 imageUrl = book.coverUrl ?: "",
+                isFinished = book.finishedReading,
                 onClick = { onItemClick(book) }
             )
         }
