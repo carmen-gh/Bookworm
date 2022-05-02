@@ -2,6 +2,7 @@ package com.caminaapps.bookworm.core.presentation.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Icon
@@ -11,6 +12,8 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,7 +24,11 @@ import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
 
 
 @Composable
-fun TopAppBarNavigationUp(title: String, onClick: () -> Unit) {
+fun TopAppBarNavigationUp(
+    title: String,
+    onClick: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {}
+) {
     TopAppBar(
         title = { Text(title) },
         navigationIcon = {
@@ -31,12 +38,17 @@ fun TopAppBarNavigationUp(title: String, onClick: () -> Unit) {
                     contentDescription = stringResource(id = R.string.button_back)
                 )
             }
-        }
+        },
+        actions = actions
     )
 }
 
 @Composable
-fun TopAppBarNavigationClose(title: String, onClick: () -> Unit) {
+fun TopAppBarNavigationClose(
+    title: String,
+    onClick: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {}
+) {
     TopAppBar(
         title = { Text(title) },
         navigationIcon = {
@@ -46,7 +58,8 @@ fun TopAppBarNavigationClose(title: String, onClick: () -> Unit) {
                     contentDescription = stringResource(id = R.string.button_close)
                 )
             }
-        }
+        },
+        actions = actions
     )
 }
 
@@ -56,7 +69,18 @@ fun TopAppBarNavigationClose(title: String, onClick: () -> Unit) {
 fun DefaultPreview() {
     BookwormTheme() {
         Column {
-            TopAppBarNavigationUp(title = "TopAppBar Title", onClick = {})
+            TopAppBarNavigationUp(
+                title = "TopAppBar Title",
+                onClick = {},
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Filled.Edit,
+                            contentDescription = null
+                        )
+                    }
+                }
+            )
             Spacer(modifier = Modifier.height(8.dp))
             TopAppBarNavigationClose(title = "TopAppBar Title", onClick = {})
         }
@@ -71,7 +95,18 @@ fun DefaultPreviewDark() {
         Column {
             TopAppBarNavigationUp(title = "TopAppBar Title", onClick = {})
             Spacer(modifier = Modifier.height(8.dp))
-            TopAppBarNavigationClose(title = "TopAppBar Title", onClick = {})
+            TopAppBarNavigationClose(
+                title = "TopAppBar Title",
+                onClick = {},
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Filled.Delete,
+                            contentDescription = null
+                        )
+                    }
+                }
+            )
         }
     }
 }
