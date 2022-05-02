@@ -26,4 +26,8 @@ class BookRepositoryImpl @Inject constructor(
         val persistableBook = BookEntity.fromBook(book)
         bookDao.insertBook(persistableBook)
     }
+
+    override suspend fun deleteBook(id: String) {
+        bookDao.deleteById(id)
+    }
 }
