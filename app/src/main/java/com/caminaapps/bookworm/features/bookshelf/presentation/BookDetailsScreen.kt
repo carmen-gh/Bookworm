@@ -6,9 +6,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,12 +40,24 @@ fun BookDetailsScreen(
             topBar = {
                 TopAppBarNavigationUp(
                     title = book.title,
-                    onClick = onUpNavigationClick
+                    onClick = onUpNavigationClick,
+                    actions = {
+                        IconButton(onClick = { viewModel.onDeleteBook(book.id) }) {
+                            Icon(
+                                imageVector = Icons.Filled.Delete,
+                                contentDescription = "trash bin"
+                            )
+                        }
+                    }
                 )
             },
         ) {
             BookContent(book = book)
         }
+    }
+
+    if (viewModel.uiState.bookDeleted) {
+        onUpNavigationClick()
     }
 }
 
