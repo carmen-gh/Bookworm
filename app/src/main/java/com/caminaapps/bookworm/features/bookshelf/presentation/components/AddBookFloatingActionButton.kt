@@ -24,6 +24,7 @@ import timber.log.Timber
 @Composable
 fun AddBookFloatingActionButton(
     onManual: () -> Unit,
+    onSearch: () -> Unit,
     onScan: () -> Unit
 ) {
     SpeedDialFloatingActionButton(
@@ -37,6 +38,12 @@ fun AddBookFloatingActionButton(
         SpeedDialItem(onClick = onManual) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_outline_edit_24),
+                contentDescription = stringResource(id = R.string.button_edit)
+            )
+        }
+        SpeedDialItem(onClick = onSearch) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_baseline_search_42),
                 contentDescription = stringResource(id = R.string.button_edit)
             )
         }
@@ -85,10 +92,12 @@ fun PreviewAddFloatingButton() {
             floatingActionButtonPosition = FabPosition.End,
             floatingActionButton = {
                 AddBookFloatingActionButton(
-                    onManual = { /*TODO*/ },
-                    onScan = {  /*TODO*/ }
+                    onManual = { },
+                    onSearch = { },
+                    onScan = { }
                 )
             }
-        ) { }
+        ) {
+        }
     }
 }

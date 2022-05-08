@@ -13,7 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -64,36 +63,17 @@ fun TopAppBarNavigationClose(
 }
 
 
-@Preview(name = "TopAppBar")
-@Composable
-fun DefaultPreview() {
-    BookwormTheme() {
-        Column {
-            TopAppBarNavigationUp(
-                title = "TopAppBar Title",
-                onClick = {},
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Filled.Edit,
-                            contentDescription = null
-                        )
-                    }
-                }
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            TopAppBarNavigationClose(title = "TopAppBar Title", onClick = {})
-        }
-
-    }
-}
-
-@Preview(name = "TopAppBar dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview("default")
+@Preview("dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview("large font", fontScale = 2f)
 @Composable
 fun DefaultPreviewDark() {
     BookwormTheme() {
         Column {
-            TopAppBarNavigationUp(title = "TopAppBar Title", onClick = {})
+            TopAppBarNavigationUp(
+                title = "TopAppBar Title",
+                onClick = {}
+            )
             Spacer(modifier = Modifier.height(8.dp))
             TopAppBarNavigationClose(
                 title = "TopAppBar Title",

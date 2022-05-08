@@ -33,7 +33,7 @@ sealed class BottomNavigationScreen(
 
 sealed class Screen(
     val route: String,
-    val argumentKey: String?
+    val argumentKey: String? = null
 ) {
     object BookDetail : Screen("book/{bookId}", "bookId") {
         fun createRoute(bookId: String) = "book/$bookId"
@@ -42,8 +42,12 @@ sealed class Screen(
     object SearchIsbnBookResult : Screen(route = "searchBookResult/{isbn}", argumentKey = "isbn") {
         fun createRoute(isbn: String) = "searchBookResult/$isbn"
     }
+    
+    object SearchBookByTitle : Screen(route = "searchBookByTitle") {
+        fun createRoute() = route
+    }
 
-    object Camera : Screen("camera", argumentKey = null) {
+    object Camera : Screen("camera") {
         fun createRoute() = route
     }
 }

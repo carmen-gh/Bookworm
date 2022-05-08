@@ -21,6 +21,7 @@ import timber.log.Timber
 @Composable
 fun BookshelfScreen(
     onScanBarcode: () -> Unit,
+    onSearchOnline: () -> Unit,
     onBookClick: (id: Book) -> Unit,
     viewModel: BookshelfViewModel = hiltViewModel()
 ) {
@@ -30,6 +31,7 @@ fun BookshelfScreen(
         floatingActionButton = {
             AddBookFloatingActionButton(
                 onManual = { /*TODO*/ },
+                onSearch = onSearchOnline,
                 onScan = onScanBarcode
             )
         }

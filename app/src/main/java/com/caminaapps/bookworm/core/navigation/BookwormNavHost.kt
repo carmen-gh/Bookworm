@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.core.navigation
+package com.caminaapps.bookworm.core.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -6,10 +6,13 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.caminaapps.bookworm.core.navigation.BottomNavigationScreen
+import com.caminaapps.bookworm.core.navigation.Screen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner.CameraScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.result.BookResultScreen
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchBookTitleScreen
 import com.caminaapps.bookworm.features.settings.SettingsScreen
 import com.caminaapps.bookworm.features.wishlist.WishlistScreen
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -31,6 +34,9 @@ fun BookwormNavHost(
                 },
                 onScanBarcode = {
                     navController.navigate(Screen.Camera.createRoute())
+                },
+                onSearchOnline = {
+                    navController.navigate(Screen.SearchBookByTitle.createRoute())
                 }
             )
         }
@@ -61,6 +67,10 @@ fun BookwormNavHost(
                     }
                 }
             )
+        }
+
+        composable(Screen.SearchBookByTitle.route) {
+            SearchBookTitleScreen(onBookClick = {}, onNavigateUp = { /*TODO*/ })
         }
 
         // Wishlist -----------------------------------------------------------------------------------
