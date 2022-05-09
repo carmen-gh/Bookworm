@@ -1,29 +1,29 @@
 package com.caminaapps.bookworm.core.data.repository
 
-import com.caminaapps.bookworm.core.data.remote.GoogleBooksApi
+import com.caminaapps.bookworm.core.data.remote.OpenLibraryAPI
 import com.caminaapps.bookworm.core.data.remote.dto.toBook
 import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.domain.repository.GoogleBooksRepository
+import com.caminaapps.bookworm.core.domain.repository.OnlineSearchBookRepository
 import com.caminaapps.bookworm.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class GoogleBooksRepositoryImpl @Inject constructor(
-    private val googleBooksApi: GoogleBooksApi,
+class OnlineSearchBookRepositoryImpl @Inject constructor(
+    private val openLibraryAPI: OpenLibraryAPI,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) : GoogleBooksRepository {
+) : OnlineSearchBookRepository {
 
     override suspend fun getBookByISBN(isbn: String): Book? = withContext(ioDispatcher) {
-        val searchResult = googleBooksApi.getBooks(GoogleBooksApi.parameterISBN(isbn))
-        searchResult.items.firstOrNull()?.volumeInfo?.toBook()
+        val searchResult = openLibraryAPI.searchBookByIsbn(isbn)
+        searchResult.docs.firstOrNull()?.toBook()
     }
 
 
     override suspend fun getBooksByTitle(title: String): List<Book> = withContext(ioDispatcher) {
-        val searchResult = googleBooksApi.getBooks(GoogleBooksApi.parameterTitle(title))
-        searchResult.items.map { it.volumeInfo.toBook() }
+        val searchResult = openLibraryAPI.searchBookByTitle(title)
+        searchResult.docs.map { it.toBook() }
     }
 
 }
