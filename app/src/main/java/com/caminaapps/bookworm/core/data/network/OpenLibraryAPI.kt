@@ -21,7 +21,7 @@ interface OpenLibraryAPI {
     @GET("search.json")
     suspend fun searchBookByTitle(
         @Query("title", encoded = true) title: String,
-        @Query("limit") limit: Int = 10
+        @Query("limit") limit: Int = 50
     ): SearchResultDTO
 
 
