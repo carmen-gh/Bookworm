@@ -50,8 +50,8 @@ fun BookList(
         modifier = modifier.padding(horizontal = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(books) { book ->
-            // state
+        items(items = books, key = { book -> book.id }) { book ->
+
             var unread by remember { mutableStateOf(false) }
             val dismissState = rememberDismissState(
                 confirmStateChange = {
