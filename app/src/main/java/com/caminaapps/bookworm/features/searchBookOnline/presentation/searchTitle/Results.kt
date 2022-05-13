@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,6 +25,8 @@ import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -34,6 +35,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
@@ -49,7 +52,7 @@ fun SearchResults(
         Text(
             text = stringResource(R.string.search_count, searchResults.size),
             style = MaterialTheme.typography.h6,
-            color = MaterialTheme.colors.onPrimary,
+            color = MaterialTheme.colors.onBackground,
             modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
         )
         LazyColumn {
@@ -58,6 +61,18 @@ fun SearchResults(
             }
         }
     }
+}
+
+@Composable
+private fun NewSearchResult(
+    book: Book,
+    onBookClick: (Book) -> Unit,
+    onAddClick: (Book) -> Unit,
+    showDivider: Boolean,
+    modifier: Modifier = Modifier
+) {
+
+
 }
 
 @Composable
@@ -84,21 +99,26 @@ private fun SearchResult(
                 }
             )
         }
-//        Image(
-//            imageUrl = book.imageUrl,
-//            contentDescription = null,
-//            modifier = Modifier
-//                .size(100.dp)
-//                .constrainAs(image) {
-//                    linkTo(
-//                        top = parent.top,
-//                        topMargin = 16.dp,
-//                        bottom = parent.bottom,
-//                        bottomMargin = 16.dp
-//                    )
-//                    start.linkTo(parent.start)
-//                }
-//        )
+
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(book.coverUrl)
+                .crossfade(true)
+                .build(),
+            placeholder = painterResource(R.drawable.ic_baseline_book_24),
+            contentDescription = book.title,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.constrainAs(image) {
+                linkTo(
+                    top = parent.top,
+                    topMargin = 16.dp,
+                    bottom = parent.bottom,
+                    bottomMargin = 16.dp,
+                )
+                start.linkTo(parent.start)
+            }
+        )
+
         Text(
             text = book.title,
             style = MaterialTheme.typography.subtitle1,
@@ -114,7 +134,7 @@ private fun SearchResult(
             }
         )
         Text(
-            text = book.subtitle,
+            text = "subtitle",
             style = MaterialTheme.typography.body1,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.constrainAs(tag) {
@@ -175,7 +195,6 @@ fun NoResults(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .fillMaxSize()
             .wrapContentSize()
             .padding(24.dp)
     ) {

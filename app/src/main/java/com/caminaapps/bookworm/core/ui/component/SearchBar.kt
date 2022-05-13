@@ -22,7 +22,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -69,7 +69,7 @@ fun SearchBar(
                 if (searchFocused) {
                     IconButton(onClick = onClearQuery) {
                         Icon(
-                            imageVector = Icons.Outlined.Delete,
+                            imageVector = Icons.Filled.Close,
                             tint = MaterialTheme.colors.primaryVariant,
                             contentDescription = stringResource(R.string.button_back)
                         )

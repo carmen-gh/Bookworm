@@ -10,7 +10,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import com.caminaapps.bookworm.core.model.Book
 
 enum class SearchDisplay {
-    Results, NoResults
+    Empty, Results, NoResults,
 }
 
 @Stable
@@ -19,7 +19,7 @@ class SearchState(
     focused: Boolean,
     startSearchAction: Boolean,
     searching: Boolean,
-    searchResults: List<Book>
+    searchResults: List<Book>?
 ) {
     var query by mutableStateOf(query)
     var focused by mutableStateOf(focused)
@@ -29,8 +29,10 @@ class SearchState(
 
     val searchDisplay: SearchDisplay
         get() = when {
-            searchResults.isEmpty() -> SearchDisplay.NoResults
-            else -> SearchDisplay.Results
+            searchResults == null -> SearchDisplay.Empty
+            searchResults!!.isNotEmpty() -> SearchDisplay.Results
+            searchResults!!.isEmpty() -> SearchDisplay.NoResults
+            else -> SearchDisplay.Empty
         }
 }
 
@@ -40,7 +42,7 @@ fun rememberSearchState(
     focused: Boolean = false,
     startSearchAction: Boolean = false,
     searching: Boolean = false,
-    searchResults: List<Book> = emptyList()
+    searchResults: List<Book>? = null
 ): SearchState {
     return remember {
         SearchState(

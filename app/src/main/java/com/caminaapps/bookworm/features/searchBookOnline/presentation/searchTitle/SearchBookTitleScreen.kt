@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -37,20 +38,27 @@ fun SearchBookTitleScreen(
 
             SearchBar(
                 query = state.query,
-                onQueryChange = { state.query = it },
+                onQueryChange = {
+                    state.query = it
+                    state.searchResults = null
+                },
                 onSearchKeyboardAction = {
                     focusManager.clearFocus()
                     state.startSearchAction = true
                 },
                 searchFocused = state.focused,
                 onSearchFocusChange = { state.focused = it },
-                onClearQuery = { state.query = TextFieldValue("") },
+                onClearQuery = {
+                    state.query = TextFieldValue("")
+                    state.searchResults = null
+                },
                 searching = state.searching
             )
 
             Divider()
 
             LaunchedEffect(state.startSearchAction) {
+                if (!state.startSearchAction) return@LaunchedEffect
                 state.searching = true
                 state.searchResults = viewModel.search(state.query.text)
                 state.searching = false
@@ -59,7 +67,7 @@ fun SearchBookTitleScreen(
 
             when (state.searchDisplay) {
                 SearchDisplay.Results -> SearchResults(
-                    searchResults = state.searchResults,
+                    searchResults = state.searchResults ?: emptyList(),
                     onBookClick = {
                         focusManager.clearFocus()
                         onBookClick(it)
@@ -71,6 +79,7 @@ fun SearchBookTitleScreen(
                     }
                 )
                 SearchDisplay.NoResults -> NoResults(state.query.text)
+                SearchDisplay.Empty -> Text("search on Open Library")
             }
         }
     }
