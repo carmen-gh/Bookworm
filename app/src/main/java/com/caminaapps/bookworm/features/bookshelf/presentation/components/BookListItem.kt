@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.presentation.screens.bookshelf.components
+package com.caminaapps.bookworm.features.bookshelf.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.caminaapps.bookworm.R
@@ -29,13 +30,17 @@ import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
 @ExperimentalMaterialApi
 @Composable
 fun BookListItem(
+    modifier: Modifier = Modifier,
     title: String,
     author: String,
     imageUrl: String,
     isFinished: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    elevation: Dp = 1.dp
 ) {
     Card(
+        modifier = modifier,
+        elevation = elevation,
         onClick = onClick,
     ) {
         Box() {

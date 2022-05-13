@@ -2,6 +2,7 @@ package com.caminaapps.bookworm.presentation.screens.bookshelf.components
 
 import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.DismissDirection
 import androidx.compose.material.DismissValue
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FractionalThreshold
 import androidx.compose.material.Icon
 import androidx.compose.material.SwipeToDismiss
 import androidx.compose.material.icons.Icons
@@ -22,9 +24,6 @@ import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -35,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.core.domain.model.Book
 import com.caminaapps.bookworm.core.presentation.previewParameterProvider.BooksPreviewParameterProvider
 import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
+import com.caminaapps.bookworm.features.bookshelf.presentation.components.BookListItem
 
 
 @ExperimentalMaterialApi
@@ -51,8 +51,6 @@ fun BookList(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(items = books, key = { book -> book.id }) { book ->
-
-            var unread by remember { mutableStateOf(false) }
             val dismissState = rememberDismissState(
                 confirmStateChange = {
                     if (it == DismissValue.DismissedToStart) {
@@ -66,9 +64,9 @@ fun BookList(
                 state = dismissState,
                 modifier = Modifier.padding(vertical = 4.dp),
                 directions = setOf(DismissDirection.EndToStart),
-//                dismissThresholds = { direction ->
-//                    FractionalThreshold(if (direction == DismissDirection.StartToEnd) 0.25f else 0.5f)
-//                },
+                dismissThresholds = { direction ->
+                    FractionalThreshold(if (direction == DismissDirection.StartToEnd) 0.25f else 0.5f)
+                },
                 background = {
                     val direction = dismissState.dismissDirection ?: return@SwipeToDismiss
                     val color by animateColorAsState(
@@ -110,7 +108,10 @@ fun BookList(
                         author = book.author,
                         imageUrl = book.coverUrl ?: "",
                         isFinished = book.finishedReading,
-                        onClick = { onItemClick(book) }
+                        onClick = { onItemClick(book) },
+                        elevation = animateDpAsState(
+                            if (dismissState.dismissDirection != null) 4.dp else 0.dp
+                        ).value
                     )
                 }
             )
