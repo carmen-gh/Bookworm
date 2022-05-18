@@ -25,10 +25,12 @@ import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 @Composable
 fun TopAppBarNavigationUp(
     title: String,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
+        modifier = modifier,
         title = { Text(title) },
         navigationIcon = {
             IconButton(onClick = onClick) {
@@ -43,12 +45,36 @@ fun TopAppBarNavigationUp(
 }
 
 @Composable
+fun TopAppBarSlotNavigationUp(
+    modifier: Modifier = Modifier,
+    title: @Composable () -> Unit,
+    onClick: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {}
+) {
+    TopAppBar(
+        modifier = modifier,
+        title = title,
+        navigationIcon = {
+            IconButton(onClick = onClick) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = stringResource(id = R.string.button_back)
+                )
+            }
+        },
+        actions = actions
+    )
+}
+
+@Composable
 fun TopAppBarNavigationClose(
+    modifier: Modifier = Modifier,
     title: String,
     onClick: () -> Unit,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
+        modifier = modifier,
         title = { Text(title) },
         navigationIcon = {
             IconButton(onClick = onClick) {

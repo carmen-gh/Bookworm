@@ -22,13 +22,16 @@ import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
 @Composable
 fun IconTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
     @StringRes label: Int,
     @DrawableRes imageResource: Int
 ) {
-    Row(verticalAlignment = Alignment.Bottom, modifier = modifier) {
+    Row(
+        verticalAlignment = Alignment.Bottom,
+        modifier = modifier
+    ) {
         Icon(
             painter = painterResource(id = imageResource),
             contentDescription = null,

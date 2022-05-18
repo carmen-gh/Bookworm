@@ -1,10 +1,6 @@
 package com.caminaapps.bookworm.features.bookshelf.presentation
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -35,20 +31,24 @@ fun BookDetailsScreen(
     viewModel: BookViewModel = hiltViewModel(),
     onUpNavigationClick: () -> Unit,
 ) {
-
-    val uiState: BookDetailsUiState by viewModel.uiState.collectAsState()
-
-    when (uiState) {
-        is Loading -> FullScreenLoading()
-        is NotFound -> onUpNavigationClick()
-        is Error -> TODO()
-        is Success -> {
-            val book = (uiState as Success).book
-            BookContent(
-                book = book,
-                onUpNavigationClick = onUpNavigationClick,
-                onDeleteBookClick = { viewModel.onDeleteBook(bookId = book.id) }
-            )
+    viewModel.uiState.book?.let { book ->
+        Scaffold(
+            backgroundColor = MaterialTheme.colors.surface,
+            topBar = {
+                TopAppBarNavigationUp(
+                    title = book.title,
+                    onClick = onUpNavigationClick
+                ) {
+                    IconButton(onClick = { viewModel.onDeleteBook(book.id) }) {
+                        Icon(
+                            imageVector = Icons.Filled.Delete,
+                            contentDescription = "trash bin"
+                        )
+                    }
+                }
+            },
+        ) {
+            BookContent(book = book)
         }
     }
 
@@ -62,36 +62,29 @@ fun BookContent(
     onUpNavigationClick: () -> Unit,
     onDeleteBookClick: () -> Unit
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBarNavigationUp(
-                title = book.title,
-                onClick = onUpNavigationClick,
-                actions = {
-                    IconButton(onClick = { onDeleteBookClick() }) {
-                        Icon(
-                            imageVector = Icons.Filled.Delete,
-                            contentDescription = "trash bin"
-                        )
-                    }
-                }
-            )
-        },
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        if (!book.coverUrl.isNullOrBlank()) {
             AsyncImage(
                 model = book.coverUrl,
                 contentDescription = "book cover",
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .size(width = 315.dp, height = 480.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(MaterialTheme.colors.secondary)
             )
-            Spacer(modifier = Modifier.height(42.dp))
+        }
+
+        Spacer(modifier = Modifier.height(42.dp))
+        Text(
+            text = book.title,
+            style = MaterialTheme.typography.h4,
+            textAlign = TextAlign.Center,
+            overflow = TextOverflow.Ellipsis,
+        )
+        if (book.subtitle.isNotBlank()) {
             Text(
                 text = book.title,
                 style = MaterialTheme.typography.h4,
