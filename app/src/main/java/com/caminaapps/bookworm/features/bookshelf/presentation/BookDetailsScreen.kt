@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.presentation.components.TopAppBarNavigationUp
+import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationUp
+import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.core.presentation.previewParameterProvider.BookPreviewParameterProvider
-import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
 
 @Composable
 fun BookDetailsScreen(

@@ -51,7 +51,7 @@ fun DocDTO.toBook(): Book {
     return Book(
         title = title ?: "",
         subtitle = "",
-        author = authorName.joinToString(separator = ", ") ?: "",
+        author = authorName.joinToString(separator = ", "),
         publishedDate = publishDate.first(),
         coverUrl = "https://covers.openlibrary.org/b/id/${coverI}-M.jpg"
     )

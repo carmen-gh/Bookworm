@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.R
-import com.caminaapps.bookworm.core.presentation.components.IconTextField
-import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
+import com.caminaapps.bookworm.core.ui.component.IconTextField
+import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
 @Composable
 fun AddBookScreen(

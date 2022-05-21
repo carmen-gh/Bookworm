@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.core.presentation.components
+package com.caminaapps.bookworm.core.ui.component
 
 import android.content.Intent
 import android.net.Uri

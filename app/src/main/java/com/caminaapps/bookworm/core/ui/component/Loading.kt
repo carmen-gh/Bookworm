@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.core.presentation.components
+package com.caminaapps.bookworm.core.ui.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

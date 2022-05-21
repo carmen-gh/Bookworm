@@ -4,7 +4,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.caminaapps.bookworm.R
-import com.caminaapps.bookworm.core.presentation.components.TopAppBarNavigationClose
+import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
+
 
 @Composable
 fun CameraScreen(

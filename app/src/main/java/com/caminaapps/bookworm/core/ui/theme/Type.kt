@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.core.presentation.theme
+package com.caminaapps.bookworm.core.ui.theme
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
