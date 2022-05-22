@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.caminaapps.bookworm.core.domain.model.Book
+import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationUp
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme

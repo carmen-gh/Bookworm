@@ -3,7 +3,7 @@ package com.caminaapps.bookworm.features.bookshelf.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.caminaapps.bookworm.core.domain.model.Book
+import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.bookshelf.domain.DeleteBookUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookDetailsUseCase
 import com.caminaapps.bookworm.util.Result

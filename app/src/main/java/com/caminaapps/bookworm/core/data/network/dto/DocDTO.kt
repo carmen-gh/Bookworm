@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.core.data.network.dto
 
 
-import com.caminaapps.bookworm.core.domain.model.Book
+import com.caminaapps.bookworm.core.model.Book
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
