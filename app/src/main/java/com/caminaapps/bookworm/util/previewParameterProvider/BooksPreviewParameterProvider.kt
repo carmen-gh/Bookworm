@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.util.previewParameterProvider
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.caminaapps.bookworm.core.domain.model.Book
+import com.caminaapps.bookworm.core.model.Book
 
 
 class BooksPreviewParameterProvider : PreviewParameterProvider<List<Book>> {

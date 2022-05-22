@@ -2,8 +2,7 @@ package com.caminaapps.bookworm.core.data.repository
 
 import com.caminaapps.bookworm.core.data.database.BookDao
 import com.caminaapps.bookworm.core.data.database.BookEntity
-import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.domain.repository.BookRepository
+import com.caminaapps.bookworm.core.model.Book
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

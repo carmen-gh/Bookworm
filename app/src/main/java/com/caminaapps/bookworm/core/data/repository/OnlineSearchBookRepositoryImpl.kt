@@ -2,8 +2,7 @@ package com.caminaapps.bookworm.core.data.repository
 
 import com.caminaapps.bookworm.core.data.network.OpenLibraryAPI
 import com.caminaapps.bookworm.core.data.network.dto.asBook
-import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.domain.repository.OnlineSearchBookRepository
+import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

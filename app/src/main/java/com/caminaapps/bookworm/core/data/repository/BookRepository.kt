@@ -1,6 +1,6 @@
-package com.caminaapps.bookworm.core.domain.repository
+package com.caminaapps.bookworm.core.data.repository
 
-import com.caminaapps.bookworm.core.domain.model.Book
+import com.caminaapps.bookworm.core.model.Book
 import kotlinx.coroutines.flow.Flow
 
 

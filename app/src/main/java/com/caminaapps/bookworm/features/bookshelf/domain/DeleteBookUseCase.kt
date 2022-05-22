@@ -1,6 +1,6 @@
 package com.caminaapps.bookworm.features.bookshelf.domain
 
-import com.caminaapps.bookworm.core.domain.repository.BookRepository
+import com.caminaapps.bookworm.core.data.repository.BookRepository
 import javax.inject.Inject
 
 class DeleteBookUseCase @Inject constructor(

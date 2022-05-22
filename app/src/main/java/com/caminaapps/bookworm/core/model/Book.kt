@@ -1,6 +1,6 @@
-package com.caminaapps.bookworm.core.domain.model
+package com.caminaapps.bookworm.core.model
 
-import java.util.UUID
+import java.util.*
 
 data class Book(
     val id: String = UUID.randomUUID().toString(),

@@ -1,9 +1,9 @@
 package com.caminaapps.bookworm.di
 
+import com.caminaapps.bookworm.core.data.repository.BookRepository
 import com.caminaapps.bookworm.core.data.repository.BookRepositoryImpl
+import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepository
 import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepositoryImpl
-import com.caminaapps.bookworm.core.domain.repository.BookRepository
-import com.caminaapps.bookworm.core.domain.repository.OnlineSearchBookRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.R
-import com.caminaapps.bookworm.core.domain.model.Book
+import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
 import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider

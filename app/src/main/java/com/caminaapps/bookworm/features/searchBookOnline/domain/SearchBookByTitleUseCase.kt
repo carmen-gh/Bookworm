@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.features.searchBookOnline.domain
 
-import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.domain.repository.OnlineSearchBookRepository
+import com.caminaapps.bookworm.core.model.Book
+import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepository
 import javax.inject.Inject
 
 class SearchBookByTitleUseCase @Inject constructor(

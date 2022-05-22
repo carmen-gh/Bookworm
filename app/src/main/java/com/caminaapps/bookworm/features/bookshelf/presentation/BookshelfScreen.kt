@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.caminaapps.bookworm.core.domain.model.Book
+import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.AddBookFloatingActionButton
 import com.caminaapps.bookworm.presentation.screens.bookshelf.components.BookList
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
