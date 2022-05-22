@@ -26,8 +26,6 @@ class BarcodeAnalyzer(
                 )
                 .build()
             val scanner = BarcodeScanning.getClient(options)
-            var cachedBarcode: List<Barcode> = emptyList()
-
             scanner.process(image)
                 .addOnSuccessListener { barcodes ->
                     if (barcodes.isNotEmpty()) {

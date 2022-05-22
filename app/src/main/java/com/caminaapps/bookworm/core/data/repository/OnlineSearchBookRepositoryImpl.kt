@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.core.data.repository
 
-import com.caminaapps.bookworm.core.data.remote.OpenLibraryAPI
-import com.caminaapps.bookworm.core.data.remote.dto.toBook
+import com.caminaapps.bookworm.core.data.network.OpenLibraryAPI
+import com.caminaapps.bookworm.core.data.network.dto.asBook
 import com.caminaapps.bookworm.core.domain.model.Book
 import com.caminaapps.bookworm.core.domain.repository.OnlineSearchBookRepository
 import com.caminaapps.bookworm.di.IoDispatcher
@@ -17,13 +17,13 @@ class OnlineSearchBookRepositoryImpl @Inject constructor(
 
     override suspend fun getBookByISBN(isbn: String): Book? = withContext(ioDispatcher) {
         val searchResult = openLibraryAPI.searchBookByIsbn(isbn)
-        searchResult.docs.firstOrNull()?.toBook()
+        searchResult.docs.firstOrNull()?.asBook()
     }
 
 
     override suspend fun getBooksByTitle(title: String): List<Book> = withContext(ioDispatcher) {
         val searchResult = openLibraryAPI.searchBookByTitle(title)
-        searchResult.docs.map { it.toBook() }
+        searchResult.docs.map { it.asBook() }
     }
 
 }

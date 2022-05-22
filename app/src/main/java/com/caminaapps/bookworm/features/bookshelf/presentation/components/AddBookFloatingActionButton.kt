@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.presentation.screens.bookshelf.components
+package com.caminaapps.bookworm.features.bookshelf.presentation.components
 
 
 import android.Manifest
@@ -6,19 +6,15 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.caminaapps.bookworm.R
-import com.caminaapps.bookworm.core.presentation.components.CameraPermissionAlertDialog
-import com.caminaapps.bookworm.core.presentation.components.SpeedDialFloatingActionButton
-import com.caminaapps.bookworm.core.presentation.components.SpeedDialItem
-import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
+import com.caminaapps.bookworm.core.ui.component.CameraPermissionAlertDialog
+import com.caminaapps.bookworm.core.ui.component.SpeedDialFloatingActionButton
+import com.caminaapps.bookworm.core.ui.component.SpeedDialItem
+import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import timber.log.Timber
