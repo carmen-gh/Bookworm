@@ -16,6 +16,7 @@ import com.caminaapps.bookworm.core.domain.model.Book
 import com.caminaapps.bookworm.core.presentation.components.FullScreenLoading
 import com.caminaapps.bookworm.core.presentation.components.TopAppBarSlotNavigationUp
 import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.*
 
 
 @Composable
@@ -43,29 +44,25 @@ fun SearchForBookTitleScreen(
             )
         }
     ) {
+        val uiState: SearchForBookTitleUiState by viewModel.uiState.collectAsState()
 
-
-        when (query.isBlank()) {
-            true -> {
-                // show reult placeholder
+        when (uiState) {
+            Empty -> Text(text = "start searching") // TODO
+            Loading -> FullScreenLoading()
+            NoResults -> {
+                Text(text = "no results")
+                // TODO show no results matching}
             }
-            false -> {
-
+            is Success -> {
+                Text(text = "no results")
+                // TODO show list of results
             }
-        }
-
-
-        if (viewModel.uiState.isLoading) {
-            FullScreenLoading()
-        } else {
-            if (viewModel.uiState.results != null) {
-                // show list of results
-            } else {
-                // show no matching results
+            Error -> {
+                Text(text = "Error occured")
             }
-
         }
     }
+
 }
 
 @Composable

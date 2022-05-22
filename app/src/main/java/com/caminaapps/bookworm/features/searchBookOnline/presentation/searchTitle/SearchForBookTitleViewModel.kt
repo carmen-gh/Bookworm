@@ -1,15 +1,15 @@
 package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.domain.model.UserMessage
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SaveBookFromOnlineSearchUseCase
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SearchBookByTitleUseCase
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.*
+import com.caminaapps.bookworm.util.createExceptionHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,20 +19,25 @@ class SearchForBookTitleViewModel @Inject constructor(
     private val saveBook: SaveBookFromOnlineSearchUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf<SearchForBookTitleUiState>(SearchForBookTitleUiState())
-        private set
+    private val _uiState = MutableStateFlow<SearchForBookTitleUiState>(Empty)
+    val uiState: StateFlow<SearchForBookTitleUiState> = _uiState
 
     fun search(query: String) {
         if (query.isBlank()) {
-            uiState = SearchForBookTitleUiState()
+            _uiState.value = Empty
             return
         }
 
-        viewModelScope.launch {
-            uiState = SearchForBookTitleUiState(isLoading = true)
-            // (TODO) add error handling
+        val errorMessage = "Failed to search for book title"
+        val exceptionHandler = viewModelScope.createExceptionHandler(errorMessage) { onFailure(it) }
+
+        viewModelScope.launch(exceptionHandler) {
+            _uiState.value = Loading
             val result = searchBook(query)
-            uiState = SearchForBookTitleUiState(isLoading = false, results = result)
+            _uiState.value = when (result.isEmpty()) {
+                true -> NoResults
+                false -> Success(books = result)
+            }
         }
     }
 
@@ -41,21 +46,18 @@ class SearchForBookTitleViewModel @Inject constructor(
             saveBook(book)
         }
     }
+
+    private fun onFailure(e: Throwable) {
+        _uiState.value = Error
+    }
 }
 
-// results null no search, if empty no matching results
 
-data class SearchForBookTitleUiState(
-    val query: String = "", // ?
-    val isLoading: Boolean = false,
-    val results: List<Book>? = null,
-    val userMessages: List<UserMessage> = emptyList(),
-)
-
-//
-//sealed class SearchForBookTitleUiState {
-//    object Initial : SearchForBookTitleUiState()
-//    object Loading : SearchForBookTitleUiState()
-//    data class SearchResults(val books: List<Book>) :  SearchForBookTitleUiState()
-//    data class Error(@StringRes val errorMessageId: Int = 0) : SearchForBookTitleUiState()
-//}
+sealed interface SearchForBookTitleUiState {
+    object Empty : SearchForBookTitleUiState
+    object Loading : SearchForBookTitleUiState
+    data class Success(val books: List<Book>) : SearchForBookTitleUiState
+    object NoResults : SearchForBookTitleUiState
+    object Error : SearchForBookTitleUiState
+}
+// data class Error(@StringRes val errorMessageId: Int = 0) : SearchForBookTitleUiState()
