@@ -9,6 +9,6 @@ class GetBooksUseCase @Inject constructor(
     private val bookRepository: BookRepository
 ) {
 
-    operator fun invoke(): Flow<List<Book>> = bookRepository.getAllBooks()
+    operator fun invoke(): Flow<List<Book>> = bookRepository.getAllBooksStream()
 
 }

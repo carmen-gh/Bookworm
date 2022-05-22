@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.di
 
-import com.caminaapps.bookworm.core.data.remote.GoogleBooksApi
-import com.caminaapps.bookworm.core.data.remote.interceptor.LoggingInterceptor
+import com.caminaapps.bookworm.core.data.network.OpenLibraryAPI
+import com.caminaapps.bookworm.core.data.network.interceptor.LoggingInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -19,20 +19,22 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RemoteDataSourceModule {
 
+    private val json = Json {
+        ignoreUnknownKeys = true
+    }
+
     @ExperimentalSerializationApi
     @Provides
     @Singleton
-    fun provideApi(okHttpClient: OkHttpClient): GoogleBooksApi {
+    fun provideApi(okHttpClient: OkHttpClient): OpenLibraryAPI {
         val contentType = "application/json".toMediaType()
-        val converterFactory = Json {
-            ignoreUnknownKeys = true
-        }.asConverterFactory(contentType)
+        val converterFactory = json.asConverterFactory(contentType)
         return Retrofit.Builder()
-            .baseUrl(GoogleBooksApi.BASE_URL)
+            .baseUrl(OpenLibraryAPI.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(converterFactory)
             .build()
-            .create(GoogleBooksApi::class.java)
+            .create(OpenLibraryAPI::class.java)
     }
 
     @Provides

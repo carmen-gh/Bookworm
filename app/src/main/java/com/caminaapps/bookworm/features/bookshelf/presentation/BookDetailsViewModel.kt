@@ -1,47 +1,56 @@
 package com.caminaapps.bookworm.features.bookshelf.presentation
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.domain.model.UserMessage
-import com.caminaapps.bookworm.core.presentation.navigation.Screen
+import com.caminaapps.bookworm.features.bookshelf.domain.DeleteBookUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookDetailsUseCase
+import com.caminaapps.bookworm.util.Result
+import com.caminaapps.bookworm.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class BookViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getBookDetails: GetBookDetailsUseCase
+    private val getBookDetails: GetBookDetailsUseCase,
+    private val deleteBook: DeleteBookUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(BookUiState())
-        private set
+    private val bookId: String = checkNotNull(savedStateHandle["bookId"])
+    private val bookStream: Flow<Result<Book?>> = getBookDetails(bookId).asResult()
 
-    init {
-        Screen.BookDetail.argumentKey?.let { argumentKey ->
-            savedStateHandle.get<String>(argumentKey)?.let { id ->
-                loadBookDetails(id)
+    val uiState: StateFlow<BookDetailsUiState> = bookStream.map { result ->
+        when (result) {
+            is Result.Success -> {
+                result.data?.let {
+                    BookDetailsUiState.Success(it)
+                } ?: BookDetailsUiState.NotFound
             }
+            is Result.Loading -> BookDetailsUiState.Loading
+            is Result.Error -> BookDetailsUiState.Error
         }
-    }
+    } .stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = BookDetailsUiState.Loading
+    )
 
-    private fun loadBookDetails(id: String) {
+
+    fun onDeleteBook(bookId: String) {
         viewModelScope.launch {
-            getBookDetails(id).collect { book ->
-                uiState = uiState.copy(book = book)
-            }
+            deleteBook(bookId)
         }
     }
-
 }
 
-data class BookUiState(
-    val book: Book? = null,
-    val userMessages: List<UserMessage> = emptyList(),
-)
+sealed interface BookDetailsUiState {
+    data class Success(val book: Book) : BookDetailsUiState
+    object NotFound: BookDetailsUiState
+    object Error : BookDetailsUiState
+    object Loading :BookDetailsUiState
+}

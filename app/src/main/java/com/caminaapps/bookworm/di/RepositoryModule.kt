@@ -1,9 +1,9 @@
 package com.caminaapps.bookworm.di
 
 import com.caminaapps.bookworm.core.data.repository.BookRepositoryImpl
-import com.caminaapps.bookworm.core.data.repository.GoogleBooksRepositoryImpl
+import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepositoryImpl
 import com.caminaapps.bookworm.core.domain.repository.BookRepository
-import com.caminaapps.bookworm.core.domain.repository.GoogleBooksRepository
+import com.caminaapps.bookworm.core.domain.repository.OnlineSearchBookRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,9 +16,9 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
 
     @Binds
-    abstract fun bindGoogleBooksRepository(
-        googleBooksRepositoryImpl: GoogleBooksRepositoryImpl
-    ): GoogleBooksRepository
+    abstract fun bindOnlineSearchBookRepository(
+        onlineSearchBookRepositoryImpl: OnlineSearchBookRepositoryImpl
+    ): OnlineSearchBookRepository
 
     @Binds
     @Singleton
