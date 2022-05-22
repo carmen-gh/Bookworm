@@ -8,8 +8,8 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.printToLog
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.caminaapps.bookworm.core.presentation.navigation.BookwormBottomNavigation
-import com.caminaapps.bookworm.core.presentation.navigation.BottomNavigationScreen
+import com.caminaapps.bookworm.core.navigation.BookwormBottomNavigation
+import com.caminaapps.bookworm.core.navigation.BottomNavigationScreen
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.core.data.repository
 
-import com.caminaapps.bookworm.core.data.local.BookDao
-import com.caminaapps.bookworm.core.data.local.BookEntity
+import com.caminaapps.bookworm.core.data.database.BookDao
+import com.caminaapps.bookworm.core.data.database.BookEntity
 import com.caminaapps.bookworm.core.domain.model.Book
 import com.caminaapps.bookworm.core.domain.repository.BookRepository
 import kotlinx.coroutines.flow.Flow
@@ -12,16 +12,16 @@ class BookRepositoryImpl @Inject constructor(
     private val bookDao: BookDao
 ) : BookRepository {
 
-    override fun getAllBooks(): Flow<List<Book>> =
-        bookDao.getAllBooks()
+    override fun getAllBooksStream(): Flow<List<Book>> =
+        bookDao.getAllBooksStream()
             .map { listOfBookEntities ->
-                listOfBookEntities.map { it.toBook() }
+                listOfBookEntities.map { it.asBook() }
             }
 
-    override fun getBookDetails(id: String): Flow<Book?> =
-        bookDao.getBook(id)
+    override fun getBookDetailsStream(id: String): Flow<Book?> =
+        bookDao.getBookStream(id)
             .map {
-                it?.toBook()
+                it?.asBook()
             }
 
     override suspend fun saveBook(book: Book) {

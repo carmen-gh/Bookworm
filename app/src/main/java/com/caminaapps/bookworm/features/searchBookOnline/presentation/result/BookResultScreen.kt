@@ -22,7 +22,7 @@ import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.domain.model.Book
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
-import com.caminaapps.bookworm.core.presentation.previewParameterProvider.BookPreviewParameterProvider
+import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.common.SearchBookResultContent
 import com.caminaapps.bookworm.searchBookOnline.presentation.result.NoBookFoundView

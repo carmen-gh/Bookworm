@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.presentation.navigation.Screen
+import com.caminaapps.bookworm.core.navigation.Screen
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SaveBookFromOnlineSearchUseCase
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SearchBookByIsbnUseCase
 import com.caminaapps.bookworm.util.createExceptionHandler

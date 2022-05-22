@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.presentation.previewParameterProvider.BooksPreviewParameterProvider
+import com.caminaapps.bookworm.util.previewParameterProvider.BooksPreviewParameterProvider
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
 

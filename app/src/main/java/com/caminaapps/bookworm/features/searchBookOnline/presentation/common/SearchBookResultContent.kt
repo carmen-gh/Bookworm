@@ -20,7 +20,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.presentation.previewParameterProvider.BookPreviewParameterProvider
+import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
 @Composable
