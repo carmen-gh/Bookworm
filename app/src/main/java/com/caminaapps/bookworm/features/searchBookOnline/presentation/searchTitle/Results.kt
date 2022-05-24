@@ -42,6 +42,7 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
 
+
 @Composable
 fun SearchResults(
     searchResults: List<Book>,

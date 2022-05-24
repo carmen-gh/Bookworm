@@ -23,4 +23,5 @@ class SearchBookTitleViewModel @Inject constructor(
             saveBook(book)
         }
     }
+
 }

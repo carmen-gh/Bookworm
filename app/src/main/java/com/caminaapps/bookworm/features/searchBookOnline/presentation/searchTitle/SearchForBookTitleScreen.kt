@@ -12,10 +12,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.R
-import com.caminaapps.bookworm.core.domain.model.Book
-import com.caminaapps.bookworm.core.presentation.components.FullScreenLoading
-import com.caminaapps.bookworm.core.presentation.components.TopAppBarSlotNavigationUp
-import com.caminaapps.bookworm.core.presentation.theme.BookwormTheme
+import com.caminaapps.bookworm.core.model.Book
+import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
+import com.caminaapps.bookworm.core.ui.component.TopAppBarSlotNavigationUp
+import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.*
 
 
