@@ -22,7 +22,12 @@ class OnlineSearchBookRepositoryImpl @Inject constructor(
 
     override suspend fun getBooksByTitle(title: String): List<Book> = withContext(ioDispatcher) {
         val searchResult = openLibraryAPI.searchBookByTitle(title)
-        searchResult.docs.map { it.asBook() }
+
+        return@withContext if (searchResult.docs.isNotEmpty()) {
+            searchResult.docs.map { it.asBook() }
+        } else {
+            emptyList()
+        }
     }
 
 }

@@ -51,10 +51,8 @@ fun DocDTO.asBook(): Book {
     return Book(
         title = title ?: "",
         subtitle = "",
-        author = authorName.joinToString(separator = ", ") ?: "",
-        publishedDate = publishDate.firstOrNull() ?: "",
-        coverUrl = coverI?.let {
-            "https://covers.openlibrary.org/b/id/${coverI}-M.jpg"
-        }
+        author = authorName.joinToString(separator = ", "),
+        publishedDate =  publishDate.firstOrNull() ?: "",
+        coverUrl = "https://covers.openlibrary.org/b/id/${coverI}-M.jpg"
     )
 }
