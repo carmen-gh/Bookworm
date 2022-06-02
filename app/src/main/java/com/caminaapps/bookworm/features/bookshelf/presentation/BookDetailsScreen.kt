@@ -3,7 +3,7 @@ package com.caminaapps.bookworm.features.bookshelf.presentation
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -65,7 +65,7 @@ fun BookContent(
                 actions = {
                     IconButton(onClick = { onDeleteBookClick() }) {
                         Icon(
-                            imageVector = Icons.Filled.Delete,
+                            imageVector = Icons.Outlined.Delete,
                             contentDescription = "trash bin"
                         )
                     }
@@ -87,7 +87,7 @@ fun BookContent(
             Spacer(modifier = Modifier.height(42.dp))
             Text(
                 text = book.title,
-                style = MaterialTheme.typography.h4,
+                style = MaterialTheme.typography.h5,
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -97,6 +97,7 @@ fun BookContent(
                     style = MaterialTheme.typography.h6
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
             Text(text = book.author)
             Text(text = book.publishedDate)
         }
