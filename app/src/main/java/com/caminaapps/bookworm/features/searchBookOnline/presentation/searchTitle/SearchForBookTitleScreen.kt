@@ -8,14 +8,15 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.R
-import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarSlotNavigationUp
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
@@ -25,7 +26,6 @@ import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitl
 @Composable
 fun SearchForBookTitleScreen(
     modifier: Modifier = Modifier,
-    onBookClick: (Book) -> Unit,
     onNavigateUp: () -> Unit,
     viewModel: SearchForBookTitleViewModel = hiltViewModel()
 ) {
@@ -37,7 +37,10 @@ fun SearchForBookTitleScreen(
             TopAppBarSlotNavigationUp(
                 title = {
                     SimpleSearchBar(
-                        onValueChange = { query = it },
+                        onValueChange = {
+                            viewModel.onQueryChanged()
+                            query = it
+                        },
                         value = query,
                         onSearchKeyboardAction = { viewModel.search(query) }
                     )
@@ -53,12 +56,11 @@ fun SearchForBookTitleScreen(
         when (uiState) {
             is Empty -> Text(text = "start searching") // TODO
             is Loading -> FullScreenLoading()
-            is NoResults -> {
-                Text(text = "no results")
-                // TODO show no results matching}
-            }
+            is NoResults -> NoResults(query)
             is Success -> {
-                SearchResults(searchResults = (uiState as Success).books, onBookClick = {}, onAddClick = {})
+                SearchResults(
+                    searchResults = (uiState as Success).books,
+                    onAddClick = { viewModel.onAddBook(it) })
 //                Text(text = "results")
                 // TODO show list of results
             }
@@ -70,6 +72,7 @@ fun SearchForBookTitleScreen(
 
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SimpleSearchBar(
     modifier: Modifier = Modifier,
@@ -78,13 +81,17 @@ fun SimpleSearchBar(
     onSearchKeyboardAction: () -> Unit
 ) {
     // state show trailing icon derivedStateOf
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     TextField(
         textStyle = LocalTextStyle.current,
         value = value,
         onValueChange = onValueChange,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-        keyboardActions = KeyboardActions(onSearch = { onSearchKeyboardAction() }),
+        keyboardActions = KeyboardActions(onSearch = {
+            onSearchKeyboardAction()
+            keyboardController?.hide()
+        }),
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
@@ -114,6 +121,6 @@ fun SimpleSearchBar(
 @Composable
 fun SearchForBookTitleScreenPreview() {
     BookwormTheme {
-        SearchForBookTitleScreen(onBookClick = {}, onNavigateUp = {})
+        SearchForBookTitleScreen(onNavigateUp = {})
     }
 }

@@ -10,8 +10,8 @@ import com.caminaapps.bookworm.core.navigation.BottomNavigationScreen
 import com.caminaapps.bookworm.core.navigation.Screen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner.CameraScreen
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.result.BookResultScreen
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.BookBarcodeResultScreen
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.CameraScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleScreen
 import com.caminaapps.bookworm.features.settings.SettingsScreen
 import com.caminaapps.bookworm.features.wishlist.WishlistScreen
@@ -48,7 +48,7 @@ fun BookwormNavHost(
         }
 
         composable(Screen.SearchIsbnBookResult.route) {
-            BookResultScreen(
+            BookBarcodeResultScreen(
                 onCloseScreen = { navController.navigateUp() },
                 onScanBarcode = {
                     navController.navigate(Screen.Camera.createRoute()) {
@@ -70,7 +70,7 @@ fun BookwormNavHost(
         }
 
         composable(Screen.SearchBookByTitle.route) {
-            SearchForBookTitleScreen(onBookClick = {}, onNavigateUp = { navController.navigateUp()})
+            SearchForBookTitleScreen(onNavigateUp = { navController.navigateUp() })
         }
 
         // Wishlist -----------------------------------------------------------------------------------

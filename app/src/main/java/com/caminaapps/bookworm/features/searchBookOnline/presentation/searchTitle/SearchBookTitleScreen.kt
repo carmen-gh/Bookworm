@@ -69,10 +69,10 @@ fun SearchBookTitleScreen(
             when (state.searchDisplay) {
                 SearchDisplay.Results -> SearchResults(
                     searchResults = state.searchResults ?: emptyList(),
-                    onBookClick = {
-                        focusManager.clearFocus()
-                        onBookClick(it)
-                    },
+//                    onBookClick = {
+//                        focusManager.clearFocus()
+//                        onBookClick(it)
+//                    },
                     onAddClick = {
                         focusManager.clearFocus()
                         viewModel.onAddBook(it)

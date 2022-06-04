@@ -22,6 +22,12 @@ class SearchForBookTitleViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<SearchForBookTitleUiState>(Empty)
     val uiState: StateFlow<SearchForBookTitleUiState> = _uiState
 
+    // TODO() use coroutine job to cancel previous search
+
+    fun onQueryChanged() {
+        _uiState.value = Empty
+    }
+
     fun search(query: String) {
         if (query.isBlank()) {
             _uiState.value = Empty

@@ -3,23 +3,11 @@ package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTit
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
@@ -46,7 +34,6 @@ import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParamete
 @Composable
 fun SearchResults(
     searchResults: List<Book>,
-    onBookClick: (Book) -> Unit,
     onAddClick: (Book) -> Unit
 ) {
     Column {
@@ -58,7 +45,7 @@ fun SearchResults(
         )
         LazyColumn {
             itemsIndexed(searchResults) { index, snack ->
-                SearchResult(snack, onBookClick, onAddClick, index != 0)
+                SearchResult(snack, {}, onAddClick, index != 0)
             }
         }
     }
