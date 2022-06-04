@@ -26,4 +26,5 @@
     <string name="search_placeholder">Search for title</string>
     <string name="search_no_matches">No matches for “%1s”</string>
     <string name="search_count">%1d items</string>
+    <string name="search_engine_text">find your book on</string>
 </resources>

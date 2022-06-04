@@ -1,19 +1,22 @@
 package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -60,7 +63,7 @@ fun SearchForBookTitleScreen(
         val uiState: SearchForBookTitleUiState by viewModel.uiState.collectAsState()
 
         when (uiState) {
-            is Empty -> Text(text = "start searching") // TODO
+            is Empty -> OpenLibraryView(modifier = Modifier.fillMaxWidth())
             is Loading -> FullScreenLoading()
             is NoResults -> NoResults(query)
             is Success -> {
@@ -74,6 +77,29 @@ fun SearchForBookTitleScreen(
         }
     }
 
+}
+
+@Composable
+fun OpenLibraryView(modifier: Modifier = Modifier) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .wrapContentSize()
+            .padding(top = 80.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.search_engine_text),
+            style = MaterialTheme.typography.subtitle1,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Image(
+            painterResource(R.drawable.openlibrary_logo),
+            contentDescription = "open library",
+            modifier = Modifier.size(width = 200.dp, height = 60.dp)
+        )
+    }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
