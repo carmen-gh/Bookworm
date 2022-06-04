@@ -12,7 +12,7 @@ import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner.CameraScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.result.BookResultScreen
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchBookTitleScreen
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleScreen
 import com.caminaapps.bookworm.features.settings.SettingsScreen
 import com.caminaapps.bookworm.features.wishlist.WishlistScreen
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -70,7 +70,7 @@ fun BookwormNavHost(
         }
 
         composable(Screen.SearchBookByTitle.route) {
-            SearchBookTitleScreen(onBookClick = {}, onNavigateUp = { /*TODO*/ })
+            SearchForBookTitleScreen(onBookClick = {}, onNavigateUp = { navController.navigateUp()})
         }
 
         // Wishlist -----------------------------------------------------------------------------------

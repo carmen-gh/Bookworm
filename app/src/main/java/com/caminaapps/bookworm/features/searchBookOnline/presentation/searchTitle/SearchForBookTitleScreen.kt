@@ -2,12 +2,15 @@ package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTit
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,7 +38,8 @@ fun SearchForBookTitleScreen(
                 title = {
                     SimpleSearchBar(
                         onValueChange = { query = it },
-                        value = query
+                        value = query,
+                        onSearchKeyboardAction = { viewModel.search(query) }
                     )
                 },
                 onClick = {
@@ -47,17 +51,18 @@ fun SearchForBookTitleScreen(
         val uiState: SearchForBookTitleUiState by viewModel.uiState.collectAsState()
 
         when (uiState) {
-            Empty -> Text(text = "start searching") // TODO
-            Loading -> FullScreenLoading()
-            NoResults -> {
+            is Empty -> Text(text = "start searching") // TODO
+            is Loading -> FullScreenLoading()
+            is NoResults -> {
                 Text(text = "no results")
                 // TODO show no results matching}
             }
             is Success -> {
-                Text(text = "no results")
+                SearchResults(searchResults = (uiState as Success).books, onBookClick = {}, onAddClick = {})
+//                Text(text = "results")
                 // TODO show list of results
             }
-            Error -> {
+            is Error -> {
                 Text(text = "Error occured")
             }
         }
@@ -70,12 +75,16 @@ fun SimpleSearchBar(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
+    onSearchKeyboardAction: () -> Unit
 ) {
     // state show trailing icon derivedStateOf
 
     TextField(
+        textStyle = LocalTextStyle.current,
         value = value,
         onValueChange = onValueChange,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+        keyboardActions = KeyboardActions(onSearch = { onSearchKeyboardAction() }),
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
