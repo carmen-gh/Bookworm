@@ -1,12 +1,13 @@
 package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -37,12 +38,17 @@ fun SearchForBookTitleScreen(
             TopAppBarSlotNavigationUp(
                 title = {
                     SimpleSearchBar(
+                        modifier = Modifier.padding(vertical = 4.dp),
                         onValueChange = {
-                            viewModel.onQueryChanged()
                             query = it
+                            viewModel.onQueryChanged()
                         },
                         value = query,
-                        onSearchKeyboardAction = { viewModel.search(query) }
+                        onSearchKeyboardAction = { viewModel.search(query) },
+                        onResetValue = {
+                            query = ""
+                            viewModel.onQueryChanged()
+                        }
                     )
                 },
                 onClick = {
@@ -61,11 +67,9 @@ fun SearchForBookTitleScreen(
                 SearchResults(
                     searchResults = (uiState as Success).books,
                     onAddClick = { viewModel.onAddBook(it) })
-//                Text(text = "results")
-                // TODO show list of results
             }
             is Error -> {
-                Text(text = "Error occured")
+                Text(text = "Error occured") // TODO
             }
         }
     }
@@ -78,41 +82,41 @@ fun SimpleSearchBar(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
-    onSearchKeyboardAction: () -> Unit
+    onSearchKeyboardAction: () -> Unit,
+    onResetValue: () -> Unit
 ) {
     // state show trailing icon derivedStateOf
     val keyboardController = LocalSoftwareKeyboardController.current
 
     TextField(
-        textStyle = LocalTextStyle.current,
         value = value,
         onValueChange = onValueChange,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-        keyboardActions = KeyboardActions(onSearch = {
-            onSearchKeyboardAction()
-            keyboardController?.hide()
-        }),
-        leadingIcon = {
+        keyboardActions = KeyboardActions(
+            onSearch = {
+                onSearchKeyboardAction()
+                keyboardController?.hide()
+            }
+        ),
+        trailingIcon = {
             Icon(
-                imageVector = Icons.Default.Search,
+                imageVector = Icons.Default.Close,
                 contentDescription = null,
-                tint = MaterialTheme.colors.onPrimary
+                tint = MaterialTheme.colors.primary,
+                modifier = Modifier.clickable { onResetValue() }
             )
         },
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.primary
-        ),
         placeholder = {
             Text(
                 text = stringResource(R.string.search_placeholder),
                 style = LocalTextStyle.current,
-                color = MaterialTheme.colors.onPrimary
+                color = MaterialTheme.colors.primary
             )
 
         },
+        maxLines = 2,
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 56.dp)
     )
 }
 
