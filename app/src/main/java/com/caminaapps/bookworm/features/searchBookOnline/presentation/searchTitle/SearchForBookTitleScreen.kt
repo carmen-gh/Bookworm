@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -135,12 +136,15 @@ fun SimpleSearchBar(
         placeholder = {
             Text(
                 text = stringResource(R.string.search_placeholder),
-                style = LocalTextStyle.current,
                 color = MaterialTheme.colors.primary
             )
 
         },
-        maxLines = 2,
+        textStyle = MaterialTheme.typography.subtitle1,
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.Transparent
+        ),
+        maxLines = 1,
         modifier = modifier
             .fillMaxWidth()
     )
