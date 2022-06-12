@@ -72,9 +72,7 @@ fun SearchForBookTitleScreen(
                     searchResults = (uiState as Success).books,
                     onAddClick = { viewModel.onAddBook(it) })
             }
-            is Error -> {
-                Text(text = "Error occured") // TODO
-            }
+            is Error -> Text(text = stringResource((uiState as Error).message))
         }
     }
 
