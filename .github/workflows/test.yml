@@ -30,12 +30,6 @@ jobs:
       - name: Unit tests
         run: ./gradlew testDebugUnitTest --continue --no-daemon
 
-      - uses: github/codeql-action/upload-sarif@v2
-        if: always()
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sarif_file: app/build/reports/detekt/detekt.sarif
-
 
   android_tests:
     runs-on: macos-latest
