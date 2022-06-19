@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlinx-serialization'
     id 'dagger.hilt.android.plugin'
+    id 'io.gitlab.arturbosch.detekt'
 }
 
 android {
@@ -46,6 +47,10 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+//    lint {
+//        lintConfig = rootProject.file("config/lint.xml")
+//        sarifReport = true
+//    }
 }
 
 dependencies {
@@ -115,4 +120,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+}
+
+
+detekt {
+    toolVersion = "$detekt_version"
+    config = rootProject.files("config/detekt/detekt.yml")
+    buildUponDefaultConfig = false
+    ignoredBuildTypes = ["release"]
+    ignoredFlavors = ["production"]
 }
