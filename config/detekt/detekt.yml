@@ -183,7 +183,22 @@ style:
   VarCouldBeVal:
     active: true
 
+compose:
+  ReusedModifierInstance:
+    active: true
+  UnnecessaryEventHandlerParameter:
+    active: true
+  ComposableEventParameterNaming:
+    active: true
+  ModifierHeightWithText:
+    active: true
+  ModifierParameterPosition:
+    active: true
+  PublicComposablePreview:
+    active: false
+
 naming:
   FunctionNaming:
     ignoreAnnotated:
       - Composable
+      - Preview

@@ -120,6 +120,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0"
+    detektPlugins("ru.kode:detekt-rules-compose:1.0.1")
 }
 
 
