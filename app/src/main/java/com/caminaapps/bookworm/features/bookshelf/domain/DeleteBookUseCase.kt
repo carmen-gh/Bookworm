@@ -8,5 +8,4 @@ class DeleteBookUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(id: String): Unit = bookRepository.deleteBook(id)
-
 }
