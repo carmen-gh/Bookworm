@@ -7,18 +7,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.UserMessage
-import com.caminaapps.bookworm.features.bookshelf.domain.DeleteBookUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-
 @HiltViewModel
 class BookshelfViewModel @Inject constructor(
     private val getBooks: GetBooksUseCase,
-    private val deleteBookUseCase: DeleteBookUseCase
+    // private val deleteBookUseCase: DeleteBookUseCase
 ) : ViewModel() {
 
     var uiState by mutableStateOf(BookshelfUiState())
@@ -33,11 +31,11 @@ class BookshelfViewModel @Inject constructor(
         }
     }
 
-    fun onItemDelet(id: String) {
-        viewModelScope.launch {
-            deleteBookUseCase(id)
-        }
-    }
+    // fun onItemDelet(id: String) {
+    //     viewModelScope.launch {
+    //         deleteBookUseCase(id)
+    //     }
+    // }
 }
 
 data class BookshelfUiState(

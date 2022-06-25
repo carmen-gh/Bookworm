@@ -11,6 +11,4 @@ import com.google.accompanist.permissions.PermissionState
  * that we can determine if they've denied it before.
  */
 @ExperimentalPermissionsApi
-fun PermissionState.hasPermanentlyDenied(): Boolean {
-    return permissionRequested && !shouldShowRationale
-}
+fun PermissionState.hasPermanentlyDenied(): Boolean = permissionRequested && !shouldShowRationale

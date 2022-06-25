@@ -47,7 +47,7 @@ fun BookDetailsScreen(
     when (uiState) {
         is Loading -> FullScreenLoading()
         is NotFound -> onUpNavigationClick()
-        is Error -> TODO()
+        is Error -> {}
         is Success -> {
             val book = (uiState as Success).book
             BookContent(
@@ -57,16 +57,14 @@ fun BookDetailsScreen(
             )
         }
     }
-
 }
-
 
 @Composable
 fun BookContent(
-    modifier: Modifier = Modifier,
     book: Book,
     onUpNavigationClick: () -> Unit,
-    onDeleteBookClick: () -> Unit
+    onDeleteBookClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
@@ -86,7 +84,9 @@ fun BookContent(
         },
     ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding).fillMaxWidth(),
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AsyncImage(

@@ -25,8 +25,8 @@ import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 @Composable
 fun TopAppBarNavigationUp(
     title: String,
-    modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
@@ -68,9 +68,9 @@ fun TopAppBarSlotNavigationUp(
 
 @Composable
 fun TopAppBarNavigationClose(
-    modifier: Modifier = Modifier,
     title: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
@@ -96,7 +96,7 @@ fun DefaultPreviewDark() {
     BookwormTheme {
         Column {
             TopAppBarNavigationUp(
-                title = "TopAppBar dasdfasdfTitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar Title",
+                title = "TopAppBar dasdfasdfTitleTopAppBar TitleTopAppBar TitleTopAppBar asdfasfas",
                 onClick = {}
             )
             Spacer(modifier = Modifier.height(8.dp))

@@ -65,8 +65,8 @@ fun SpeedDialFloatingActionButton(
         ) {
             this@Column.AnimatedVisibility(
                 visible = expanded,
-                enter = slideInVertically(initialOffsetY = { 200 }),
-                exit = slideOutVertically(targetOffsetY = { 300 })
+                enter = slideInVertically(initialOffsetY = { SpeedDialFloatingActionButtonInitialOffsetY }),
+                exit = slideOutVertically(targetOffsetY = { SpeedDialFloatingActionButtonTargetOffsetY })
             ) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(SpeedDialFloatingActionButtonSpace)
@@ -88,11 +88,8 @@ fun SpeedDialFloatingActionButton(
 private val SpeedDialFloatingActionButtonBoxMaxHeight = 40.dp * 6 + 24.dp * 5
 private val SpeedDialFloatingActionButtonSize = 40.dp
 private val SpeedDialFloatingActionButtonSpace = 24.dp
-
-enum class SpeedDialFloatingActionButtonValue {
-    Closed,
-    Expanded
-}
+private val SpeedDialFloatingActionButtonInitialOffsetY = 200
+private val SpeedDialFloatingActionButtonTargetOffsetY = 300
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview

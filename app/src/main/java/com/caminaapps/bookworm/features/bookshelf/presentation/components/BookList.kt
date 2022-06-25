@@ -18,9 +18,9 @@ import com.caminaapps.bookworm.util.previewParameterProvider.BooksPreviewParamet
 @ExperimentalMaterialApi
 @Composable
 fun BookList(
-    modifier: Modifier = Modifier,
     books: List<Book>,
-    onItemClick: (Book) -> Unit
+    onItemClick: (Book) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier,

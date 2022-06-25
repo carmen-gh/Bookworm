@@ -6,6 +6,5 @@ import javax.inject.Inject
 class DeleteBookUseCase @Inject constructor(
     private val bookRepository: BookRepository
 ) {
-
-    suspend operator fun invoke(id: String): Unit = bookRepository.deleteBook(id)
+    suspend operator fun invoke(id: String) = bookRepository.deleteBook(id)
 }

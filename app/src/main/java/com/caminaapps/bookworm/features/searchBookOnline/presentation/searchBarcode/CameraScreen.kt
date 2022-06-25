@@ -11,7 +11,7 @@ import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
 @Composable
 fun CameraScreen(
     onClose: () -> Unit,
-    onBarcodeDetected: (isbn: String) -> Unit
+    onBarcodeDetection: (isbn: String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -23,7 +23,7 @@ fun CameraScreen(
     ) { innerPadding ->
         CameraPreview(
             modifier = Modifier.padding(innerPadding),
-            onBarcodeDetected = onBarcodeDetected
+            onBarcodeDetection = onBarcodeDetection
         )
     }
 }

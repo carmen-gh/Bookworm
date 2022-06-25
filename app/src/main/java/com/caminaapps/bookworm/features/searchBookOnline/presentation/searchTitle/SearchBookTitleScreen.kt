@@ -68,15 +68,12 @@ fun SearchBookTitleScreen(
             when (state.searchDisplay) {
                 SearchDisplay.Results -> SearchResults(
                     searchResults = state.searchResults ?: emptyList(),
-//                    onBookClick = {
-//                        focusManager.clearFocus()
-//                        onBookClick(it)
-//                    },
                     onAddClick = {
                         focusManager.clearFocus()
                         viewModel.onAddBook(it)
                         onNavigateUp()
-                    }
+                    },
+                    modifier = Modifier
                 )
                 SearchDisplay.NoResults -> NoResults(state.query.text)
                 SearchDisplay.Empty -> Text("search on Open Library")

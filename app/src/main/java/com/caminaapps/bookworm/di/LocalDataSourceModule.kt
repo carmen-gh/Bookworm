@@ -10,19 +10,15 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object LocalDataSourceModule {
 
     @Singleton
     @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
-        return AppDatabase.getInstance(context)
-    }
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
+        AppDatabase.getInstance(context)
 
     @Provides
-    fun provideBookDao(appDatabase: AppDatabase): BookDao {
-        return appDatabase.bookDao()
-    }
+    fun provideBookDao(appDatabase: AppDatabase): BookDao = appDatabase.bookDao()
 }

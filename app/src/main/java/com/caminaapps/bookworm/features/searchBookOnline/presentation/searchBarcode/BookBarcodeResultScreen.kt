@@ -82,10 +82,10 @@ fun BookBarcodeResultScreen(
 
 @Composable
 fun BookResultContent(
-    modifier: Modifier,
     book: Book,
     onSaveClick: () -> Unit,
-    onSaveAndScanClick: () -> Unit
+    onSaveAndScanClick: () -> Unit,
+    modifier: Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

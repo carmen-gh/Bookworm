@@ -4,24 +4,17 @@ import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,9 +37,9 @@ import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParamete
 
 @Composable
 fun SearchResults(
-    modifier: Modifier,
     searchResults: List<Book>,
-    onAddClick: (Book) -> Unit
+    onAddClick: (Book) -> Unit,
+    modifier: Modifier,
 ) {
     Column(modifier = modifier) {
         Text(
@@ -56,35 +49,36 @@ fun SearchResults(
             modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
         )
         LazyColumn {
-            itemsIndexed(searchResults) { index, snack ->
-                SearchResult(snack, {}, onAddClick, index != 0)
+            itemsIndexed(searchResults) { index, book ->
+                SearchResult(
+                    book = book,
+                    showDivider = index != 0,
+                    modifier = Modifier.clickable { onAddClick(book) }
+                )
             }
         }
     }
 }
 
-@Composable
-private fun NewSearchResult(
-    book: Book,
-    onBookClick: (Book) -> Unit,
-    onAddClick: (Book) -> Unit,
-    showDivider: Boolean,
-    modifier: Modifier = Modifier
-) {
-}
+// @Composable
+// private fun NewSearchResult(
+//     book: Book,
+//     onBookClick: (Book) -> Unit,
+//     onAddClick: (Book) -> Unit,
+//     showDivider: Boolean,
+//     modifier: Modifier = Modifier
+// ) {
+// }
 
 @Composable
 private fun SearchResult(
     book: Book,
-    onBookClick: (Book) -> Unit,
-    onAddClick: (Book) -> Unit,
     showDivider: Boolean,
     modifier: Modifier = Modifier
 ) {
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onBookClick(book) }
             .padding(horizontal = 24.dp)
     ) {
         val (divider, image, name, tag, priceSpacer, price, add) = createRefs()
@@ -166,22 +160,6 @@ private fun SearchResult(
                 )
             }
         )
-        Button(
-            onClick = { onAddClick(book) },
-            shape = CircleShape,
-            contentPadding = PaddingValues(0.dp),
-            modifier = Modifier
-                .size(36.dp)
-                .constrainAs(add) {
-                    linkTo(top = parent.top, bottom = parent.bottom)
-                    end.linkTo(parent.end)
-                }
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Add,
-                contentDescription = stringResource(R.string.button_add)
-            )
-        }
     }
 }
 
@@ -221,8 +199,6 @@ private fun SearchResultPreview(
         Surface {
             SearchResult(
                 book = book,
-                onBookClick = {},
-                onAddClick = {},
                 showDivider = false
             )
         }

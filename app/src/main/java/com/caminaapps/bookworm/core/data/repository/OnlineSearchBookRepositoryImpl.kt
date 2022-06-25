@@ -8,7 +8,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-
 class OnlineSearchBookRepositoryImpl @Inject constructor(
     private val openLibraryAPI: OpenLibraryAPI,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
@@ -19,7 +18,6 @@ class OnlineSearchBookRepositoryImpl @Inject constructor(
         searchResult.docs.firstOrNull()?.asBook()
     }
 
-
     override suspend fun getBooksByTitle(title: String): List<Book> = withContext(ioDispatcher) {
         val searchResult = openLibraryAPI.searchBookByTitle(title)
 
@@ -29,5 +27,4 @@ class OnlineSearchBookRepositoryImpl @Inject constructor(
             emptyList()
         }
     }
-
 }

@@ -59,7 +59,7 @@ fun BookwormNavHost(
         composable(Screen.Camera.route) {
             CameraScreen(
                 onClose = { navController.navigateUp() },
-                onBarcodeDetected = { isbn ->
+                onBarcodeDetection = { isbn ->
                     navController.navigate(Screen.SearchIsbnBookResult.createRoute(isbn)) {
                         popUpTo(Screen.Camera.route) { inclusive = true }
                     }

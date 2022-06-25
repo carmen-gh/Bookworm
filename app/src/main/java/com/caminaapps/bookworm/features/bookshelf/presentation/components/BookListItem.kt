@@ -28,12 +28,12 @@ import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 @ExperimentalMaterialApi
 @Composable
 fun BookListItem(
-    modifier: Modifier = Modifier,
     title: String,
     author: String,
     imageUrl: String,
     isFinished: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier,

@@ -48,8 +48,8 @@ import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitl
 
 @Composable
 fun SearchForBookTitleScreen(
-    modifier: Modifier = Modifier,
     onNavigateUp: () -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: SearchForBookTitleViewModel = hiltViewModel()
 ) {
     var query by remember { mutableStateOf("") }
@@ -82,9 +82,11 @@ fun SearchForBookTitleScreen(
         val uiState: SearchForBookTitleUiState by viewModel.uiState.collectAsState()
 
         when (uiState) {
-            is Empty -> OpenLibraryView(modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxWidth())
+            is Empty -> OpenLibraryView(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxWidth()
+            )
             is Loading -> FullScreenLoading()
             is NoResults -> NoResults(query)
             is Success -> {
@@ -124,11 +126,11 @@ fun OpenLibraryView(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SimpleSearchBar(
-    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     onSearchKeyboardAction: () -> Unit,
-    onResetValue: () -> Unit
+    onResetValue: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     // state show trailing icon derivedStateOf
     val keyboardController = LocalSoftwareKeyboardController.current

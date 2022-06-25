@@ -1,6 +1,5 @@
 package com.caminaapps.bookworm.core.data.network.dto
 
-
 import com.caminaapps.bookworm.core.model.Book
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -52,7 +51,7 @@ fun DocDTO.asBook(): Book {
         title = title ?: "",
         subtitle = "",
         author = authorName.joinToString(separator = ", "),
-        publishedDate =  publishDate.firstOrNull() ?: "",
+        publishedDate = publishDate.firstOrNull() ?: "",
         coverUrl = "https://covers.openlibrary.org/b/id/${coverI}-M.jpg"
     )
 }

@@ -6,19 +6,22 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 
-
 @Composable
 fun CameraPreview(
+    onBarcodeDetection: (String) -> Unit,
     modifier: Modifier = Modifier,
     cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA,
-    onBarcodeDetected: (String) -> Unit
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val localContext = LocalContext.current
@@ -47,7 +50,7 @@ fun CameraPreview(
                                 barcodes.first().displayValue?.let { barcode ->
                                     if (cachedBarcode != barcode) {
                                         cachedBarcode = barcode
-                                        onBarcodeDetected(barcode)
+                                        onBarcodeDetection(barcode)
                                     }
                                 }
                             })
