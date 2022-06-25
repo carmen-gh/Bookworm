@@ -16,5 +16,4 @@ An app to keep an overview of all your books.
 - Room
 - Permission Handling
 - CameraX
-- MLKit
-- ?? WorkManager, Animations with MotionLayout
+- MLKit detecting Barcodes
