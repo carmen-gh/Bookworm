@@ -1,7 +1,16 @@
 package com.caminaapps.bookworm.features.bookshelf.presentation
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
@@ -21,7 +30,10 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationUp
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.*
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Error
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Loading
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.NotFound
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Success
 import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
 
 @Composable
@@ -72,9 +84,9 @@ fun BookContent(
                 }
             )
         },
-    ) {
+    ) { innerPadding ->
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.padding(innerPadding).fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AsyncImage(

@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.core.presentation.navigation
+package com.caminaapps.bookworm.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -6,8 +6,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.caminaapps.bookworm.core.navigation.BottomNavigationScreen
-import com.caminaapps.bookworm.core.navigation.Screen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.BookBarcodeResultScreen

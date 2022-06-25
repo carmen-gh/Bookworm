@@ -7,4 +7,4 @@ import javax.inject.Inject
 @HiltViewModel
 class WishlistViewModel @Inject constructor(
 
-) : ViewModel() {}
+) : ViewModel()

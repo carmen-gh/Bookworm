@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.presentation.screens.bookshelf.components
+package com.caminaapps.bookworm.features.bookshelf.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +39,7 @@ fun BookListItem(
         modifier = modifier,
         onClick = onClick,
     ) {
-        Box() {
+        Box {
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {

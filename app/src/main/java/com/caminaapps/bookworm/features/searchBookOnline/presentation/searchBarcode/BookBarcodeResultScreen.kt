@@ -1,6 +1,13 @@
 package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -27,9 +34,7 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
-import com.caminaapps.bookworm.searchBookOnline.presentation.result.NoBookFoundView
 import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
-
 
 @Composable
 fun BookBarcodeResultScreen(
@@ -44,7 +49,7 @@ fun BookBarcodeResultScreen(
                 onClick = onCloseScreen
             )
         },
-    ) {
+    ) { innerPadding ->
 
         if (viewModel.uiState.isLoading) {
             FullScreenLoading()
@@ -52,7 +57,7 @@ fun BookBarcodeResultScreen(
 
         viewModel.uiState.book?.let { book ->
             BookResultContent(
-                modifier = Modifier.padding(24.dp),
+                modifier = Modifier.padding(innerPadding),
                 book = book,
                 onSaveClick = {
                     viewModel.saveBook()
@@ -73,9 +78,7 @@ fun BookBarcodeResultScreen(
     if (viewModel.uiState.errorOcured) {
         Text("Error", modifier = Modifier.fillMaxSize())
     }
-
 }
-
 
 @Composable
 fun BookResultContent(

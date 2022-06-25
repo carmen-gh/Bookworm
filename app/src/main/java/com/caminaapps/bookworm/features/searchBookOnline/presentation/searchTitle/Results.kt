@@ -3,11 +3,23 @@ package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTit
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Divider
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.runtime.Composable
@@ -30,13 +42,13 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
 
-
 @Composable
 fun SearchResults(
+    modifier: Modifier,
     searchResults: List<Book>,
     onAddClick: (Book) -> Unit
 ) {
-    Column {
+    Column(modifier = modifier) {
         Text(
             text = stringResource(R.string.search_count, searchResults.size),
             style = MaterialTheme.typography.h6,
@@ -59,8 +71,6 @@ private fun NewSearchResult(
     showDivider: Boolean,
     modifier: Modifier = Modifier
 ) {
-
-
 }
 
 @Composable

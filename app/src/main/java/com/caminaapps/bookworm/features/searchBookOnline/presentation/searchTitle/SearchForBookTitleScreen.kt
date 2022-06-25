@@ -2,13 +2,28 @@ package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTit
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -25,8 +40,11 @@ import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarSlotNavigationUp
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.*
-
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Empty
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Error
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Loading
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.NoResults
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Success
 
 @Composable
 fun SearchForBookTitleScreen(
@@ -60,22 +78,24 @@ fun SearchForBookTitleScreen(
                 }
             )
         }
-    ) {
+    ) { innerPadding ->
         val uiState: SearchForBookTitleUiState by viewModel.uiState.collectAsState()
 
         when (uiState) {
-            is Empty -> OpenLibraryView(modifier = Modifier.fillMaxWidth())
+            is Empty -> OpenLibraryView(modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxWidth())
             is Loading -> FullScreenLoading()
             is NoResults -> NoResults(query)
             is Success -> {
                 SearchResults(
+                    modifier = Modifier.padding(innerPadding),
                     searchResults = (uiState as Success).books,
                     onAddClick = { viewModel.onAddBook(it) })
             }
             is Error -> Text(text = stringResource((uiState as Error).message))
         }
     }
-
 }
 
 @Composable
@@ -147,7 +167,6 @@ fun SimpleSearchBar(
             .fillMaxWidth()
     )
 }
-
 
 @Preview
 @Composable

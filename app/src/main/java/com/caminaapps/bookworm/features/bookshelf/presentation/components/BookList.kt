@@ -13,7 +13,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
-import com.caminaapps.bookworm.presentation.screens.bookshelf.components.BookListItem
 import com.caminaapps.bookworm.util.previewParameterProvider.BooksPreviewParameterProvider
 
 @ExperimentalMaterialApi
@@ -51,7 +50,7 @@ fun BookList(
 fun PreviewBookList(
     @PreviewParameter(BooksPreviewParameterProvider::class) books: List<Book>
 ) {
-    BookwormTheme() {
+    BookwormTheme {
         BookList(books = books, onItemClick = {})
     }
 }

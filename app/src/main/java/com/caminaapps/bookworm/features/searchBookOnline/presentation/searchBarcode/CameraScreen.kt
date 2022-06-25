@@ -1,11 +1,12 @@
 package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
-
 
 @Composable
 fun CameraScreen(
@@ -19,7 +20,10 @@ fun CameraScreen(
                 onClick = onClose
             )
         }
-    ) {
-        CameraPreview(onBarcodeDetected = onBarcodeDetected)
+    ) { innerPadding ->
+        CameraPreview(
+            modifier = Modifier.padding(innerPadding),
+            onBarcodeDetected = onBarcodeDetected
+        )
     }
 }

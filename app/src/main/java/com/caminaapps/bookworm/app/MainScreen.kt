@@ -13,10 +13,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.caminaapps.bookworm.core.navigation.BookwormBottomNavigation
+import com.caminaapps.bookworm.core.navigation.BookwormNavHost
 import com.caminaapps.bookworm.core.navigation.Screen.Camera
 import com.caminaapps.bookworm.core.navigation.Screen.SearchBookByTitle
 import com.caminaapps.bookworm.core.navigation.Screen.SearchIsbnBookResult
-import com.caminaapps.bookworm.core.presentation.navigation.BookwormNavHost
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 

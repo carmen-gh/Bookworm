@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
-
 @Composable
 fun TopAppBarNavigationUp(
     title: String,
@@ -89,13 +88,12 @@ fun TopAppBarNavigationClose(
     )
 }
 
-
 @Preview("default")
 @Preview("dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview("large font", fontScale = 2f)
 @Composable
 fun DefaultPreviewDark() {
-    BookwormTheme() {
+    BookwormTheme {
         Column {
             TopAppBarNavigationUp(
                 title = "TopAppBar dasdfasdfTitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar TitleTopAppBar Title",

@@ -2,10 +2,11 @@ package com.caminaapps.bookworm.core.ui.icon
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.ArrowBack
 
 /**
- * Bookworm icons. Material icons are [ImageVector]s, custom icons are drawable resource IDs.
+ * Bookworm icons. Material icons are ImageVector, custom icons are drawable resource IDs.
  */
 object BwIcons {
     val AccountCircle = Icons.Outlined.AccountCircle
