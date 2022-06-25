@@ -3,15 +3,13 @@ name: Run tests
 on:
   pull_request:
 
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-
-  unit_tests:
+  build:
     runs-on: ubuntu-latest
-
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
 
     steps:
       - name: Checkout
@@ -24,11 +22,17 @@ jobs:
           java-version: '11'
           cache: 'gradle'
 
-      - name: Static analysis
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Check static analysis with detekt
         run: ./gradlew detekt --continue --no-daemon
 
-      - name: Unit tests
-        run: ./gradlew testDebugUnitTest --continue --no-daemon
+      - name: Check lint
+        run: ./gradlew lintDebug --stacktrace
+
+      - name: Run unit tests
+        run: ./gradlew testDebugUnitTest --stacktrace --continue --no-daemon
 
 
   android_tests:
@@ -43,6 +47,9 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
           cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
       - name: Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2
