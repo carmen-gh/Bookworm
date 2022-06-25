@@ -15,12 +15,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.core.model.Book
-
+import com.caminaapps.bookworm.core.ui.component.SearchBar
 
 // change to Search(..) and create an outer composable Screen
 //
 //  screen TopAppBar, onBook, onAdd, onSearch
-
 
 @Composable
 fun SearchBookTitleScreen(

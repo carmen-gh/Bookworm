@@ -43,9 +43,6 @@ fun BookshelfScreen(
                 modifier = Modifier.padding(innerPadding),
                 books = viewModel.uiState.books,
                 onItemClick = onBookClick,
-                onItemDelete = { book ->
-                    viewModel.onItemDelet(book.id)
-                }
             )
         } else {
             Text("add some books to get started")
