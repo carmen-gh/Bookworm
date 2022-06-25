@@ -5,13 +5,23 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material.DismissDirection
+import androidx.compose.material.DismissValue
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FractionalThreshold
+import androidx.compose.material.Icon
+import androidx.compose.material.SwipeToDismiss
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.rememberDismissState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -25,7 +35,6 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.BookListItem
 import com.caminaapps.bookworm.util.previewParameterProvider.BooksPreviewParameterProvider
-
 
 @ExperimentalMaterialApi
 @Composable
@@ -49,7 +58,6 @@ fun BookList(
                     true
                 }
             )
-
             SwipeToDismiss(
                 state = dismissState,
                 modifier = Modifier.padding(vertical = 4.dp),
@@ -108,7 +116,6 @@ fun BookList(
         }
     }
 }
-
 
 @ExperimentalMaterialApi
 @Preview(
