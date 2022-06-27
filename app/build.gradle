@@ -47,6 +47,7 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    namespace 'com.caminaapps.bookworm'
 //    lint {
 //        lintConfig = rootProject.file("config/lint.xml")
 //        sarifReport = true
