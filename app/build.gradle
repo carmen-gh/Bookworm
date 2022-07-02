@@ -1,10 +1,10 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id 'kotlinx-serialization'
+    alias(libs.plugins.android)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
     id 'dagger.hilt.android.plugin'
-    id 'io.gitlab.arturbosch.detekt'
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -40,7 +40,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion "1.1.1"
     }
     packagingOptions {
         resources {
@@ -48,10 +48,6 @@ android {
         }
     }
     namespace 'com.caminaapps.bookworm'
-//    lint {
-//        lintConfig = rootProject.file("config/lint.xml")
-//        sarifReport = true
-//    }
 }
 
 // Allow references to generated code (room)
@@ -60,58 +56,53 @@ kapt {
 }
 
 dependencies {
-    implementation "androidx.activity:activity-compose:$activity_compose_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.camera:camera-camera2:$camerax_version"
-    implementation "androidx.camera:camera-lifecycle:$camera_lifecycle_version"
-    implementation "androidx.camera:camera-view:$camerax_version"
-    implementation "androidx.compose.foundation:foundation:$compose_version"
-    implementation "androidx.compose.material:material-icons-core:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version"
-    implementation "androidx.core:core-ktx:$android_core_version"
-    implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.navigation:navigation-compose:$nav_version"
-    implementation "androidx.room:room-ktx:$room_version"
-    implementation "com.google.accompanist:accompanist-permissions:$accompanist_version"
-    implementation "com.google.accompanist:accompanist-placeholder-material:$accompanist_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    implementation "com.google.mlkit:barcode-scanning:$barcode_scanning_version"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$serialization_converter_version"
-    implementation "com.jakewharton.timber:timber:$timber_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_logging_version"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "io.coil-kt:coil-compose:$coil_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "androidx.room:room-testing:$room_version"
-
-    androidTestImplementation "androidx.test.ext:junit:$android_test_ext_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
-
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
-
-
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_formatting"
-    detektPlugins("ru.kode:detekt-rules-compose:$detekt_compose")
+    implementation(libs.accompanist.permission)
+    implementation(libs.accompanist.placeholder)
+    implementation(libs.activity.compose)
+    implementation(libs.appcompat)
+    implementation(libs.camera.camera2)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+    implementation(libs.coil.compose)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.material)
+    implementation(libs.compose.material.icons)
+    implementation(libs.compose.tooling.preview)
+    implementation(libs.compose.ui)
+    implementation(libs.constraintlayout.compose)
+    implementation(libs.core.ktx)
+    implementation(libs.hilt)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.hilt.plugin)
+    implementation(libs.kotlin.serialization.json)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.material)
+    implementation(libs.mlkit.barcode.scanning)
+    implementation(libs.navigation.compose)
+    implementation(libs.okhttp3.logging)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.serialization.converter)
+    implementation(libs.room.ktx)
+    implementation(libs.timber)
+    kapt(libs.room.compiler)
+    kapt(libs.hilt.compiler)
+    testImplementation(libs.junit)
+    testImplementation(libs.room.testing)
+    androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.espresso)
+    androidTestImplementation(libs.compose.test)
+    debugImplementation(libs.compose.test.manifest)
+    debugImplementation(libs.compose.tooling)
+    detektPlugins(libs.detekt.formatting.plugin)
+    detektPlugins(libs.detekt.compose.plugin)
 }
 
-
+def libs = extensions.getByType(VersionCatalogsExtension).named("libs")
 detekt {
-    toolVersion = "$detekt_version"
+    toolVersion = libs.findVersion("detekt").get()
     config = rootProject.files("config/detekt/detekt.yml")
     buildUponDefaultConfig = false
     ignoredBuildTypes = ["release"]
