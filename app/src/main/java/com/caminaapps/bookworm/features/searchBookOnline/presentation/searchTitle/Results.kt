@@ -38,7 +38,7 @@ import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParamete
 @Composable
 fun SearchResults(
     searchResults: List<Book>,
-    onAddClick: (Book) -> Unit,
+    onResultClick: (Book) -> Unit,
     modifier: Modifier,
 ) {
     Column(modifier = modifier) {
@@ -53,23 +53,14 @@ fun SearchResults(
                 SearchResult(
                     book = book,
                     showDivider = index != 0,
-                    modifier = Modifier.clickable { onAddClick(book) }
+                    modifier = Modifier.clickable { onResultClick(book) }
                 )
             }
         }
     }
 }
 
-// @Composable
-// private fun NewSearchResult(
-//     book: Book,
-//     onBookClick: (Book) -> Unit,
-//     onAddClick: (Book) -> Unit,
-//     showDivider: Boolean,
-//     modifier: Modifier = Modifier
-// ) {
-// }
-
+// TODO simplify layout with final designf
 @Composable
 private fun SearchResult(
     book: Book,

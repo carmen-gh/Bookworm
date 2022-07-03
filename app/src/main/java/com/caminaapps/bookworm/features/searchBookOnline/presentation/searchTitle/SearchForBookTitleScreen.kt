@@ -54,31 +54,23 @@ fun SearchForBookTitleScreen(
 ) {
     var query by remember { mutableStateOf("") }
 
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBarSlotNavigationUp(
-                title = {
-                    SimpleSearchBar(
-                        modifier = Modifier.padding(vertical = 4.dp),
-                        onValueChange = {
-                            query = it
-                            viewModel.onQueryChanged()
-                        },
-                        value = query,
-                        onSearchKeyboardAction = { viewModel.search(query) },
-                        onResetValue = {
-                            query = ""
-                            viewModel.onQueryChanged()
-                        }
-                    )
+    Scaffold(modifier = modifier, topBar = {
+        TopAppBarSlotNavigationUp(title = {
+            SimpleSearchBar(modifier = Modifier.padding(vertical = 4.dp),
+                onValueChange = {
+                    query = it
+                    viewModel.onQueryChanged()
                 },
-                onClick = {
-                    onNavigateUp()
-                }
-            )
-        }
-    ) { innerPadding ->
+                value = query,
+                onSearchKeyboardAction = { viewModel.search(query) },
+                onResetValue = {
+                    query = ""
+                    viewModel.onQueryChanged()
+                })
+        }, onClick = {
+            onNavigateUp()
+        })
+    }) { innerPadding ->
         val uiState: SearchForBookTitleUiState by viewModel.uiState.collectAsState()
 
         when (uiState) {
@@ -90,10 +82,12 @@ fun SearchForBookTitleScreen(
             is Loading -> FullScreenLoading()
             is NoResults -> NoResults(query)
             is Success -> {
-                SearchResults(
-                    modifier = Modifier.padding(innerPadding),
+                SearchResults(modifier = Modifier.padding(innerPadding),
                     searchResults = (uiState as Success).books,
-                    onAddClick = { viewModel.onAddBook(it) })
+                    onResultClick = {
+                        viewModel.onAddBook(it)
+                        onNavigateUp()
+                    })
             }
             is Error -> Text(text = stringResource((uiState as Error).message))
         }
@@ -135,23 +129,18 @@ fun SimpleSearchBar(
     // state show trailing icon derivedStateOf
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    TextField(
-        value = value,
+    TextField(value = value,
         onValueChange = onValueChange,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-        keyboardActions = KeyboardActions(
-            onSearch = {
-                onSearchKeyboardAction()
-                keyboardController?.hide()
-            }
-        ),
+        keyboardActions = KeyboardActions(onSearch = {
+            onSearchKeyboardAction()
+            keyboardController?.hide()
+        }),
         trailingIcon = {
-            Icon(
-                imageVector = Icons.Default.Close,
+            Icon(imageVector = Icons.Default.Close,
                 contentDescription = null,
                 tint = MaterialTheme.colors.primary,
-                modifier = Modifier.clickable { onResetValue() }
-            )
+                modifier = Modifier.clickable { onResetValue() })
         },
         placeholder = {
             Text(
@@ -165,8 +154,7 @@ fun SimpleSearchBar(
             backgroundColor = Color.Transparent
         ),
         maxLines = 1,
-        modifier = modifier
-            .fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     )
 }
 
