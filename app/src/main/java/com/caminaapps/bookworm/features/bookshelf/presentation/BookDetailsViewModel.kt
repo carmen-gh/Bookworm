@@ -9,15 +9,18 @@ import com.caminaapps.bookworm.features.bookshelf.domain.GetBookDetailsUseCase
 import com.caminaapps.bookworm.util.Result
 import com.caminaapps.bookworm.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class BookViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getBookDetails: GetBookDetailsUseCase,
+    getBookDetails: GetBookDetailsUseCase,
     private val deleteBook: DeleteBookUseCase
 ) : ViewModel() {
 
@@ -27,19 +30,20 @@ class BookViewModel @Inject constructor(
     val uiState: StateFlow<BookDetailsUiState> = bookStream.map { result ->
         when (result) {
             is Result.Success -> {
-                result.data?.let {
-                    BookDetailsUiState.Success(it)
-                } ?: BookDetailsUiState.NotFound
+                if (result.data != null) {
+                    BookDetailsUiState.Success(result.data)
+                } else {
+                    BookDetailsUiState.NotFound
+                }
             }
             is Result.Loading -> BookDetailsUiState.Loading
             is Result.Error -> BookDetailsUiState.Error
         }
-    } .stateIn(
+    }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = BookDetailsUiState.Loading
     )
-
 
     fun onDeleteBook(bookId: String) {
         viewModelScope.launch {
@@ -50,7 +54,7 @@ class BookViewModel @Inject constructor(
 
 sealed interface BookDetailsUiState {
     data class Success(val book: Book) : BookDetailsUiState
-    object NotFound: BookDetailsUiState
+    object NotFound : BookDetailsUiState
     object Error : BookDetailsUiState
-    object Loading :BookDetailsUiState
+    object Loading : BookDetailsUiState
 }

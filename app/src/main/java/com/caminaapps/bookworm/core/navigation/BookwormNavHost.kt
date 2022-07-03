@@ -8,8 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner.CameraScreen
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.result.BookResultScreen
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.BookBarcodeResultScreen
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.CameraScreen
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleScreen
 import com.caminaapps.bookworm.features.settings.SettingsScreen
 import com.caminaapps.bookworm.features.wishlist.WishlistScreen
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -31,6 +32,9 @@ fun BookwormNavHost(
                 },
                 onScanBarcode = {
                     navController.navigate(Screen.Camera.createRoute())
+                },
+                onSearchOnline = {
+                    navController.navigate(Screen.SearchBookByTitle.createRoute())
                 }
             )
         }
@@ -42,7 +46,7 @@ fun BookwormNavHost(
         }
 
         composable(Screen.SearchIsbnBookResult.route) {
-            BookResultScreen(
+            BookBarcodeResultScreen(
                 onCloseScreen = { navController.navigateUp() },
                 onScanBarcode = {
                     navController.navigate(Screen.Camera.createRoute()) {
@@ -55,12 +59,16 @@ fun BookwormNavHost(
         composable(Screen.Camera.route) {
             CameraScreen(
                 onClose = { navController.navigateUp() },
-                onBarcodeDetected = { isbn ->
+                onBarcodeDetection = { isbn ->
                     navController.navigate(Screen.SearchIsbnBookResult.createRoute(isbn)) {
                         popUpTo(Screen.Camera.route) { inclusive = true }
                     }
                 }
             )
+        }
+
+        composable(Screen.SearchBookByTitle.route) {
+            SearchForBookTitleScreen(onNavigateUp = { navController.navigateUp() })
         }
 
         // Wishlist -----------------------------------------------------------------------------------

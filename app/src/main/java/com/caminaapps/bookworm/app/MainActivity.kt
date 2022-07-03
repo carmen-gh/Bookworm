@@ -3,10 +3,7 @@ package com.caminaapps.bookworm.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             setContent {
-                MainScreen(Modifier.background(MaterialTheme.colors.background))
+                MainScreen()
             }
         }
     }

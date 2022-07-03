@@ -15,28 +15,28 @@ import androidx.navigation.compose.rememberNavController
 import com.caminaapps.bookworm.core.navigation.BookwormBottomNavigation
 import com.caminaapps.bookworm.core.navigation.BookwormNavHost
 import com.caminaapps.bookworm.core.navigation.Screen.Camera
+import com.caminaapps.bookworm.core.navigation.Screen.SearchBookByTitle
 import com.caminaapps.bookworm.core.navigation.Screen.SearchIsbnBookResult
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
-
 @ExperimentalComposeUiApi
 @ExperimentalPermissionsApi
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun MainScreen() {
     BookwormTheme {
         val navController = rememberNavController()
         var showBottomBar by rememberSaveable { mutableStateOf(true) }
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
         showBottomBar = when (navBackStackEntry?.destination?.route) {
+            SearchBookByTitle.route -> false
             SearchIsbnBookResult.route -> false
             Camera.route -> false
             else -> true
         }
 
         Scaffold(
-            modifier = modifier,
             bottomBar = { if (showBottomBar) BookwormBottomNavigation(navController = navController) }
         ) { innerPadding ->
             BookwormNavHost(
@@ -46,7 +46,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
         }
     }
 }
-
 
 @ExperimentalComposeUiApi
 @ExperimentalPermissionsApi

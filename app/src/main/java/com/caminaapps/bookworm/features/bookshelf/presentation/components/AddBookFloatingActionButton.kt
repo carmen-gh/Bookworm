@@ -2,11 +2,16 @@ package com.caminaapps.bookworm.features.bookshelf.presentation.components
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,6 +29,7 @@ import timber.log.Timber
 @Composable
 fun AddBookFloatingActionButton(
     onManual: () -> Unit,
+    onSearch: () -> Unit,
     onScan: () -> Unit
 ) {
     SpeedDialFloatingActionButton(
@@ -37,6 +43,12 @@ fun AddBookFloatingActionButton(
         SpeedDialItem(onClick = onManual) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_outline_edit_24),
+                contentDescription = stringResource(id = R.string.button_edit)
+            )
+        }
+        SpeedDialItem(onClick = onSearch) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_baseline_search_42),
                 contentDescription = stringResource(id = R.string.button_edit)
             )
         }
@@ -76,6 +88,7 @@ fun ColumnScope.CameraSpeedDialItem(onScan: () -> Unit) {
 }
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalPermissionsApi
 @Preview(showBackground = true, name = "add floating button")
 @Composable
@@ -85,10 +98,12 @@ fun PreviewAddFloatingButton() {
             floatingActionButtonPosition = FabPosition.End,
             floatingActionButton = {
                 AddBookFloatingActionButton(
-                    onManual = { /*TODO*/ },
-                    onScan = {  /*TODO*/ }
+                    onManual = { },
+                    onSearch = { },
+                    onScan = { }
                 )
             }
-        ) { }
+        ) {
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.searchBookOnline.presentation.result
+package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
-
 
 @Composable
 fun NoBookFoundView(modifier: Modifier = Modifier) {

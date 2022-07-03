@@ -3,7 +3,6 @@ package com.caminaapps.bookworm.util.previewParameterProvider
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.caminaapps.bookworm.core.model.Book
 
-
 class BooksPreviewParameterProvider : PreviewParameterProvider<List<Book>> {
     override val values: Sequence<List<Book>>
         get() = sequenceOf(
@@ -38,7 +37,6 @@ class BooksPreviewParameterProvider : PreviewParameterProvider<List<Book>> {
             )
         )
 }
-
 
 class BookPreviewParameterProvider : PreviewParameterProvider<Book> {
     override val values = sequenceOf(

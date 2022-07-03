@@ -1,9 +1,15 @@
 package com.caminaapps.bookworm.core.ui.component
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -59,8 +65,8 @@ fun SpeedDialFloatingActionButton(
         ) {
             this@Column.AnimatedVisibility(
                 visible = expanded,
-                enter = slideInVertically(initialOffsetY = { 200 }),
-                exit = slideOutVertically(targetOffsetY = { 300 })
+                enter = slideInVertically(initialOffsetY = { SpeedDialFloatingActionButtonInitialOffsetY }),
+                exit = slideOutVertically(targetOffsetY = { SpeedDialFloatingActionButtonTargetOffsetY })
             ) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(SpeedDialFloatingActionButtonSpace)
@@ -82,12 +88,10 @@ fun SpeedDialFloatingActionButton(
 private val SpeedDialFloatingActionButtonBoxMaxHeight = 40.dp * 6 + 24.dp * 5
 private val SpeedDialFloatingActionButtonSize = 40.dp
 private val SpeedDialFloatingActionButtonSpace = 24.dp
+private val SpeedDialFloatingActionButtonInitialOffsetY = 200
+private val SpeedDialFloatingActionButtonTargetOffsetY = 300
 
-enum class SpeedDialFloatingActionButtonValue {
-    Closed,
-    Expanded
-}
-
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview
 @Composable
 fun SpeedDialFloatingActionButtonPreview() {

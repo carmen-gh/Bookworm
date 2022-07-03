@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner
+package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode
 
 import android.annotation.SuppressLint
 import androidx.camera.core.ImageAnalysis

@@ -1,6 +1,5 @@
 package com.caminaapps.bookworm.core.data.network.dto
 
-
 import kotlinx.serialization.Serializable
 
 @Serializable

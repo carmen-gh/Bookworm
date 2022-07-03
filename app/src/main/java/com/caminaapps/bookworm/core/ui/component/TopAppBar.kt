@@ -13,24 +13,47 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
-
 @Composable
 fun TopAppBarNavigationUp(
     title: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
-        title = { Text(title) },
+        modifier = modifier,
+        title = { Text(title, maxLines = 2, overflow = TextOverflow.Ellipsis) },
+        navigationIcon = {
+            IconButton(onClick = onClick) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = stringResource(id = R.string.button_back)
+                )
+            }
+        },
+        actions = actions
+    )
+}
+
+@Composable
+fun TopAppBarSlotNavigationUp(
+    modifier: Modifier = Modifier,
+    title: @Composable () -> Unit,
+    onClick: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {}
+) {
+    TopAppBar(
+        modifier = modifier,
+        title = title,
         navigationIcon = {
             IconButton(onClick = onClick) {
                 Icon(
@@ -47,10 +70,12 @@ fun TopAppBarNavigationUp(
 fun TopAppBarNavigationClose(
     title: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
-        title = { Text(title) },
+        modifier = modifier,
+        title = { Text(title, maxLines = 2, overflow = TextOverflow.Ellipsis) },
         navigationIcon = {
             IconButton(onClick = onClick) {
                 Icon(
@@ -63,37 +88,17 @@ fun TopAppBarNavigationClose(
     )
 }
 
-
-@Preview(name = "TopAppBar")
-@Composable
-fun DefaultPreview() {
-    BookwormTheme() {
-        Column {
-            TopAppBarNavigationUp(
-                title = "TopAppBar Title",
-                onClick = {},
-                actions = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Filled.Edit,
-                            contentDescription = null
-                        )
-                    }
-                }
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            TopAppBarNavigationClose(title = "TopAppBar Title", onClick = {})
-        }
-
-    }
-}
-
-@Preview(name = "TopAppBar dark", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview("default")
+@Preview("dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview("large font", fontScale = 2f)
 @Composable
 fun DefaultPreviewDark() {
-    BookwormTheme() {
+    BookwormTheme {
         Column {
-            TopAppBarNavigationUp(title = "TopAppBar Title", onClick = {})
+            TopAppBarNavigationUp(
+                title = "TopAppBar dasdfasdfTitleTopAppBar TitleTopAppBar TitleTopAppBar asdfasfas",
+                onClick = {}
+            )
             Spacer(modifier = Modifier.height(8.dp))
             TopAppBarNavigationClose(
                 title = "TopAppBar Title",

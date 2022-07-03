@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.features.searchBookOnline.presentation.barcodeScanner
+package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode
 
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -17,12 +17,11 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 
-
 @Composable
 fun CameraPreview(
+    onBarcodeDetection: (String) -> Unit,
     modifier: Modifier = Modifier,
     cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA,
-    onBarcodeDetected: (String) -> Unit
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val localContext = LocalContext.current
@@ -51,7 +50,7 @@ fun CameraPreview(
                                 barcodes.first().displayValue?.let { barcode ->
                                     if (cachedBarcode != barcode) {
                                         cachedBarcode = barcode
-                                        onBarcodeDetected(barcode)
+                                        onBarcodeDetection(barcode)
                                     }
                                 }
                             })

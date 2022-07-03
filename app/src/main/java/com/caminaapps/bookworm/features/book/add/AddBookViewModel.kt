@@ -8,4 +8,4 @@ import javax.inject.Inject
 @HiltViewModel
 class AddBookViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-) : ViewModel() {}
+) : ViewModel()

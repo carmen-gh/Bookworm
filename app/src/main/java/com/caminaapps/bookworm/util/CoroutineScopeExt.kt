@@ -5,7 +5,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-
 inline fun CoroutineScope.createExceptionHandler(
     message: String,
     crossinline action: (throwable: Throwable) -> Unit
@@ -16,7 +15,7 @@ inline fun CoroutineScope.createExceptionHandler(
     /**
      * A [CoroutineExceptionHandler] can be called from any thread. So, if [action] is supposed to
      * run in the main thread, you need to be careful and call this function on the a scope that
-     * runs in the main thread, such as a [viewModelScope].
+     * runs in the main thread, such as a viewModelScope.
      */
     launch {
         action(throwable)

@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.features.searchBookOnline.presentation.result
+package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +17,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class BookResultViewModel @Inject constructor(
+class BookBarcodeResultViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val searchBook: SearchBookByIsbnUseCase,
     private val saveBook: SaveBookFromOnlineSearchUseCase

@@ -19,16 +19,18 @@ import androidx.compose.ui.unit.dp
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
-
 @Composable
 fun IconTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
     @StringRes label: Int,
-    @DrawableRes imageResource: Int
+    @DrawableRes imageResource: Int,
+    modifier: Modifier = Modifier,
 ) {
-    Row(verticalAlignment = Alignment.Bottom, modifier = modifier) {
+    Row(
+        verticalAlignment = Alignment.Bottom,
+        modifier = modifier
+    ) {
         Icon(
             painter = painterResource(id = imageResource),
             contentDescription = null,

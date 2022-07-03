@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.AddBookFloatingActionButton
-import com.caminaapps.bookworm.presentation.screens.bookshelf.components.BookList
+import com.caminaapps.bookworm.features.bookshelf.presentation.components.BookList
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import timber.log.Timber
 
@@ -21,6 +21,7 @@ import timber.log.Timber
 @Composable
 fun BookshelfScreen(
     onScanBarcode: () -> Unit,
+    onSearchOnline: () -> Unit,
     onBookClick: (id: Book) -> Unit,
     viewModel: BookshelfViewModel = hiltViewModel()
 ) {
@@ -30,6 +31,7 @@ fun BookshelfScreen(
         floatingActionButton = {
             AddBookFloatingActionButton(
                 onManual = { /*TODO*/ },
+                onSearch = onSearchOnline,
                 onScan = onScanBarcode
             )
         }
@@ -41,9 +43,6 @@ fun BookshelfScreen(
                 modifier = Modifier.padding(innerPadding),
                 books = viewModel.uiState.books,
                 onItemClick = onBookClick,
-                onItemDelete = { book ->
-                    viewModel.onItemDelet(book.id)
-                }
             )
         } else {
             Text("add some books to get started")
