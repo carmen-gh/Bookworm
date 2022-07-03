@@ -1,3 +1,12 @@
+// Without these suppressions version catalog usage here and in other build
+// files is marked red by IntelliJ:
+// https://youtrack.jetbrains.com/issue/KTIJ-19369.
+@Suppress(
+    "DSL_SCOPE_VIOLATION",
+    "MISSING_DEPENDENCY_CLASS",
+    "UNRESOLVED_REFERENCE_WRONG_RECEIVER",
+    "FUNCTION_CALL_EXPECTED"
+)
 plugins {
     alias(libs.plugins.android)
     alias(libs.plugins.kotlin.android)
@@ -27,8 +36,11 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -110,6 +122,6 @@ dependencies {
 detekt {
     config = rootProject.files("config/detekt/detekt.yml")
     buildUponDefaultConfig = false
-    ignoredBuildTypes = ["release"]
-    ignoredFlavors = ["production"]
+    ignoredBuildTypes = listOf("release")
+    ignoredFlavors = listOf("production")
 }
