@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.23.1"
-activity-compose = "1.4.0"
+activity-compose = "1.5.0"
 android = "7.2.1"
 appcompat = "1.4.2"
 camerax = "1.1.0"
