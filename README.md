@@ -19,3 +19,9 @@ An app to keep an overview of all your books.
 - MLKit detecting Barcodes
 - Static code analysis (with detekt)
 - Gradle with Kotlin DSL and versions.toml
+
+## Architecture
+- Clean architecture
+- Data, Domain, Presentation layers approach
+- DataSource <- Repository <- UseCase <- ViewModel <- View
+- Unidirectional DataFlow  
