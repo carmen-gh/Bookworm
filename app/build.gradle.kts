@@ -3,51 +3,57 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
-    id 'dagger.hilt.android.plugin'
     alias(libs.plugins.detekt)
+    id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdk 32
+    compileSdk = 32
 
     defaultConfig {
-        applicationId "com.caminaapps.bookworm"
-        minSdk 28
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        applicationId = "com.caminaapps.bookworm"
+        minSdk = 28
+        targetSdk = 32
+        versionCode = 1
+        versionName = "1.0"
+        namespace = "com.caminaapps.bookworm"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
         vectorDrawables {
-            useSupportLibrary true
+            useSupportLibrary = true
         }
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = "1.8"
     }
+
     buildFeatures {
-        compose true
+        compose = true
     }
+
     composeOptions {
-        kotlinCompilerExtensionVersion "1.1.1"
+        kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
+
     packagingOptions {
         resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
-    namespace 'com.caminaapps.bookworm'
 }
 
 // Allow references to generated code (room)
@@ -100,9 +106,8 @@ dependencies {
     detektPlugins(libs.detekt.compose.plugin)
 }
 
-def libs = extensions.getByType(VersionCatalogsExtension).named("libs")
+
 detekt {
-    toolVersion = libs.findVersion("detekt").get()
     config = rootProject.files("config/detekt/detekt.yml")
     buildUponDefaultConfig = false
     ignoredBuildTypes = ["release"]
