@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.caminaapps.bookworm.core.model.Book
+import java.time.OffsetDateTime
 
 @Entity(
     tableName = "book"
@@ -22,30 +23,30 @@ data class BookEntity(
     val finishedReading: Boolean,
     @ColumnInfo(name = "favourite")
     val isFavourite: Boolean,
-) {
-    companion object {
-        fun fromBook(book: Book) = BookEntity(
-            id = book.id,
-            title = book.title,
-            subtitle = book.subtitle,
-            author = book.author,
-            publishedDate = book.publishedDate,
-            coverUrl = book.coverUrl,
-            finishedReading = book.finishedReading,
-            isFavourite = book.isFavourite
-        )
+    @ColumnInfo(name = "added_date")
+    val addedToBookshelf: OffsetDateTime
+)
 
-    }
+fun BookEntity.toBook() = Book(
+    id = id,
+    title = title,
+    subtitle = subtitle,
+    author = author,
+    publishedDate = publishedDate,
+    coverUrl = coverUrl,
+    finishedReading = finishedReading,
+    isFavourite = isFavourite,
+    addedToBookshelf = addedToBookshelf
+)
 
-    fun asBook() = Book(
-        id = id,
-        title = title,
-        subtitle = subtitle,
-        author = author,
-        publishedDate = publishedDate,
-        coverUrl = coverUrl,
-        finishedReading = finishedReading,
-        isFavourite = isFavourite
-    )
-
-}
+fun Book.toBookEntity() = BookEntity(
+    id = id,
+    title = title,
+    subtitle = subtitle,
+    author = author,
+    publishedDate = publishedDate,
+    coverUrl = coverUrl,
+    finishedReading = finishedReading,
+    isFavourite = isFavourite,
+    addedToBookshelf = addedToBookshelf
+)

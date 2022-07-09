@@ -14,7 +14,7 @@ interface BookDao {
     @Query("SELECT * FROM book")
     fun getAllBooksStream(): Flow<List<BookEntity>>
 
-    @Query("SELECT * FROM book WHERE id = :bookId")
+    @Query("SELECT * FROM book WHERE id = :bookId ORDER BY datetime(added_date)")
     fun getBookStream(bookId: String): Flow<BookEntity?>
 
     @Insert(onConflict = REPLACE)
