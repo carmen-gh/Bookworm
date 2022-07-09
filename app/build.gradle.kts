@@ -42,6 +42,23 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            extra["enableCrashlytics"] = false
+            extra["alwaysUpdateBuildId"] = false
+        }
+    }
+
+    flavorDimensions += mutableListOf("free") // free, paid
+
+    productFlavors {
+        create("dev") {
+            minSdk = 28
+            versionNameSuffix = "-dev"
+            applicationIdSuffix = ".dev"
+            resourceConfigurations += mutableSetOf("en", "xxhdpi")
+        }
+        create("prod") {
+        }
     }
 
     compileOptions {
