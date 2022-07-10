@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BookDao {
 
-    @Query("SELECT * FROM book")
+    @Query("SELECT * FROM book ORDER BY datetime(added_date) DESC")
     fun getAllBooksStream(): Flow<List<BookEntity>>
 
-    @Query("SELECT * FROM book WHERE id = :bookId ORDER BY datetime(added_date)")
+    @Query("SELECT * FROM book WHERE id = :bookId")
     fun getBookStream(bookId: String): Flow<BookEntity?>
 
     @Insert(onConflict = REPLACE)
