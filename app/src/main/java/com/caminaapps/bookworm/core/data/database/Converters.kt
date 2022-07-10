@@ -15,7 +15,5 @@ object Converters {
     }
 
     @TypeConverter
-    fun offsetDateTimeToString(date: OffsetDateTime?): String? {
-        return date?.format(formatter)
-    }
+    fun offsetDateTimeToString(date: OffsetDateTime?) = date?.format(formatter)
 }
