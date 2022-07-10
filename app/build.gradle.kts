@@ -106,6 +106,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.constraintlayout.compose)
     implementation(libs.core.ktx)
+    implementation(libs.datastore.preferences)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.hilt.plugin)
