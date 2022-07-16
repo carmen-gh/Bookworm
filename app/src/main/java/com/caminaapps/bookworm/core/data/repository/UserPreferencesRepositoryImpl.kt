@@ -23,7 +23,8 @@ class UserPreferencesRepositoryImpl @Inject constructor(
 
     override val bookshelfSortOrder: Flow<BookshelfSortOrder> = dataStore.data
         .map { preferences ->
-            val sortOrder = preferences[bookshelfSortOrderKey] ?: BookshelfSortOrder.getDefault().name
+            val sortOrder =
+                preferences[bookshelfSortOrderKey] ?: BookshelfSortOrder.getDefault().name
             BookshelfSortOrder.valueOf(sortOrder)
         }
 

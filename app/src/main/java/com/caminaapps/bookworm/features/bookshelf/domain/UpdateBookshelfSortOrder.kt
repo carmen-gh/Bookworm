@@ -4,7 +4,7 @@ import com.caminaapps.bookworm.core.data.repository.UserPreferencesRepository
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
 import javax.inject.Inject
 
-class UpdateBookshelfSortOrder @Inject constructor(
+class UpdateBookshelfSortOrderUseCase @Inject constructor(
     private val userPreferencesRepository: UserPreferencesRepository
 ) {
     suspend operator fun invoke(sortOrder: BookshelfSortOrder) =

@@ -63,7 +63,10 @@ fun BookshelfScreen(
         SortingDropDownMenu(
             expanded = sortingMenuExpanded,
             onDismissRequest = { sortingMenuExpanded = false },
-            onSelectedItem = { sortingMenuExpanded = false }
+            onSelectedItem = {
+                sortingMenuExpanded = false
+                viewModel.updateSortOrder(BookshelfSortOrder.values()[it])
+            }
         )
     }
 
@@ -128,7 +131,10 @@ fun SortingDropDownMenu(
                         .height(56.dp)
                         .selectable(
                             selected = text == items[selectedOptionIndex],
-                            onClick = { onOptionSelectedIndex(index) },
+                            onClick = {
+                                onSelectedItem(index)
+                                onOptionSelectedIndex(index)
+                            },
                             role = Role.RadioButton
                         )
                         .padding(horizontal = 16.dp),

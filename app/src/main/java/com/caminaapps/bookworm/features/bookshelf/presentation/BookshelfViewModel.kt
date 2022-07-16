@@ -9,7 +9,8 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
 import com.caminaapps.bookworm.core.model.UserMessage
 import com.caminaapps.bookworm.features.bookshelf.domain.GetAllBooksUseCase
-import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrder
+import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrderUseCase
+import com.caminaapps.bookworm.features.bookshelf.domain.UpdateBookshelfSortOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -18,18 +19,38 @@ import javax.inject.Inject
 @HiltViewModel
 class BookshelfViewModel @Inject constructor(
     private val getAllBooks: GetAllBooksUseCase,
-    private val getBookshelfSortOrder: GetBookshelfSortOrder,
+    private val getBookshelfSortOrder: GetBookshelfSortOrderUseCase,
+    private val updateBookshelfSortOrder: UpdateBookshelfSortOrderUseCase
 ) : ViewModel() {
 
     var uiState by mutableStateOf(BookshelfUiState())
         private set
 
     init {
+        subscribeToBookshelfSortOrder()
+        subscribeToBooks()
+    }
+
+    private fun subscribeToBooks() {
         viewModelScope.launch {
             getAllBooks().collect { bookList ->
                 Timber.d("update ui state books")
                 uiState = uiState.copy(books = bookList)
             }
+        }
+    }
+
+    private fun subscribeToBookshelfSortOrder() {
+        viewModelScope.launch {
+            getBookshelfSortOrder().collect() {
+                uiState = uiState.copy(sortOrder = it)
+            }
+        }
+    }
+
+    fun updateSortOrder(sortOrder: BookshelfSortOrder) {
+        viewModelScope.launch {
+            updateBookshelfSortOrder(sortOrder)
         }
     }
 
