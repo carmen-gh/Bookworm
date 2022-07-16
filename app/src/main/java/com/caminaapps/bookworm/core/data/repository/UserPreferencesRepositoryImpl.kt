@@ -13,7 +13,6 @@ class UserPreferencesRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) : UserPreferencesRepository {
 
-    private val defaultBookshelfSortOrder = BookshelfSortOrder.DATE_ADDED_DESC.name
     private val bookshelfSortOrderKey = stringPreferencesKey("bookshelf_sort_order")
 
     override suspend fun saveBookshelfSortOrder(sortOrder: BookshelfSortOrder) {
@@ -24,7 +23,7 @@ class UserPreferencesRepositoryImpl @Inject constructor(
 
     override val bookshelfSortOrder: Flow<BookshelfSortOrder> = dataStore.data
         .map { preferences ->
-            val sortOrder = preferences[bookshelfSortOrderKey] ?: defaultBookshelfSortOrder
+            val sortOrder = preferences[bookshelfSortOrderKey] ?: BookshelfSortOrder.getDefault().name
             BookshelfSortOrder.valueOf(sortOrder)
         }
 

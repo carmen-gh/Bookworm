@@ -20,8 +20,8 @@ class GetAllBooksUseCase @Inject constructor(
 ) {
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    operator fun invoke(): Flow<List<Book>> {
-        return userPreferencesRepository.bookshelfSortOrder.flatMapLatest {
+    operator fun invoke(): Flow<List<Book>> =
+        userPreferencesRepository.bookshelfSortOrder.flatMapLatest {
             when (it) {
                 DATE_ADDED_ASC -> bookRepository.getAllBooksStreamSortedByDateAsc()
                 DATE_ADDED_DESC -> bookRepository.getAllBooksStreamSortedByDateDesc()
@@ -31,6 +31,5 @@ class GetAllBooksUseCase @Inject constructor(
                 AUTHOR_DESC -> bookRepository.getAllBooksStreamSortedByAuthorDesc()
             }
         }
-    }
 
 }

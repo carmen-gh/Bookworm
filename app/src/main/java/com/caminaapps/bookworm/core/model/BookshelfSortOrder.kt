@@ -7,5 +7,9 @@ enum class BookshelfSortOrder {
     TITLE_ASC,
     TITLE_DESC,
     AUTHOR_ASC,
-    AUTHOR_DESC
+    AUTHOR_DESC;
+
+    companion object {
+        fun getDefault() = DATE_ADDED_DESC
+    }
 }

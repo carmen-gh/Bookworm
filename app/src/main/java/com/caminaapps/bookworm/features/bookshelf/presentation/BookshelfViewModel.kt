@@ -6,8 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.model.Book
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder
 import com.caminaapps.bookworm.core.model.UserMessage
 import com.caminaapps.bookworm.features.bookshelf.domain.GetAllBooksUseCase
+import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -16,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookshelfViewModel @Inject constructor(
     private val getAllBooks: GetAllBooksUseCase,
-    // private val deleteBookUseCase: DeleteBookUseCase
+    private val getBookshelfSortOrder: GetBookshelfSortOrder,
 ) : ViewModel() {
 
     var uiState by mutableStateOf(BookshelfUiState())
@@ -31,6 +33,7 @@ class BookshelfViewModel @Inject constructor(
         }
     }
 
+
     // fun onItemDelet(id: String) {
     //     viewModelScope.launch {
     //         deleteBookUseCase(id)
@@ -40,5 +43,6 @@ class BookshelfViewModel @Inject constructor(
 
 data class BookshelfUiState(
     val books: List<Book> = emptyList(),
+    val sortOrder: BookshelfSortOrder = BookshelfSortOrder.getDefault(),
     val userMessages: List<UserMessage> = emptyList()
 )
