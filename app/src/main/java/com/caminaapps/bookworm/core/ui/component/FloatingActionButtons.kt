@@ -88,8 +88,8 @@ fun SpeedDialFloatingActionButton(
 private val SpeedDialFloatingActionButtonBoxMaxHeight = 40.dp * 6 + 24.dp * 5
 private val SpeedDialFloatingActionButtonSize = 40.dp
 private val SpeedDialFloatingActionButtonSpace = 24.dp
-private val SpeedDialFloatingActionButtonInitialOffsetY = 200
-private val SpeedDialFloatingActionButtonTargetOffsetY = 300
+private const val SpeedDialFloatingActionButtonInitialOffsetY = 200
+private const val SpeedDialFloatingActionButtonTargetOffsetY = 300
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview

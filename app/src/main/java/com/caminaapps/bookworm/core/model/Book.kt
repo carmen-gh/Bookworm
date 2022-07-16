@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.core.model
 
 import java.time.OffsetDateTime
-import java.util.UUID
+import java.util.*
 
 data class Book(
     val id: String = UUID.randomUUID().toString(),

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.UserMessage
-import com.caminaapps.bookworm.features.bookshelf.domain.GetBooksUseCase
+import com.caminaapps.bookworm.features.bookshelf.domain.GetAllBooksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookshelfViewModel @Inject constructor(
-    private val getBooks: GetBooksUseCase,
+    private val getAllBooks: GetAllBooksUseCase,
     // private val deleteBookUseCase: DeleteBookUseCase
 ) : ViewModel() {
 
@@ -24,7 +24,7 @@ class BookshelfViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getBooks().collect { bookList ->
+            getAllBooks().collect { bookList ->
                 Timber.d("update ui state books")
                 uiState = uiState.copy(books = bookList)
             }

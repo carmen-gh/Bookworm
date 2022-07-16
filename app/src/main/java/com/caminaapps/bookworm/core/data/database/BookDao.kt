@@ -12,7 +12,22 @@ import kotlinx.coroutines.flow.Flow
 interface BookDao {
 
     @Query("SELECT * FROM book ORDER BY datetime(added_date) DESC")
-    fun getAllBooksStream(): Flow<List<BookEntity>>
+    fun getAllBooksStreamSortedByDateDesc(): Flow<List<BookEntity>>
+
+    @Query("SELECT * FROM book ORDER BY datetime(added_date) ASC")
+    fun getAllBooksStreamSortedByDateAsc(): Flow<List<BookEntity>>
+
+    @Query("SELECT * FROM book ORDER BY title ASC")
+    fun getAllBooksStreamSortedByTitleAsc(): Flow<List<BookEntity>>
+
+    @Query("SELECT * FROM book ORDER BY title DESC")
+    fun getAllBooksStreamSortedByTitleDesc(): Flow<List<BookEntity>>
+
+    @Query("SELECT * FROM book ORDER BY author ASC")
+    fun getAllBooksStreamSortedByAuthorAsc(): Flow<List<BookEntity>>
+
+    @Query("SELECT * FROM book ORDER BY author DESC")
+    fun getAllBooksStreamSortedByAuthorDesc(): Flow<List<BookEntity>>
 
     @Query("SELECT * FROM book WHERE id = :bookId")
     fun getBookStream(bookId: String): Flow<BookEntity?>
