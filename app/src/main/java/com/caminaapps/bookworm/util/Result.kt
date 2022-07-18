@@ -1,5 +1,6 @@
 package com.caminaapps.bookworm.util
 
+import com.caminaapps.bookworm.util.Result.Success
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -13,9 +14,10 @@ sealed interface Result<out T> {
 
 fun <T> Flow<T>.asResult(): Flow<Result<T>> {
     return this
-        .map<T, Result<T>> {
-            Result.Success(it)
-        }
+        .map<T, Result<T>> { Success(it) }
         .onStart { emit(Result.Loading) }
         .catch { emit(Result.Error(it)) }
 }
+
+val <T> Result<T>.data: T?
+    get() = (this as? Success)?.data
