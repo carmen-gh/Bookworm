@@ -11,5 +11,6 @@ enum class BookshelfSortOrder {
 
     companion object {
         fun getDefault() = DATE_ADDED_DESC
+        fun valuesAsList() = values().toList()
     }
 }

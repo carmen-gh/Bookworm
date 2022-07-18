@@ -62,11 +62,12 @@ fun BookshelfScreen(
     ) {
         SortingDropDownMenu(
             expanded = sortingMenuExpanded,
-            onDismissRequest = { sortingMenuExpanded = false },
+            selectedItem = viewModel.uiState.sortOrder,
             onSelectedItem = {
                 sortingMenuExpanded = false
-                viewModel.updateSortOrder(BookshelfSortOrder.values()[it])
-            }
+                viewModel.updateSortOrder(it)
+            },
+            onDismissRequest = { sortingMenuExpanded = false }
         )
     }
 
@@ -111,41 +112,36 @@ fun BookshelfScreen(
 @Composable
 fun SortingDropDownMenu(
     expanded: Boolean,
+    selectedItem: BookshelfSortOrder,
+    onSelectedItem: (BookshelfSortOrder) -> Unit,
     onDismissRequest: () -> Unit,
-    onSelectedItem: (Int) -> Unit, // add preselected Item
     modifier: Modifier = Modifier,
 ) {
-    val items = BookshelfSortOrder.values().map { stringResource(id = it.toStringResId()) }.toList()
-    val (selectedOptionIndex, onOptionSelectedIndex) = remember { mutableStateOf(0) }
-
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
         modifier = modifier
     ) {
         Column(Modifier.selectableGroup()) {
-            items.forEachIndexed { index, text ->
+            BookshelfSortOrder.valuesAsList().forEach { item ->
                 Row(
                     Modifier
                         .fillMaxWidth()
                         .height(56.dp)
                         .selectable(
-                            selected = text == items[selectedOptionIndex],
-                            onClick = {
-                                onSelectedItem(index)
-                                onOptionSelectedIndex(index)
-                            },
+                            selected = item == selectedItem,
+                            onClick = { onSelectedItem(item) },
                             role = Role.RadioButton
                         )
                         .padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RadioButton(
-                        selected = text == items[selectedOptionIndex],
+                        selected = item == selectedItem,
                         onClick = null // null recommended for accessibility with screenreaders
                     )
                     Text(
-                        text = text,
+                        text = stringResource(id = item.toStringResId()),
                         style = MaterialTheme.typography.body1.merge(),
                         modifier = Modifier.padding(start = 16.dp)
                     )
