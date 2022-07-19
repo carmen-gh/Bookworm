@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.features.book.add
+package com.caminaapps.bookworm.features.enterBook
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,14 +18,14 @@ import com.caminaapps.bookworm.core.ui.component.IconTextField
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
 @Composable
-fun AddBookScreen(
-    viewModel: AddBookViewModel
+fun EnterBookScreen(
+    viewModel: EnterBookViewModel
 ) {
 
 }
 
 @Composable
-fun AddBookContentView(
+fun EnterBookContentView(
     modifier: Modifier = Modifier,
 ) {
     var title by rememberSaveable { mutableStateOf("") }
@@ -71,7 +71,7 @@ fun AddBookContentView(
 @Composable
 fun AddBookScreenPreview() {
     BookwormTheme {
-        AddBookContentView(
+        EnterBookContentView(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(10.dp)

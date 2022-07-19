@@ -27,4 +27,10 @@
     <string name="search_no_matches">No matches for “%1s”</string>
     <string name="search_count">%1d items</string>
     <string name="search_engine_text">find your book on</string>
+    <string name="book_sort_order_date_asc">Date added - newest to oldest</string>
+    <string name="book_sort_order_date_desc">Date added - oldest to newest</string>
+    <string name="book_sort_order_title_asc">Title - A to︎ Z</string>
+    <string name="book_sort_order_title_desc">Title - Z to︎ A</string>
+    <string name="book_sort_order_author_asc">Author - A to Z</string>
+    <string name="book_sort_order_author_desc">Author - Z to︎ A</string>
 </resources>

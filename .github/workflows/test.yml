@@ -56,4 +56,3 @@ jobs:
         with:
           api-level: 29
           script: ./gradlew connectedAndroidTest --continue --no-daemon
-

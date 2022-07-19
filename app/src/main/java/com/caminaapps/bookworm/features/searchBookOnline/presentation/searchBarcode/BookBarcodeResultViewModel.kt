@@ -49,6 +49,7 @@ class BookBarcodeResultViewModel @Inject constructor(
 
     private fun onFailure(e: Throwable) {
 //        TODO("proper error message to the user")
+        Timber.e(e.localizedMessage)
         uiState = SearchBookIsbnUiState(isLoading = false, errorOcured = true)
     }
 
