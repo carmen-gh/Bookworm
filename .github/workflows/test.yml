@@ -32,7 +32,7 @@ jobs:
         run: ./gradlew lintDevDebug --stacktrace
 
       - name: Run unit tests
-        run: ./gradlew testDebugUnitTest --stacktrace --continue --no-daemon
+        run: ./gradlew testDevDebugUnitTest --stacktrace --continue --no-daemon
 
 
   android_tests:
@@ -56,4 +56,3 @@ jobs:
         with:
           api-level: 29
           script: ./gradlew connectedAndroidTest --continue --no-daemon
-
