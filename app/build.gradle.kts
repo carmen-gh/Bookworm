@@ -1,3 +1,5 @@
+import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
+
 // Without these suppressions version catalog usage here and in other build
 // files is marked red by IntelliJ:
 // https://youtrack.jetbrains.com/issue/KTIJ-19369.
@@ -13,6 +15,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.test.logger)
     id("dagger.hilt.android.plugin")
 }
 
@@ -125,11 +128,19 @@ dependencies {
     implementation(libs.timber)
     kapt(libs.room.compiler)
     kapt(libs.hilt.compiler)
-    testImplementation(libs.junit)
+
     testImplementation(libs.room.testing)
-    androidTestImplementation(libs.junit.ext)
-    androidTestImplementation(libs.espresso)
+    testImplementation(libs.junit)
+    testImplementation(libs.truth)
+
     androidTestImplementation(libs.compose.test)
+    androidTestImplementation(libs.espresso)
+    androidTestImplementation(libs.android.test.core)
+    androidTestImplementation(libs.android.test.ext.junit)
+    androidTestImplementation(libs.android.test.ext.truth)
+    androidTestImplementation(libs.android.test.rules)
+    androidTestImplementation(libs.android.test.runner)
+
     debugImplementation(libs.compose.test.manifest)
     debugImplementation(libs.compose.tooling)
     detektPlugins(libs.detekt.formatting.plugin)
@@ -142,4 +153,8 @@ detekt {
     buildUponDefaultConfig = false
     ignoredBuildTypes = listOf("release")
     ignoredFlavors = listOf("production")
+}
+
+testlogger {
+    theme = MOCHA
 }

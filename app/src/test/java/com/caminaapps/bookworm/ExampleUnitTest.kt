@@ -1,6 +1,6 @@
 package com.caminaapps.bookworm
 
-import org.junit.Assert.assertEquals
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 /**
@@ -10,7 +10,20 @@ import org.junit.Test
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun something_isCorrect() {
+        assertThat("hello").matches("hello")
+        assertThat(false).isFalse()
+    }
+
+    @Test
+    fun on_isCorrect() {
+        assertThat("hello").matches("hello")
+        assertThat(false).isFalse()
+    }
+
+    @Test
+    fun of_isCorrect() {
+        assertThat("hello").matches("hello")
+        assertThat(false).isFalse()
     }
 }
