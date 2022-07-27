@@ -112,12 +112,7 @@ dependencies {
     implementation(libs.datastore.preferences)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
-    implementation(libs.hilt.plugin)
     implementation(libs.kotlin.serialization.json)
-    implementation(libs.lifecycle.livedata)
-    implementation(libs.lifecycle.runtime)
-    implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.lifecycle.viewmodel)
     implementation(libs.material)
     implementation(libs.mlkit.barcode.scanning)
     implementation(libs.navigation.compose)
@@ -126,18 +121,18 @@ dependencies {
     implementation(libs.retrofit.serialization.converter)
     implementation(libs.room)
     implementation(libs.timber)
+
     kapt(libs.room.compiler)
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.room.testing)
     testImplementation(libs.junit)
-    testImplementation(libs.truth)
+    testImplementation(libs.assertk)
 
     androidTestImplementation(libs.compose.test)
     androidTestImplementation(libs.espresso)
     androidTestImplementation(libs.android.test.core)
     androidTestImplementation(libs.android.test.ext.junit)
-    androidTestImplementation(libs.android.test.ext.truth)
     androidTestImplementation(libs.android.test.rules)
     androidTestImplementation(libs.android.test.runner)
 
@@ -146,7 +141,6 @@ dependencies {
     detektPlugins(libs.detekt.formatting.plugin)
     detektPlugins(libs.detekt.compose.plugin)
 }
-
 
 detekt {
     config = rootProject.files("config/detekt/detekt.yml")
