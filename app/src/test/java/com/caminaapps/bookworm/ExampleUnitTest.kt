@@ -1,6 +1,8 @@
 package com.caminaapps.bookworm
 
-import com.google.common.truth.Truth.assertThat
+import assertk.assertThat
+import assertk.assertions.isEqualTo
+import assertk.assertions.isFalse
 import org.junit.Test
 
 /**
@@ -11,19 +13,14 @@ import org.junit.Test
 class ExampleUnitTest {
     @Test
     fun something_isCorrect() {
-        assertThat("hello").matches("hello")
+        assertThat("hello").isEqualTo("hello")
         assertThat(false).isFalse()
     }
 
     @Test
     fun on_isCorrect() {
-        assertThat("hello").matches("hello")
-        assertThat(false).isFalse()
-    }
-
-    @Test
-    fun of_isCorrect() {
-        assertThat("hello").matches("hello")
+        assertThat(4).isEqualTo(2 + 2)
+        assertThat("hello").isEqualTo("hello")
         assertThat(false).isFalse()
     }
 }
