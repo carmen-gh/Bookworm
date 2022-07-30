@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.25.0"
-activity-compose = "1.5.0"
+activity-compose = "1.5.1"
 android = "7.2.1"
 android-test = "1.4.0"
 android-test-ext = "1.4.0"
@@ -46,7 +46,6 @@ turbine = "0.9.0"
 [libraries]
 accompanist-permission = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 android-test-core = { module = "androidx.test:core-ktx", version.ref = "android-test" }
 android-test-ext-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "android-test-ext_junit" }
