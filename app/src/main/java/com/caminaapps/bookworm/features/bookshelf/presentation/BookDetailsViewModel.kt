@@ -29,13 +29,8 @@ class BookViewModel @Inject constructor(
 
     val uiState: StateFlow<BookDetailsUiState> = bookStream.map { result ->
         when (result) {
-            is Result.Success -> {
-                if (result.data != null) {
-                    BookDetailsUiState.Success(result.data)
-                } else {
-                    BookDetailsUiState.NotFound
-                }
-            }
+            is Result.Success -> result.data?.let { BookDetailsUiState.Success(it) }
+                ?: BookDetailsUiState.NotFound
             is Result.Loading -> BookDetailsUiState.Loading
             is Result.Error -> BookDetailsUiState.Error
         }
