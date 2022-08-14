@@ -89,6 +89,7 @@ kapt {
 dependencies {
     implementation(libs.accompanist.permission)
     implementation(libs.accompanist.placeholder)
+    implementation(libs.accompanist.systemuicontroller)
     implementation(libs.activity.compose)
     implementation(libs.appcompat)
     implementation(libs.camera.camera2)

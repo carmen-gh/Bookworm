@@ -10,9 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.caminaapps.bookworm.R
-import com.caminaapps.bookworm.util.hasPermanentlyDenied
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 
 @ExperimentalPermissionsApi
 @Composable
@@ -26,14 +26,14 @@ fun CameraPermissionAlertDialog(
     ConfirmAlertDialog(
         onDismissRequest = onDismissRequest,
         onConfirm = {
-            if (cameraPermissionState.hasPermanentlyDenied()) {
+            if (cameraPermissionState.status.shouldShowRationale) {
                 context.startActivity(
                     Intent(
                         Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                         Uri.fromParts("package", context.packageName, null)
                     )
                 )
-            } else if (cameraPermissionState.shouldShowRationale) {
+            } else if (!cameraPermissionState.status.shouldShowRationale) {
                 cameraPermissionState.launchPermissionRequest()
             }
             onConfirm()
