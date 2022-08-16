@@ -17,6 +17,8 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.test.logger)
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -46,23 +48,23 @@ android {
             )
         }
         debug {
-            extra["enableCrashlytics"] = false
+//            extra["enableCrashlytics"] = false
             extra["alwaysUpdateBuildId"] = false
         }
     }
 
     flavorDimensions += mutableListOf("free") // free, paid
 
-    productFlavors {
-        create("dev") {
-            minSdk = 28
-            versionNameSuffix = "-dev"
-            applicationIdSuffix = ".dev"
-            resourceConfigurations += mutableSetOf("en", "xxhdpi")
-        }
-        create("prod") {
-        }
-    }
+//    productFlavors {
+//        create("dev") {
+//            minSdk = 28
+//            versionNameSuffix = "-dev"
+//            applicationIdSuffix = ".dev"
+//            resourceConfigurations += mutableSetOf("en", "xxhdpi")
+//        }
+//        create("prod") {
+//        }
+//    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -110,6 +112,8 @@ dependencies {
     implementation(libs.constraintlayout.compose)
     implementation(libs.core)
     implementation(libs.datastore.preferences)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.kotlin.serialization.json)

@@ -1,6 +1,8 @@
 buildscript {
     dependencies {
         classpath(libs.hilt.plugin)
+        classpath(libs.google.service.plugin)
+        classpath(libs.firebase.crashlytics.plugin)
     }
 }
 
