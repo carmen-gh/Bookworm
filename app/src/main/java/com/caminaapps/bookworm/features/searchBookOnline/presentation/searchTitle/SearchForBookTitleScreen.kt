@@ -39,6 +39,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarSlotNavigationUp
+import com.caminaapps.bookworm.core.ui.component.TrackedScreen
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Empty
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Error
@@ -52,6 +53,7 @@ fun SearchForBookTitleScreen(
     modifier: Modifier = Modifier,
     viewModel: SearchForBookTitleViewModel = hiltViewModel()
 ) {
+    TrackedScreen(name = "Search book online by title")
     var query by remember { mutableStateOf("") }
 
     Scaffold(modifier = modifier, topBar = {
