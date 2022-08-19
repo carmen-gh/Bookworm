@@ -50,7 +50,6 @@ android {
         }
         debug {
             extra["alwaysUpdateBuildId"] = false
-            extra["enableCrashlytics"] = false
             configure<CrashlyticsExtension> {
                 mappingFileUploadEnabled = false
             }
