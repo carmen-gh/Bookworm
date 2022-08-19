@@ -1,4 +1,5 @@
 import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 
 // Without these suppressions version catalog usage here and in other build
 // files is marked red by IntelliJ:
@@ -48,23 +49,13 @@ android {
             )
         }
         debug {
-//            extra["enableCrashlytics"] = false
             extra["alwaysUpdateBuildId"] = false
+            extra["enableCrashlytics"] = false
+            configure<CrashlyticsExtension> {
+                mappingFileUploadEnabled = false
+            }
         }
     }
-
-    flavorDimensions += mutableListOf("free") // free, paid
-
-//    productFlavors {
-//        create("dev") {
-//            minSdk = 28
-//            versionNameSuffix = "-dev"
-//            applicationIdSuffix = ".dev"
-//            resourceConfigurations += mutableSetOf("en", "xxhdpi")
-//        }
-//        create("prod") {
-//        }
-//    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

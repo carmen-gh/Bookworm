@@ -29,10 +29,10 @@ jobs:
         run: ./gradlew detekt --continue --no-daemon
 
       - name: Check lint
-        run: ./gradlew lintDevDebug --stacktrace
+        run: ./gradlew lintDebug --stacktrace
 
       - name: Run unit tests
-        run: ./gradlew testDevDebugUnitTest --stacktrace --continue --no-daemon
+        run: ./gradlew testDebugUnitTest --stacktrace --continue --no-daemon
 
 
   android_tests:
