@@ -11,18 +11,6 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 
-//@Composable
-//fun TrackedScreen(name: String) {
-//
-//    DisposableEffect(Unit) {
-//        val firebaseAnalytics = Firebase.analytics
-//        firebaseAnalytics.logEvent()
-//        onDispose {
-//
-//        }
-//    }
-//}
-
 @Composable
 fun TrackedScreen(
     name: String,
@@ -33,6 +21,7 @@ fun TrackedScreen(
             if (event == Lifecycle.Event.ON_START) {
                 Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
                     param(FirebaseAnalytics.Param.SCREEN_NAME, name)
+                    param(FirebaseAnalytics.Param.SCREEN_CLASS, name)
                 }
             }
         }
