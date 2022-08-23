@@ -11,10 +11,11 @@ import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
 )
 plugins {
     alias(libs.plugins.android)
+    alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.detekt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.test.logger)
     id("dagger.hilt.android.plugin")
 }
@@ -122,7 +123,7 @@ dependencies {
     implementation(libs.room)
     implementation(libs.timber)
 
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.room.testing)
