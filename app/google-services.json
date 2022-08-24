@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1063224306890",
+    "project_id": "bookworm-90a96",
+    "storage_bucket": "bookworm-90a96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063224306890:android:e1ef9396b05ecdf4179833",
+        "android_client_info": {
+          "package_name": "com.caminaapps.bookworm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063224306890-m2ookajau8reetsqd9rfq52b54icrgdu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.caminaapps.bookworm",
+            "certificate_hash": "17b5b646274471c69668926afa00966e98cc5e3a"
+          }
+        },
+        {
+          "client_id": "1063224306890-s9nncr42tqq4ss4ofl35k7bl6nqbdtd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-uJNx7PZ8oDWmuWZWX-zX_fmwNyXZw9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063224306890-s9nncr42tqq4ss4ofl35k7bl6nqbdtd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

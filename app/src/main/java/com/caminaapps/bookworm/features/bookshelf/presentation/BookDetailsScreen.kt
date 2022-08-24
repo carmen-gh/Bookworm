@@ -29,6 +29,7 @@ import coil.compose.AsyncImage
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationUp
+import com.caminaapps.bookworm.core.ui.component.TrackedScreen
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Error
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Loading
@@ -41,7 +42,7 @@ fun BookDetailsScreen(
     viewModel: BookViewModel = hiltViewModel(),
     onUpNavigationClick: () -> Unit,
 ) {
-
+    TrackedScreen(name = "Book details")
     val uiState: BookDetailsUiState by viewModel.uiState.collectAsState()
 
     when (uiState) {

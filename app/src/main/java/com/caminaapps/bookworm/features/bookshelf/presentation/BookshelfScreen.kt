@@ -37,6 +37,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
+import com.caminaapps.bookworm.core.ui.component.TrackedScreen
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.AddBookFloatingActionButton
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.BookList
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -52,6 +53,7 @@ fun BookshelfScreen(
     onBookClick: (id: Book) -> Unit,
     viewModel: BookshelfViewModel = hiltViewModel()
 ) {
+    TrackedScreen(name = "Bookshelf")
     var sortingMenuExpanded by remember { mutableStateOf(false) }
 
     Box(

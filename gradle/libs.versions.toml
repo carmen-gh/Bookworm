@@ -18,6 +18,10 @@ detekt = "1.21.0"
 detekt-compose = "1.2.1"
 detekt-formatting = "1.21.0"
 espresso = "3.4.0"
+firebase-analytics = "21.1.0"
+firebase-crashlytics = "18.2.12"
+firebase-crashlytics-plugin = "2.9.1"
+google-service-plugin = "4.3.13"
 hilt = "2.43.2"
 hilt-navigation-compose = "1.0.0"
 junit = "4.13.2"
@@ -64,6 +68,8 @@ core = { module = "androidx.core:core-ktx", version.ref = "core" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 detekt-compose-plugin = { module = "ru.kode:detekt-rules-compose", version.ref = "detekt-compose" }
 detekt-formatting-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt-formatting" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref = "firebase-crashlytics" }
 espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
@@ -81,7 +87,9 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
-# Hilt plugin is not in the Gradle Plugins portal
+# plugins which are not in the Gradle Plugins portal available
+firebase-crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-plugin" }
+google-service-plugin = { module = "com.google.gms:google-services", version.ref = "google-service-plugin" }
 hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 
 

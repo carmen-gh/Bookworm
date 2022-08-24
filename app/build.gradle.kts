@@ -1,4 +1,5 @@
 import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 
 // Without these suppressions version catalog usage here and in other build
 // files is marked red by IntelliJ:
@@ -18,6 +19,8 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.test.logger)
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -47,21 +50,10 @@ android {
             )
         }
         debug {
-            extra["enableCrashlytics"] = false
             extra["alwaysUpdateBuildId"] = false
-        }
-    }
-
-    flavorDimensions += mutableListOf("free") // free, paid
-
-    productFlavors {
-        create("dev") {
-            minSdk = 28
-            versionNameSuffix = "-dev"
-            applicationIdSuffix = ".dev"
-            resourceConfigurations += mutableSetOf("en", "xxhdpi")
-        }
-        create("prod") {
+            configure<CrashlyticsExtension> {
+                mappingFileUploadEnabled = false
+            }
         }
     }
 
@@ -111,6 +103,8 @@ dependencies {
     implementation(libs.constraintlayout.compose)
     implementation(libs.core)
     implementation(libs.datastore.preferences)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
     implementation(libs.hilt)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.kotlin.serialization.json)
