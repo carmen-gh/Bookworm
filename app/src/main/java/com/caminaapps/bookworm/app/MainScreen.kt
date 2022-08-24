@@ -23,7 +23,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 @ExperimentalComposeUiApi
 @ExperimentalPermissionsApi
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun MainScreen() {
     BookwormTheme {
         val navController = rememberNavController()
         var showBottomBar by rememberSaveable { mutableStateOf(true) }
@@ -37,7 +37,6 @@ fun MainScreen(modifier: Modifier = Modifier) {
         }
 
         Scaffold(
-            modifier = modifier,
             bottomBar = { if (showBottomBar) BookwormBottomNavigation(navController = navController) }
         ) { innerPadding ->
             BookwormNavHost(
