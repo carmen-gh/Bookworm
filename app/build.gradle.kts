@@ -11,19 +11,21 @@ import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
     "FUNCTION_CALL_EXPECTED"
 )
 plugins {
-    alias(libs.plugins.android)
+    alias(libs.plugins.android.application)
     alias(libs.plugins.detekt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.test.logger)
-    id("dagger.hilt.android.plugin")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
 }
 
+apply(plugin = "dagger.hilt.android.plugin")
+apply(plugin = "com.google.gms.google-services")
+apply(plugin = "com.google.firebase.crashlytics")
+
 android {
+    namespace = "com.caminaapps.bookworm"
     compileSdk = 32
 
     defaultConfig {
@@ -32,24 +34,22 @@ android {
         targetSdk = 32
         versionCode = 1
         versionName = "1.0"
-        namespace = "com.caminaapps.bookworm"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
-        debug {
+        getByName("debug") {
             extra["alwaysUpdateBuildId"] = false
             configure<CrashlyticsExtension> {
                 mappingFileUploadEnabled = false
@@ -133,6 +133,7 @@ dependencies {
 
     debugImplementation(libs.compose.test.manifest)
     debugImplementation(libs.compose.tooling)
+
     detektPlugins(libs.detekt.formatting.plugin)
     detektPlugins(libs.detekt.compose.plugin)
 }
