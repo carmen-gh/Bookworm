@@ -40,6 +40,7 @@ retrofit-serialization-converter = "0.8.0"
 room = "2.4.3"
 test-logger = "3.2.0"
 timber = "5.0.1"
+turbine = "0.9.0"
 
 
 [libraries]
@@ -88,6 +89,7 @@ room = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine"}
 
 # plugins which are not in the Gradle Plugins portal available
 firebase-crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-plugin" }

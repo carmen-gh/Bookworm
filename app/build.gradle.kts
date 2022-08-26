@@ -124,6 +124,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.room.testing)
+    testImplementation(libs.turbine)
 
     androidTestImplementation(libs.android.test.core)
     androidTestImplementation(libs.android.test.ext.junit)
