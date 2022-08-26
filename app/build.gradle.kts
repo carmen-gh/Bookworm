@@ -20,9 +20,9 @@ plugins {
     alias(libs.plugins.test.logger)
 }
 
-apply(plugin = "dagger.hilt.android.plugin")
-apply(plugin = "com.google.gms.google-services")
 apply(plugin = "com.google.firebase.crashlytics")
+apply(plugin = "com.google.gms.google-services")
+apply(plugin = "dagger.hilt.android.plugin")
 
 android {
     namespace = "com.caminaapps.bookworm"
@@ -117,32 +117,32 @@ dependencies {
     implementation(libs.room)
     implementation(libs.timber)
 
-    ksp(libs.room.compiler)
     kapt(libs.hilt.compiler)
+    ksp(libs.room.compiler)
 
-    testImplementation(libs.room.testing)
-    testImplementation(libs.junit)
     testImplementation(libs.assertk)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.room.testing)
 
-    androidTestImplementation(libs.compose.test)
-    androidTestImplementation(libs.espresso)
     androidTestImplementation(libs.android.test.core)
     androidTestImplementation(libs.android.test.ext.junit)
     androidTestImplementation(libs.android.test.rules)
     androidTestImplementation(libs.android.test.runner)
+    androidTestImplementation(libs.compose.test)
+    androidTestImplementation(libs.espresso)
 
     debugImplementation(libs.compose.test.manifest)
     debugImplementation(libs.compose.tooling)
 
-    detektPlugins(libs.detekt.formatting.plugin)
     detektPlugins(libs.detekt.compose.plugin)
+    detektPlugins(libs.detekt.formatting.plugin)
 }
 
 detekt {
     config = rootProject.files("config/detekt/detekt.yml")
     buildUponDefaultConfig = false
     ignoredBuildTypes = listOf("release")
-    ignoredFlavors = listOf("production")
 }
 
 testlogger {

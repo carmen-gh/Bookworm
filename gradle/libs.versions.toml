@@ -27,7 +27,8 @@ hilt-navigation-compose = "1.0.0"
 junit = "4.13.2"
 kotlin = "1.7.0"
 kotlin-kapt = "1.7.0"
-kotlin-serialization-json = "1.4.0"
+kotlinx-coroutines = "1.6.4"
+kotlinx-serialization = "1.4.0"
 ksp = "1.7.0-1.0.6"
 lifecycle = "2.5.0"
 material = "1.6.1"
@@ -75,7 +76,8 @@ hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 junit = { module = "junit:junit", version.ref = "junit" }
-kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
+kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkit-barcode-scanning" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
