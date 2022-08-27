@@ -9,9 +9,7 @@ class SearchBookByIsbnUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(isbn: String): Book? {
-        if (isbn.isBlank()) {
-            return null
-        }
+        if (isbn.isBlank()) return null
         return onlineSearchBookRepository.getBookByISBN(isbn)
     }
 }

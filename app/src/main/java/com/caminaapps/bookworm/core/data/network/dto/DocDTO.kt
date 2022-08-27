@@ -46,7 +46,7 @@ data class DocDTO(
     val version: Long? = null
 )
 
-fun DocDTO.asBook(): Book {
+fun DocDTO.toBook(): Book {
     return Book(
         title = title ?: "",
         subtitle = "",
