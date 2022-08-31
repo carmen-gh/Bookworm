@@ -30,11 +30,10 @@ class BookwormBottomNavigationTest {
     }
 
     @Test
-    fun bookwormNavHost_navigateToBookshelf_viaUI() {
+    fun navigateToBookshelf_viaUI() {
         composeTestRule.onRoot().printToLog("TAG")
         composeTestRule.onRoot(useUnmergedTree = true).printToLog("TAG")
 
         composeTestRule.onNodeWithTag(BottomNavigationScreen.Bookshelf.route).assertIsDisplayed()
-        // add test
     }
 }

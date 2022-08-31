@@ -35,7 +35,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.caminaapps.bookworm.testing.BookwormTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -124,7 +124,10 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.room.testing)
+    testImplementation(libs.hilt.testing)
     testImplementation(libs.turbine)
+
+    kaptTest(libs.hilt.testing)
 
     androidTestImplementation(libs.android.test.core)
     androidTestImplementation(libs.android.test.ext.junit)
@@ -132,6 +135,9 @@ dependencies {
     androidTestImplementation(libs.android.test.runner)
     androidTestImplementation(libs.compose.test)
     androidTestImplementation(libs.espresso)
+    androidTestImplementation(libs.hilt.testing)
+
+    kaptAndroidTest(libs.hilt.testing)
 
     debugImplementation(libs.compose.test.manifest)
     debugImplementation(libs.compose.tooling)

@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm
+package com.caminaapps.bookworm.util
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
