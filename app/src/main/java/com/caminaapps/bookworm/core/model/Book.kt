@@ -1,6 +1,7 @@
 package com.caminaapps.bookworm.core.model
 
-import java.time.OffsetDateTime
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import java.util.*
 
 data class Book(
@@ -12,5 +13,5 @@ data class Book(
     val coverUrl: String?,
     val finishedReading: Boolean = false,
     val isFavourite: Boolean = false,
-    val addedToBookshelf: OffsetDateTime = OffsetDateTime.now()
+    val addedToBookshelf: Instant = Clock.System.now()
 )
