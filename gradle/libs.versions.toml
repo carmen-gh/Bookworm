@@ -18,8 +18,7 @@ detekt = "1.21.0"
 detekt-compose = "1.2.1"
 detekt-formatting = "1.21.0"
 espresso = "3.4.0"
-firebase-analytics = "21.1.0"
-firebase-crashlytics = "18.2.12"
+firebase-bom = "30.4.0"
 firebase-crashlytics-plugin = "2.9.1"
 google-service-plugin = "4.3.13"
 hilt = "2.43.2"
@@ -71,8 +70,10 @@ core = { module = "androidx.core:core-ktx", version.ref = "core" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 detekt-compose-plugin = { module = "ru.kode:detekt-rules-compose", version.ref = "detekt-compose" }
 detekt-formatting-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt-formatting" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref = "firebase-crashlytics" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-app-check = { module = "com.google.firebase:firebase-appcheck-playintegrity" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx"}
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
