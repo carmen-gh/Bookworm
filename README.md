@@ -1,12 +1,11 @@
-# WIP - Fun project to learn and try out all the cool stuff
+# Little fun project to learn and play around with new things...
 
 # Bookworm 📚🪱
 
 An app to keep an overview of all your books.
 
-![wireframe](https://github.com/camina-apps/Bookworm/blob/main/Untitled%20Diagram.jpg "Logo Title Text 1")
 
-## Used Technology so far
+## Technology
 
 - Android
 - Kotlin
@@ -19,11 +18,13 @@ An app to keep an overview of all your books.
 - DataStore
 - MLKit detecting Barcodes
 - Static code analysis (with detekt)
-- Gradle with Kotlin DSL and versions.toml
+- Gradle setup with Kotlin DSL and Gradle version catalog
+- Google Analytics
+- Goolge Crashlytics
+- Google AppCheck
 
 ## Architecture
 
-- Clean architecture
+- Following Google Architecure Guide
 - Data, Domain, Presentation layers approach
-- DataSource <- Repository <- UseCase <- ViewModel <- View
 - Unidirectional DataFlow  
