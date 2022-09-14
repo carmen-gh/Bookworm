@@ -12,7 +12,9 @@ class SaveEnteredBookUseCase @Inject constructor(
         title: String,
         subtitle: String?,
         author: String?,
-        published: String?
+        published: String?,
+        isFavourite: Boolean,
+        finishedReading: Boolean
     ) {
         if (title.isBlank()) throw BookTitleMissing("book title is required field")
 
@@ -21,6 +23,8 @@ class SaveEnteredBookUseCase @Inject constructor(
             subtitle = subtitle ?: "",
             author = author ?: "",
             publishedDate = published ?: "",
+            isFavourite = isFavourite,
+            finishedReading = finishedReading,
             coverUrl = null
         )
         bookRepository.saveBook(book)

@@ -33,4 +33,10 @@
     <string name="book_sort_order_title_desc">Title - Z to︎ A</string>
     <string name="book_sort_order_author_asc">Author - A to Z</string>
     <string name="book_sort_order_author_desc">Author - Z to︎ A</string>
+    <string name="book_favourite">favourite book</string>
+    <string name="book_finished">finished</string>
+    <string name="book_title">Title</string>
+    <string name="book_subtitle">Subtitle</string>
+    <string name="book_author">Title</string>
+    <string name="book_published">Published</string>
 </resources>

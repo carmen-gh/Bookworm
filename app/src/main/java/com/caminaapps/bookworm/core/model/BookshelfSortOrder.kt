@@ -1,6 +1,8 @@
 package com.caminaapps.bookworm.core.model
 
+import androidx.annotation.Keep
 
+@Keep
 enum class BookshelfSortOrder {
     DATE_ADDED_ASC,
     DATE_ADDED_DESC,

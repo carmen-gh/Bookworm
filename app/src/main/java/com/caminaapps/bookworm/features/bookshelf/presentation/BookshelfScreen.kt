@@ -1,5 +1,6 @@
 package com.caminaapps.bookworm.features.bookshelf.presentation
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -50,6 +51,7 @@ import timber.log.Timber
 fun BookshelfScreen(
     onScanBarcode: () -> Unit,
     onSearchOnline: () -> Unit,
+    onEnterBook: () -> Unit,
     onBookClick: (id: Book) -> Unit,
     viewModel: BookshelfViewModel = hiltViewModel()
 ) {
@@ -91,7 +93,7 @@ fun BookshelfScreen(
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
             AddBookFloatingActionButton(
-                onManual = { /*TODO*/ },
+                onManual = onEnterBook,
                 onSearch = onSearchOnline,
                 onScan = onScanBarcode
             )
@@ -153,6 +155,7 @@ fun SortingDropDownMenu(
     }
 }
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview
 @Composable
 fun BookshelfPreview() {

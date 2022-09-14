@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
+import com.caminaapps.bookworm.features.enterBook.EnterBookScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.BookBarcodeResultScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.CameraScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleScreen
@@ -35,6 +36,9 @@ fun BookwormNavHost(
                 },
                 onSearchOnline = {
                     navController.navigate(Screen.SearchBookByTitle.createRoute())
+                },
+                onEnterBook = {
+                    navController.navigate(Screen.EnterBook.createRoute())
                 }
             )
         }
@@ -69,6 +73,10 @@ fun BookwormNavHost(
 
         composable(Screen.SearchBookByTitle.route) {
             SearchForBookTitleScreen(onNavigateUp = { navController.navigateUp() })
+        }
+
+        composable(Screen.EnterBook.route) {
+            EnterBookScreen(onUpNavigationClick = { navController.navigateUp() })
         }
 
         // Wishlist -----------------------------------------------------------------------------------

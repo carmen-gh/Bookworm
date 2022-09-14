@@ -19,14 +19,19 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        firebaseAnalytics = Firebase.analytics
-        val params = Bundle()
-        params.putString("test", "test")
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, params)
+        initAnalytics()
+
         setContent {
             setContent {
                 MainScreen()
             }
         }
+    }
+
+    private fun initAnalytics() {
+        firebaseAnalytics = Firebase.analytics
+        val params = Bundle()
+        params.putString("test", "test")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, params)
     }
 }

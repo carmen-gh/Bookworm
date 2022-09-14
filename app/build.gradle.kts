@@ -26,12 +26,12 @@ apply(plugin = "dagger.hilt.android.plugin")
 
 android {
     namespace = "com.caminaapps.bookworm"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.caminaapps.bookworm"
         minSdk = 28
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
