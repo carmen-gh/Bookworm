@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Switch
@@ -29,6 +30,8 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
 import com.caminaapps.bookworm.core.ui.component.TrackedScreen
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
+import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.BookSaved
+import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.ErrorTitleMissing
 
 @Composable
 fun EnterBookScreen(
@@ -39,17 +42,15 @@ fun EnterBookScreen(
 
     val uiState = viewModel.uiState.collectAsState()
 
-    if (uiState.value is EnterBookUiState.BookSaved) {
+    if (uiState.value is BookSaved) {
         onUpNavigationClick()
     }
-
-    // todo() computed state value for show title error
 
     EnterBookContent(
         onClose = onUpNavigationClick,
         onSave = { viewModel.saveBook(it) },
         onTitleValueChanged = viewModel::titleInputChanged,
-        showTitleError = false
+        showTitleError = (uiState.value is ErrorTitleMissing)
     )
 }
 
@@ -101,7 +102,7 @@ fun EnterBookContent(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 },
-                horizontalAlignment = Alignment.CenterHorizontally,
+                horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 OutlinedTextField(
@@ -113,6 +114,14 @@ fun EnterBookContent(
                         title = it
                     }
                 )
+                if (showTitleError) {
+                    Text(
+                        text = "Title is missing",
+                        color = MaterialTheme.colors.error,
+                        style = MaterialTheme.typography.caption,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
                 OutlinedTextField(
                     value = subtitle,
                     label = { Text(text = stringResource(R.string.book_subtitle)) },
