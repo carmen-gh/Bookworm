@@ -46,7 +46,7 @@ fun BookBarcodeResultScreen(
         topBar = {
             TopAppBarNavigationClose(
                 title = "Book details",
-                onClick = onCloseScreen
+                onClose = onCloseScreen
             )
         },
     ) { innerPadding ->

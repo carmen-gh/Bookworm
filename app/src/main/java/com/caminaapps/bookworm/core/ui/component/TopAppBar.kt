@@ -69,7 +69,7 @@ fun TopAppBarSlotNavigationUp(
 @Composable
 fun TopAppBarNavigationClose(
     title: String,
-    onClick: () -> Unit,
+    onClose: () -> Unit,
     modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
@@ -77,7 +77,7 @@ fun TopAppBarNavigationClose(
         modifier = modifier,
         title = { Text(title, maxLines = 2, overflow = TextOverflow.Ellipsis) },
         navigationIcon = {
-            IconButton(onClick = onClick) {
+            IconButton(onClick = onClose) {
                 Icon(
                     imageVector = Icons.Filled.Close,
                     contentDescription = stringResource(id = R.string.button_close)
@@ -102,7 +102,7 @@ fun DefaultPreviewDark() {
             Spacer(modifier = Modifier.height(8.dp))
             TopAppBarNavigationClose(
                 title = "TopAppBar Title",
-                onClick = {},
+                onClose = {},
                 actions = {
                     IconButton(onClick = {}) {
                         Icon(

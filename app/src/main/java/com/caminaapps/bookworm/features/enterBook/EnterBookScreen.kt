@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -22,6 +25,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.caminaapps.bookworm.R
+import com.caminaapps.bookworm.core.model.Book
+import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
 import com.caminaapps.bookworm.core.ui.component.TrackedScreen
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 
@@ -32,12 +37,28 @@ fun EnterBookScreen(
 ) {
     TrackedScreen(name = "Enter book")
 
-    EnterBookContent(onSave = {})
+    val uiState = viewModel.uiState.collectAsState()
+
+    if (uiState.value is EnterBookUiState.BookSaved) {
+        onUpNavigationClick()
+    }
+
+    // todo() computed state value for show title error
+
+    EnterBookContent(
+        onClose = onUpNavigationClick,
+        onSave = { viewModel.saveBook(it) },
+        onTitleValueChanged = viewModel::titleInputChanged,
+        showTitleError = false
+    )
 }
 
 @Composable
 fun EnterBookContent(
-    onSave: () -> Unit,
+    onClose: () -> Unit,
+    onSave: (Book) -> Unit,
+    onTitleValueChanged: () -> Unit,
+    showTitleError: Boolean,
     modifier: Modifier = Modifier,
 ) {
     var title by rememberSaveable { mutableStateOf("") }
@@ -47,64 +68,92 @@ fun EnterBookContent(
     var isFavourite by rememberSaveable { mutableStateOf(false) }
     var isFinished by rememberSaveable { mutableStateOf(false) }
 
-    ConstraintLayout(modifier = modifier) {
-
-        val (inputColumn, checkboxColumn) = createRefs()
-
-        Column(
-            modifier = Modifier.constrainAs(inputColumn) {
-                top.linkTo(parent.top, margin = 16.dp)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            },
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            OutlinedTextField(
-                value = title,
-                label = { Text(text = stringResource(R.string.book_title)) },
-                onValueChange = { title = it }
-            )
-            OutlinedTextField(
-                value = subtitle,
-                label = { Text(text = stringResource(R.string.book_subtitle)) },
-                onValueChange = { subtitle = it }
-            )
-            OutlinedTextField(
-                value = author,
-                label = { Text(text = stringResource(R.string.book_author)) },
-                onValueChange = { author = it }
-            )
-            OutlinedTextField(
-                value = published,
-                label = { Text(text = stringResource(R.string.book_published)) },
-                onValueChange = { published = it }
-            )
-        }
-        Column(
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .constrainAs(checkboxColumn) {
-                    top.linkTo(inputColumn.bottom, margin = 16.dp)
-                    start.linkTo(inputColumn.start)
-                    end.linkTo(inputColumn.end)
-                    width = Dimension.fillToConstraints
-                },
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = stringResource(R.string.book_favourite),
-                    modifier = Modifier.weight(1.0F)
-                )
-                Switch(checked = isFavourite, onCheckedChange = { isFavourite = it })
+    Scaffold(
+        topBar = {
+            TopAppBarNavigationClose(
+                title = stringResource(R.string.book_enter_title),
+                onClose = { onClose() }
+            ) {
+                Button(onClick = {
+                    onSave(
+                        Book(
+                            title = title,
+                            subtitle = subtitle,
+                            author = author,
+                            publishedDate = published,
+                            isFavourite = isFavourite,
+                            finishedReading = isFinished,
+                            coverUrl = null
+                        )
+                    )
+                }) {
+                    Text(text = stringResource(id = R.string.button_save))
+                }
             }
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = stringResource(R.string.book_finished),
-                    modifier = Modifier.weight(1.0F)
+        }
+    ) {
+        ConstraintLayout(modifier = modifier) {
+            val (inputColumn, checkboxColumn) = createRefs()
+
+            Column(
+                modifier = Modifier.constrainAs(inputColumn) {
+                    top.linkTo(parent.top, margin = 16.dp)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                },
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                OutlinedTextField(
+                    value = title,
+                    label = { Text(text = stringResource(R.string.book_title)) },
+                    isError = showTitleError,
+                    onValueChange = {
+                        onTitleValueChanged()
+                        title = it
+                    }
                 )
-                Switch(checked = isFinished, onCheckedChange = { isFinished = it })
+                OutlinedTextField(
+                    value = subtitle,
+                    label = { Text(text = stringResource(R.string.book_subtitle)) },
+                    onValueChange = { subtitle = it }
+                )
+                OutlinedTextField(
+                    value = author,
+                    label = { Text(text = stringResource(R.string.book_author)) },
+                    onValueChange = { author = it }
+                )
+                OutlinedTextField(
+                    value = published,
+                    label = { Text(text = stringResource(R.string.book_published)) },
+                    onValueChange = { published = it }
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .constrainAs(checkboxColumn) {
+                        top.linkTo(inputColumn.bottom, margin = 16.dp)
+                        start.linkTo(inputColumn.start)
+                        end.linkTo(inputColumn.end)
+                        width = Dimension.fillToConstraints
+                    },
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = stringResource(R.string.book_favourite),
+                        modifier = Modifier.weight(1.0F)
+                    )
+                    Switch(checked = isFavourite, onCheckedChange = { isFavourite = it })
+                }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = stringResource(R.string.book_finished),
+                        modifier = Modifier.weight(1.0F)
+                    )
+                    Switch(checked = isFinished, onCheckedChange = { isFinished = it })
+                }
             }
         }
     }
@@ -115,6 +164,10 @@ fun EnterBookContent(
 fun AddBookScreenPreview() {
     BookwormTheme {
         EnterBookContent(
+            onClose = {},
+            onSave = {},
+            onTitleValueChanged = {},
+            showTitleError = true,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(10.dp)
