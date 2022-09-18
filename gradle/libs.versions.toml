@@ -30,7 +30,7 @@ kotlinx-coroutines = "1.6.4"
 kotlinx-datetime = "0.4.0"
 kotlinx-serialization = "1.4.0"
 ksp = "1.7.10-1.0.6"
-lifecycle = "2.5.0"
+lifecycle-compose = "2.6.0-alpha02"
 material = "1.6.1"
 mlkit-barcode-scanning = '17.0.2'
 navigation-compose = "2.5.2"
@@ -84,6 +84,7 @@ junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-compose" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkit-barcode-scanning" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
