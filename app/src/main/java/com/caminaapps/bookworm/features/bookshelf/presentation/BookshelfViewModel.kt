@@ -13,7 +13,6 @@ import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrderUs
 import com.caminaapps.bookworm.features.bookshelf.domain.UpdateBookshelfSortOrderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,7 +33,6 @@ class BookshelfViewModel @Inject constructor(
     private fun subscribeToBooks() {
         viewModelScope.launch {
             getAllBooks().collect { bookList ->
-                Timber.d("update ui state books")
                 uiState = uiState.copy(books = bookList)
             }
         }

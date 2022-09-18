@@ -49,4 +49,8 @@ sealed class Screen(
     object Camera : Screen("camera") {
         fun createRoute() = route
     }
+
+    object EnterBook : Screen("enterBook") {
+        fun createRoute() = route
+    }
 }

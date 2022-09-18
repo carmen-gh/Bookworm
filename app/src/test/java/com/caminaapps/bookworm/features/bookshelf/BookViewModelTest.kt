@@ -8,11 +8,15 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.fake.FakeBookRepository
 import com.caminaapps.bookworm.features.bookshelf.domain.DeleteBookUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookDetailsUseCase
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Error
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Loading
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.NotFound
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Success
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookViewModel
 import com.caminaapps.bookworm.util.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -37,16 +41,21 @@ class BookViewModelTest {
         )
     }
 
+    @After
+    fun tearDown() {
+        bookRepository.shouldReturnError = false
+    }
+
     @Test
     fun uiState_whenInitialized_thenLoading() = runTest {
-        assertThat(viewModel.uiState.value).isEqualTo(BookDetailsUiState.Loading)
+        assertThat(viewModel.uiState.value).isEqualTo(Loading)
     }
 
     @Test
     fun uiState_whenBookIdNotExist_thenNotFound() = runTest {
         viewModel.uiState.test {
             bookRepository.send(listOf(testInputBookNotMatching))
-            assertThat(viewModel.uiState.value).isEqualTo(BookDetailsUiState.NotFound)
+            assertThat(viewModel.uiState.value).isEqualTo(NotFound)
             cancelAndIgnoreRemainingEvents()
         }
     }
@@ -56,7 +65,7 @@ class BookViewModelTest {
         viewModel.uiState.test {
             bookRepository.send(listOf(testInputBookMatching))
             assertThat(viewModel.uiState.value)
-                .isEqualTo(BookDetailsUiState.Success(testInputBookMatching))
+                .isEqualTo(Success(testInputBookMatching))
             cancelAndIgnoreRemainingEvents()
         }
     }
@@ -66,10 +75,10 @@ class BookViewModelTest {
         viewModel.uiState.test {
             bookRepository.send(listOf(testInputBookMatching))
             assertThat(viewModel.uiState.value)
-                .isEqualTo(BookDetailsUiState.Success(testInputBookMatching))
+                .isEqualTo(Success(testInputBookMatching))
             viewModel.onDeleteBook(testInputBookMatching.id)
             assertThat(viewModel.uiState.value)
-                .isEqualTo(BookDetailsUiState.NotFound)
+                .isEqualTo(NotFound)
             cancelAndIgnoreRemainingEvents()
         }
     }
@@ -83,10 +92,9 @@ class BookViewModelTest {
             deleteBook = deleteBookUseCase
         )
         viewModel.uiState.test {
-            assertThat(viewModel.uiState.value).isEqualTo(BookDetailsUiState.Error)
+            assertThat(viewModel.uiState.value).isEqualTo(Error)
             cancelAndIgnoreRemainingEvents()
         }
-        bookRepository.shouldReturnError = false
     }
 }
 

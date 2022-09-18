@@ -17,7 +17,7 @@ fun CameraScreen(
         topBar = {
             TopAppBarNavigationClose(
                 title = stringResource(id = R.string.screen_title_scan_barcode),
-                onClick = onClose
+                onClose = onClose
             )
         }
     ) { innerPadding ->

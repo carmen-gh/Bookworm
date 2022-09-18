@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.caminaapps.bookworm.core.model.Book
 import kotlinx.datetime.Instant
-import java.time.OffsetDateTime
 
 @Entity(
     tableName = "book"

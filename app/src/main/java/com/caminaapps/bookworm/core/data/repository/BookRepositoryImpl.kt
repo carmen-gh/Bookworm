@@ -4,6 +4,13 @@ import com.caminaapps.bookworm.core.data.database.BookDao
 import com.caminaapps.bookworm.core.data.database.toBook
 import com.caminaapps.bookworm.core.data.database.toBookEntity
 import com.caminaapps.bookworm.core.model.Book
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.AUTHOR_ASC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.AUTHOR_DESC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.DATE_ADDED_ASC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.DATE_ADDED_DESC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.TITLE_ASC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.TITLE_DESC
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -12,39 +19,15 @@ class BookRepositoryImpl @Inject constructor(
     private val bookDao: BookDao
 ) : BookRepository {
 
-    override fun getAllBooksStreamSortedByDateAsc(): Flow<List<Book>> {
-        return bookDao.getAllBooksStreamSortedByDateAsc().map { listOfBookEntities ->
-            listOfBookEntities.map { it.toBook() }
-        }
-    }
-
-
-    override fun getAllBooksStreamSortedByDateDesc(): Flow<List<Book>> {
-        return bookDao.getAllBooksStreamSortedByDateDesc().map { listOfBookEntities ->
-            listOfBookEntities.map { it.toBook() }
-        }
-    }
-
-    override fun getAllBooksStreamSortedByTitleAsc(): Flow<List<Book>> {
-        return bookDao.getAllBooksStreamSortedByTitleAsc().map { listOfBookEntities ->
-            listOfBookEntities.map { it.toBook() }
-        }
-    }
-
-    override fun getAllBooksStreamSortedByTitleDesc(): Flow<List<Book>> {
-        return bookDao.getAllBooksStreamSortedByTitleDesc().map { listOfBookEntities ->
-            listOfBookEntities.map { it.toBook() }
-        }
-    }
-
-    override fun getAllBooksStreamSortedByAuthorAsc(): Flow<List<Book>> {
-        return bookDao.getAllBooksStreamSortedByAuthorAsc().map { listOfBookEntities ->
-            listOfBookEntities.map { it.toBook() }
-        }
-    }
-
-    override fun getAllBooksStreamSortedByAuthorDesc(): Flow<List<Book>> {
-        return bookDao.getAllBooksStreamSortedByAuthorDesc().map { listOfBookEntities ->
+    override fun getAllBooksStream(sortOrder: BookshelfSortOrder): Flow<List<Book>> {
+        return when(sortOrder) {
+            DATE_ADDED_ASC -> bookDao.getAllBooksStreamSortedByDateAsc()
+            DATE_ADDED_DESC -> bookDao.getAllBooksStreamSortedByDateDesc()
+            TITLE_ASC -> bookDao.getAllBooksStreamSortedByTitleAsc()
+            TITLE_DESC -> bookDao.getAllBooksStreamSortedByTitleDesc()
+            AUTHOR_ASC -> bookDao.getAllBooksStreamSortedByAuthorAsc()
+            AUTHOR_DESC -> bookDao.getAllBooksStreamSortedByAuthorDesc()
+        }.map { listOfBookEntities ->
             listOfBookEntities.map { it.toBook() }
         }
     }

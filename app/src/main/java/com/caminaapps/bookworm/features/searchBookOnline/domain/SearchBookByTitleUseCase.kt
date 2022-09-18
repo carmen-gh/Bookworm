@@ -8,7 +8,10 @@ class SearchBookByTitleUseCase @Inject constructor(
     private val onlineSearchBookRepository: OnlineSearchBookRepository,
 ) {
     suspend operator fun invoke(title: String): List<Book> {
-        if (title.isBlank()) return emptyList()
-        return onlineSearchBookRepository.getBooksByTitle(title)
+        return if (title.isBlank()) {
+            emptyList()
+        } else {
+            onlineSearchBookRepository.getBooksByTitle(title)
+        }
     }
 }

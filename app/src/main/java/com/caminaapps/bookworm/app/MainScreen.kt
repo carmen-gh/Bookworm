@@ -14,6 +14,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.caminaapps.bookworm.core.navigation.BookwormBottomNavigation
 import com.caminaapps.bookworm.core.navigation.BookwormNavHost
+import com.caminaapps.bookworm.core.navigation.Screen
 import com.caminaapps.bookworm.core.navigation.Screen.Camera
 import com.caminaapps.bookworm.core.navigation.Screen.SearchBookByTitle
 import com.caminaapps.bookworm.core.navigation.Screen.SearchIsbnBookResult
@@ -32,6 +33,7 @@ fun MainScreen() {
         showBottomBar = when (navBackStackEntry?.destination?.route) {
             SearchBookByTitle.route -> false
             SearchIsbnBookResult.route -> false
+            Screen.EnterBook.route -> false
             Camera.route -> false
             else -> true
         }

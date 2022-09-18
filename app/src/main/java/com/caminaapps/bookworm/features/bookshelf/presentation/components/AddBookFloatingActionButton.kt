@@ -21,7 +21,9 @@ import com.caminaapps.bookworm.core.ui.component.SpeedDialFloatingActionButton
 import com.caminaapps.bookworm.core.ui.component.SpeedDialItem
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 import timber.log.Timber
 
 
@@ -63,12 +65,12 @@ fun ColumnScope.CameraSpeedDialItem(onScan: () -> Unit) {
     var openDialog by remember { mutableStateOf(false) }
 
     SpeedDialItem(onClick = {
-        if (cameraPermissionState.hasPermission) {
+        if (cameraPermissionState.status.isGranted) {
             Timber.d("start camera")
             onScan()
-        } else if (!cameraPermissionState.permissionRequested) {
+        } else if (!cameraPermissionState.status.shouldShowRationale) {
             cameraPermissionState.launchPermissionRequest()
-        } else if (!cameraPermissionState.hasPermission) {
+        } else if (cameraPermissionState.status.shouldShowRationale) {
             openDialog = true
         }
     }) {

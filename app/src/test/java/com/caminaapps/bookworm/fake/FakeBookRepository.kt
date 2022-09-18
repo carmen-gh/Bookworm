@@ -2,6 +2,13 @@ package com.caminaapps.bookworm.fake
 
 import com.caminaapps.bookworm.core.data.repository.BookRepository
 import com.caminaapps.bookworm.core.model.Book
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.AUTHOR_ASC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.AUTHOR_DESC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.DATE_ADDED_ASC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.DATE_ADDED_DESC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.TITLE_ASC
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder.TITLE_DESC
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,59 +29,26 @@ class FakeBookRepository : BookRepository {
         booksFlow.tryEmit(books)
     }
 
-    override fun getAllBooksStreamSortedByDateAsc(): Flow<List<Book>> =
-        if (shouldReturnError) {
+    override fun getAllBooksStream(sortOrder: BookshelfSortOrder): Flow<List<Book>> {
+        return if (shouldReturnError) {
             flow { throw IllegalStateException("error") }
         } else {
-            booksFlow.map { books ->
-                books.sortedBy { it.publishedDate }
-            }
+            sortedBooks(sortOrder)
         }
+    }
 
-    override fun getAllBooksStreamSortedByDateDesc(): Flow<List<Book>> =
-        if (shouldReturnError) {
-            flow { throw IllegalStateException("error") }
-        } else {
-            booksFlow.map { books ->
-                books.sortedByDescending { it.publishedDate }
+    private fun sortedBooks(order: BookshelfSortOrder): Flow<List<Book>> {
+        return booksFlow.map { books ->
+            when (order) {
+                DATE_ADDED_ASC -> books.sortedBy { it.publishedDate }
+                DATE_ADDED_DESC -> books.sortedByDescending { it.publishedDate }
+                TITLE_ASC -> books.sortedBy { it.title }
+                TITLE_DESC -> books.sortedByDescending { it.title }
+                AUTHOR_ASC -> books.sortedBy { it.author }
+                AUTHOR_DESC -> books.sortedByDescending { it.author }
             }
         }
-
-    override fun getAllBooksStreamSortedByTitleAsc(): Flow<List<Book>> =
-        if (shouldReturnError) {
-            flow { throw IllegalStateException("error") }
-        } else {
-            booksFlow.map { books ->
-                books.sortedBy { it.title }
-            }
-        }
-
-    override fun getAllBooksStreamSortedByTitleDesc(): Flow<List<Book>> =
-        if (shouldReturnError) {
-            flow { throw IllegalStateException("error") }
-        } else {
-            booksFlow.map { books ->
-                books.sortedByDescending { it.title }
-            }
-        }
-
-    override fun getAllBooksStreamSortedByAuthorAsc(): Flow<List<Book>> =
-        if (shouldReturnError) {
-            flow { throw IllegalStateException("error") }
-        } else {
-            booksFlow.map { books ->
-                books.sortedBy { it.author }
-            }
-        }
-
-    override fun getAllBooksStreamSortedByAuthorDesc(): Flow<List<Book>> =
-        if (shouldReturnError) {
-            flow { throw IllegalStateException("error") }
-        } else {
-            booksFlow.map { books ->
-                books.sortedByDescending { it.author }
-            }
-        }
+    }
 
     override fun getBookDetailsStream(id: String): Flow<Book?> =
         if (shouldReturnError) {
