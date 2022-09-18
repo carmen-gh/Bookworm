@@ -4,13 +4,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -47,10 +48,11 @@ fun EnterBookScreen(
     }
 
     EnterBookContent(
+        modifier = Modifier.fillMaxWidth(),
         onClose = onUpNavigationClick,
         onSave = { viewModel.saveBook(it) },
-        onTitleValueChanged = viewModel::titleInputChanged,
-        showTitleError = (uiState.value is ErrorTitleMissing)
+        onTitleValueChange = viewModel::titleInputChanged,
+        showTitleError = uiState.value is ErrorTitleMissing
     )
 }
 
@@ -58,7 +60,7 @@ fun EnterBookScreen(
 fun EnterBookContent(
     onClose: () -> Unit,
     onSave: (Book) -> Unit,
-    onTitleValueChanged: () -> Unit,
+    onTitleValueChange: () -> Unit,
     showTitleError: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -75,7 +77,7 @@ fun EnterBookContent(
                 title = stringResource(R.string.book_enter_title),
                 onClose = { onClose() }
             ) {
-                Button(onClick = {
+                TextButton(onClick = {
                     onSave(
                         Book(
                             title = title,
@@ -88,7 +90,10 @@ fun EnterBookContent(
                         )
                     )
                 }) {
-                    Text(text = stringResource(id = R.string.button_save))
+                    Text(
+                        text = stringResource(id = R.string.button_save),
+                        color = MaterialTheme.colors.onPrimary
+                    )
                 }
             }
         }
@@ -110,7 +115,7 @@ fun EnterBookContent(
                     label = { Text(text = stringResource(R.string.book_title)) },
                     isError = showTitleError,
                     onValueChange = {
-                        onTitleValueChanged()
+                        onTitleValueChange()
                         title = it
                     }
                 )
@@ -175,7 +180,7 @@ fun AddBookScreenPreview() {
         EnterBookContent(
             onClose = {},
             onSave = {},
-            onTitleValueChanged = {},
+            onTitleValueChange = {},
             showTitleError = true,
             modifier = Modifier
                 .fillMaxSize()
