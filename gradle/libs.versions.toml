@@ -71,15 +71,15 @@ core = { module = "androidx.core:core-ktx", version.ref = "core" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 detekt-compose-plugin = { module = "ru.kode:detekt-rules-compose", version.ref = "detekt-compose" }
 detekt-formatting-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt-formatting" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
-firebase-app-check = { module = "com.google.firebase:firebase-appcheck-playintegrity" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx"}
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx"}
+firebase-app-check = { module = "com.google.firebase:firebase-appcheck-playintegrity" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
-hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
