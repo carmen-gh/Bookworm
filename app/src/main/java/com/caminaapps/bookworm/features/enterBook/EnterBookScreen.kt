@@ -72,6 +72,7 @@ fun EnterBookContent(
     var isFinished by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBarNavigationClose(
                 title = stringResource(R.string.book_enter_title),
@@ -97,8 +98,8 @@ fun EnterBookContent(
                 }
             }
         }
-    ) {
-        ConstraintLayout(modifier = modifier) {
+    ) { innerPadding ->
+        ConstraintLayout(modifier = Modifier.padding(innerPadding)) {
             val (inputColumn, checkboxColumn) = createRefs()
 
             Column(
