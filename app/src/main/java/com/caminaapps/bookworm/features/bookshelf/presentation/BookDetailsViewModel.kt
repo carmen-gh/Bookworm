@@ -7,6 +7,9 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.bookshelf.domain.DeleteBookUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookDetailsUseCase
 import com.caminaapps.bookworm.util.Result
+import com.caminaapps.bookworm.util.Result.Error
+import com.caminaapps.bookworm.util.Result.Loading
+import com.caminaapps.bookworm.util.Result.Success
 import com.caminaapps.bookworm.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -29,10 +32,10 @@ class BookViewModel @Inject constructor(
 
     val uiState: StateFlow<BookDetailsUiState> = bookStream.map { result ->
         when (result) {
-            is Result.Success -> result.data?.let { BookDetailsUiState.Success(it) }
+            is Success -> result.data?.let { BookDetailsUiState.Success(it) }
                 ?: BookDetailsUiState.NotFound
-            is Result.Loading -> BookDetailsUiState.Loading
-            is Result.Error -> BookDetailsUiState.Error
+            is Loading -> BookDetailsUiState.Loading
+            is Error -> BookDetailsUiState.Error
         }
     }.stateIn(
         scope = viewModelScope,

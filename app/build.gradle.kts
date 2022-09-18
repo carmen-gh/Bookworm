@@ -104,7 +104,7 @@ dependencies {
     implementation(libs.constraintlayout.compose)
     implementation(libs.core)
     implementation(libs.datastore.preferences)
-    implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
+    implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.app.check)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
@@ -112,6 +112,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.datetime)
+    implementation(libs.lifecycle.compose)
     implementation(libs.material)
     implementation(libs.mlkit.barcode.scanning)
     implementation(libs.navigation.compose)
@@ -151,6 +152,7 @@ dependencies {
 }
 
 detekt {
+    autoCorrect = true
     config = rootProject.files("config/detekt/detekt.yml")
     buildUponDefaultConfig = false
     ignoredBuildTypes = listOf("release")

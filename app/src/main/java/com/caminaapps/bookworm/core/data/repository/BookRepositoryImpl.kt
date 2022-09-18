@@ -20,7 +20,7 @@ class BookRepositoryImpl @Inject constructor(
 ) : BookRepository {
 
     override fun getAllBooksStream(sortOrder: BookshelfSortOrder): Flow<List<Book>> {
-        return when(sortOrder) {
+        return when (sortOrder) {
             DATE_ADDED_ASC -> bookDao.getAllBooksStreamSortedByDateAsc()
             DATE_ADDED_DESC -> bookDao.getAllBooksStreamSortedByDateDesc()
             TITLE_ASC -> bookDao.getAllBooksStreamSortedByTitleAsc()

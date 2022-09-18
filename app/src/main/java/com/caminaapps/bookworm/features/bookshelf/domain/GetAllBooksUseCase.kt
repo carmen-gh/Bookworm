@@ -16,7 +16,6 @@ class GetAllBooksUseCase @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     operator fun invoke(): Flow<List<Book>> =
         userPreferencesRepository.bookshelfSortOrder.flatMapLatest { sortOrder ->
-           bookRepository.getAllBooksStream(sortOrder)
+            bookRepository.getAllBooksStream(sortOrder)
         }
-
 }

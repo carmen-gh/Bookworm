@@ -10,12 +10,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BookDao {
+    @Query("SELECT * FROM book ORDER BY datetime(added_date) ASC")
+    fun getAllBooksStreamSortedByDateAsc(): Flow<List<BookEntity>>
 
     @Query("SELECT * FROM book ORDER BY datetime(added_date) DESC")
     fun getAllBooksStreamSortedByDateDesc(): Flow<List<BookEntity>>
-
-    @Query("SELECT * FROM book ORDER BY datetime(added_date) ASC")
-    fun getAllBooksStreamSortedByDateAsc(): Flow<List<BookEntity>>
 
     @Query("SELECT * FROM book ORDER BY title ASC")
     fun getAllBooksStreamSortedByTitleAsc(): Flow<List<BookEntity>>
