@@ -104,7 +104,7 @@ dependencies {
     implementation(libs.constraintlayout.compose)
     implementation(libs.core)
     implementation(libs.datastore.preferences)
-    implementation(platform("com.google.firebase:firebase-bom:30.4.0"))
+    implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
     implementation(libs.firebase.app.check)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
