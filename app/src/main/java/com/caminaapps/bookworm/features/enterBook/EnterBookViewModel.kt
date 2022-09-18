@@ -40,5 +40,5 @@ class EnterBookViewModel @Inject constructor(
 sealed interface EnterBookUiState {
     object EnterBookInfo : EnterBookUiState
     object BookSaved : EnterBookUiState
-    object ErrorTitleMissing: EnterBookUiState
+    object ErrorTitleMissing : EnterBookUiState
 }
