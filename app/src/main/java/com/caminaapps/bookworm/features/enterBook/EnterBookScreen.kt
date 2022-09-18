@@ -13,7 +13,6 @@ import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -26,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationClose
@@ -34,6 +35,7 @@ import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.BookSaved
 import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.ErrorTitleMissing
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun EnterBookScreen(
     viewModel: EnterBookViewModel = hiltViewModel(),
@@ -41,7 +43,7 @@ fun EnterBookScreen(
 ) {
     TrackedScreen(name = "Enter book")
 
-    val uiState = viewModel.uiState.collectAsState()
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     if (uiState.value is BookSaved) {
         onUpNavigationClick()
@@ -72,7 +74,6 @@ fun EnterBookContent(
     var isFinished by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
-        modifier = modifier,
         topBar = {
             TopAppBarNavigationClose(
                 title = stringResource(R.string.book_enter_title),
@@ -99,7 +100,7 @@ fun EnterBookContent(
             }
         }
     ) { innerPadding ->
-        ConstraintLayout(modifier = Modifier.padding(innerPadding)) {
+        ConstraintLayout(modifier = modifier.padding(innerPadding)) {
             val (inputColumn, checkboxColumn) = createRefs()
 
             Column(

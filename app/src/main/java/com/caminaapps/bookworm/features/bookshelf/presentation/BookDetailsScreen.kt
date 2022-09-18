@@ -14,7 +14,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,6 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
@@ -37,13 +38,14 @@ import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiStat
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Success
 import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun BookDetailsScreen(
     viewModel: BookViewModel = hiltViewModel(),
     onUpNavigationClick: () -> Unit,
 ) {
     TrackedScreen(name = "Book details")
-    val uiState: BookDetailsUiState by viewModel.uiState.collectAsState()
+    val uiState: BookDetailsUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     when (uiState) {
         is Loading -> FullScreenLoading()

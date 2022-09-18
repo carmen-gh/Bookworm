@@ -7,10 +7,16 @@ import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SaveBookFromOnlineSearchUseCase
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SearchBookByTitleUseCase
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.*
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Empty
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Error
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Loading
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.NoResults
+import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,8 +28,11 @@ class SearchForBookTitleViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<SearchForBookTitleUiState>(Empty)
-    val uiState: StateFlow<SearchForBookTitleUiState> = _uiState
-
+    val uiState: StateFlow<SearchForBookTitleUiState> = _uiState.stateIn(
+        scope = viewModelScope,
+        started = WhileSubscribed(5_000),
+        initialValue = Empty
+    )
 
     fun onQueryChanged() {
         _uiState.value = Empty
@@ -44,7 +53,7 @@ class SearchForBookTitleViewModel @Inject constructor(
                     true -> _uiState.update { NoResults }
                     false -> _uiState.update { Success(books = result) }
                 }
-            } catch(e: Throwable){
+            } catch (e: Throwable) {
                 _uiState.update { Error(message = R.string.error_general_text) }
             }
         }
@@ -56,11 +65,10 @@ class SearchForBookTitleViewModel @Inject constructor(
         }
     }
 
-    fun errorMessageShown() {
-        _uiState.update { Empty }
-    }
+//    fun errorMessageShown() {
+//        _uiState.update { Empty }
+//    }
 }
-
 
 sealed interface SearchForBookTitleUiState {
     object Empty : SearchForBookTitleUiState

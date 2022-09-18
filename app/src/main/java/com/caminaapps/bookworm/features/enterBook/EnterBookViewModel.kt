@@ -8,8 +8,9 @@ import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.EnterBookInfo
 import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.ErrorTitleMissing
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,7 +20,11 @@ class EnterBookViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var _uiState = MutableStateFlow<EnterBookUiState>(EnterBookInfo)
-    val uiState: StateFlow<EnterBookUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<EnterBookUiState> = _uiState.stateIn(
+        scope = viewModelScope,
+        started = WhileSubscribed(5_000),
+        initialValue = EnterBookInfo
+    )
 
     fun saveBook(book: Book) {
         viewModelScope.launch {

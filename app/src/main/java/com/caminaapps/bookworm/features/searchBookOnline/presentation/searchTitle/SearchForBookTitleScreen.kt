@@ -19,7 +19,6 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,6 +35,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarSlotNavigationUp
@@ -47,6 +48,7 @@ import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitl
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.NoResults
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Success
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun SearchForBookTitleScreen(
     onNavigateUp: () -> Unit,
@@ -57,23 +59,28 @@ fun SearchForBookTitleScreen(
     var query by remember { mutableStateOf("") }
 
     Scaffold(modifier = modifier, topBar = {
-        TopAppBarSlotNavigationUp(title = {
-            SimpleSearchBar(modifier = Modifier.padding(vertical = 4.dp),
-                onValueChange = {
-                    query = it
-                    viewModel.onQueryChanged()
-                },
-                value = query,
-                onSearchKeyboardAction = { viewModel.search(query) },
-                onResetValue = {
-                    query = ""
-                    viewModel.onQueryChanged()
-                })
-        }, onClick = {
-            onNavigateUp()
-        })
+        TopAppBarSlotNavigationUp(
+            title = {
+                SimpleSearchBar(
+                    modifier = Modifier.padding(vertical = 4.dp),
+                    onValueChange = {
+                        query = it
+                        viewModel.onQueryChanged()
+                    },
+                    value = query,
+                    onSearchKeyboardAction = { viewModel.search(query) },
+                    onResetValue = {
+                        query = ""
+                        viewModel.onQueryChanged()
+                    }
+                )
+            },
+            onClick = {
+                onNavigateUp()
+            }
+        )
     }) { innerPadding ->
-        val uiState: SearchForBookTitleUiState by viewModel.uiState.collectAsState()
+        val uiState: SearchForBookTitleUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         when (uiState) {
             is Empty -> OpenLibraryView(
@@ -84,12 +91,14 @@ fun SearchForBookTitleScreen(
             is Loading -> FullScreenLoading()
             is NoResults -> NoResults(query)
             is Success -> {
-                SearchResults(modifier = Modifier.padding(innerPadding),
+                SearchResults(
+                    modifier = Modifier.padding(innerPadding),
                     searchResults = (uiState as Success).books,
                     onResultClick = {
                         viewModel.onAddBook(it)
                         onNavigateUp()
-                    })
+                    }
+                )
             }
             is Error -> Text(text = stringResource((uiState as Error).message))
         }
@@ -131,7 +140,8 @@ fun SimpleSearchBar(
     // state show trailing icon derivedStateOf
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    TextField(value = value,
+    TextField(
+        value = value,
         onValueChange = onValueChange,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = {
@@ -139,17 +149,18 @@ fun SimpleSearchBar(
             keyboardController?.hide()
         }),
         trailingIcon = {
-            Icon(imageVector = Icons.Default.Close,
+            Icon(
+                imageVector = Icons.Default.Close,
                 contentDescription = null,
                 tint = MaterialTheme.colors.primary,
-                modifier = Modifier.clickable { onResetValue() })
+                modifier = Modifier.clickable { onResetValue() }
+            )
         },
         placeholder = {
             Text(
                 text = stringResource(R.string.search_placeholder),
                 color = MaterialTheme.colors.primary
             )
-
         },
         textStyle = MaterialTheme.typography.subtitle1,
         colors = TextFieldDefaults.textFieldColors(
