@@ -79,6 +79,11 @@ android {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
+
+    lint {
+        sarifReport = true
+        checkDependencies = true
+    }
 }
 
 // Allow references to generated code (room)
@@ -157,6 +162,13 @@ detekt {
     buildUponDefaultConfig = false
     ignoredBuildTypes = listOf("release")
 }
+
+tasks.detekt.configure {
+    reports {
+        sarif.required.set(true)
+    }
+}
+
 
 testlogger {
     theme = MOCHA
