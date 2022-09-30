@@ -25,11 +25,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Check static analysis with detekt
-        run: ./gradlew detekt --continue --no-daemon
-
-      - name: Check lint
-        run: ./gradlew lintDebug --continue --no-daemon
+      - name: Check static analysis with detekt and lint
+        run: ./gradlew detekt lintDebug --continue --no-daemon
 
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace --continue --no-daemon
