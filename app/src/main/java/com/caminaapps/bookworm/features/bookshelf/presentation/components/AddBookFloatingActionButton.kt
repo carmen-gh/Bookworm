@@ -1,6 +1,5 @@
 package com.caminaapps.bookworm.features.bookshelf.presentation.components
 
-
 import android.Manifest
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.ColumnScope
@@ -25,7 +24,6 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import timber.log.Timber
-
 
 @ExperimentalPermissionsApi
 @Composable
@@ -88,7 +86,6 @@ fun ColumnScope.CameraSpeedDialItem(onScan: () -> Unit) {
         )
     }
 }
-
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalPermissionsApi

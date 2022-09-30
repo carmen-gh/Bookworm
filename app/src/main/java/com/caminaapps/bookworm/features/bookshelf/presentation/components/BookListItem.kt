@@ -64,7 +64,6 @@ fun BookListItem(
                         color = Color.Gray // change to theme
                     )
                 }
-
             }
 
             if (isFinished) {

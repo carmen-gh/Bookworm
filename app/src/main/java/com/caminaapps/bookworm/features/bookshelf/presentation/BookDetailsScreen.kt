@@ -41,8 +41,8 @@ import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParamete
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun BookDetailsScreen(
-    viewModel: BookViewModel = hiltViewModel(),
     onUpNavigationClick: () -> Unit,
+    viewModel: BookViewModel = hiltViewModel(),
 ) {
     TrackedScreen(name = "Book details")
     val uiState: BookDetailsUiState by viewModel.uiState.collectAsStateWithLifecycle()

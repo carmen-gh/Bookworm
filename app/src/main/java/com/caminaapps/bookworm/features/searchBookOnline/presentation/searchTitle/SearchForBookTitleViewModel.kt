@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -54,6 +55,7 @@ class SearchForBookTitleViewModel @Inject constructor(
                     false -> _uiState.update { Success(books = result) }
                 }
             } catch (e: Throwable) {
+                Timber.e(e)
                 _uiState.update { Error(message = R.string.error_general_text) }
             }
         }

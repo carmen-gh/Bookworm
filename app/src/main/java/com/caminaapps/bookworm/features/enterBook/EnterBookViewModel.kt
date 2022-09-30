@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,6 +33,7 @@ class EnterBookViewModel @Inject constructor(
                 saveBookUseCase(book)
                 _uiState.value = BookSaved
             } catch (e: BookTitleMissing) {
+                Timber.d(e)
                 _uiState.value = ErrorTitleMissing
             }
         }

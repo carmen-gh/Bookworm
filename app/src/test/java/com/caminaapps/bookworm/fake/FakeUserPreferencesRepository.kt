@@ -15,5 +15,4 @@ class FakeUserPreferencesRepository : UserPreferencesRepository {
     }
 
     override val bookshelfSortOrder: Flow<BookshelfSortOrder> = flow
-
 }

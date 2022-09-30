@@ -38,8 +38,8 @@ import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.ErrorTitleMis
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun EnterBookScreen(
-    viewModel: EnterBookViewModel = hiltViewModel(),
     onUpNavigationClick: () -> Unit,
+    viewModel: EnterBookViewModel = hiltViewModel(),
 ) {
     TrackedScreen(name = "Enter book")
 

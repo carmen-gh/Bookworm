@@ -39,7 +39,7 @@ import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParamete
 fun SearchResults(
     searchResults: List<Book>,
     onResultClick: (Book) -> Unit,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         Text(
@@ -201,6 +201,5 @@ private fun SearchResultPreview(
 fun NoResultPreview() {
     BookwormTheme {
         NoResults(query = "foobar")
-
     }
 }

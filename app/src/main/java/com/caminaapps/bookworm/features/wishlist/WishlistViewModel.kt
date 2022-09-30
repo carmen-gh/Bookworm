@@ -5,6 +5,4 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class WishlistViewModel @Inject constructor(
-
-) : ViewModel()
+class WishlistViewModel @Inject constructor() : ViewModel()

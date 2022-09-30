@@ -9,7 +9,6 @@ import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderF
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
-
 @HiltAndroidApp
 class BookwormApplication : Application() {
     override fun onCreate() {

@@ -73,5 +73,4 @@ class FakeBookRepository : BookRepository {
         }
         booksFlow.emit(newList)
     }
-
 }

@@ -40,7 +40,7 @@ class BookshelfViewModel @Inject constructor(
 
     private fun subscribeToBookshelfSortOrder() {
         viewModelScope.launch {
-            getBookshelfSortOrder().collect() {
+            getBookshelfSortOrder().collect {
                 uiState = uiState.copy(sortOrder = it)
             }
         }
@@ -51,7 +51,6 @@ class BookshelfViewModel @Inject constructor(
             updateBookshelfSortOrder(sortOrder)
         }
     }
-
 
     // fun onItemDelet(id: String) {
     //     viewModelScope.launch {

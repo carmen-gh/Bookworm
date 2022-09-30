@@ -46,7 +46,8 @@ fun CameraPreview(
                     .build()
                     .also { imageAnalysis ->
                         imageAnalysis.setAnalyzer(
-                            executor, BarcodeAnalyzer(onBarcodeDetected = { barcodes ->
+                            executor,
+                            BarcodeAnalyzer(onBarcodeDetected = { barcodes ->
                                 barcodes.first().displayValue?.let { barcode ->
                                     if (cachedBarcode != barcode) {
                                         cachedBarcode = barcode
