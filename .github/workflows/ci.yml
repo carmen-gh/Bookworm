@@ -26,7 +26,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build app variants
-        uses: ./gradlew assemble --stacktrace
+        run: ./gradlew assemble --stacktrace
 
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace --no-daemon
