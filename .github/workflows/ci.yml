@@ -8,7 +8,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  qa:
     runs-on: ubuntu-latest
 
     steps:
