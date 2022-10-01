@@ -25,11 +25,15 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Check static analysis with detekt and lint
-        run: ./gradlew detekt lintDebug --continue --no-daemon
+      - name: Build app variants
+        uses: ./gradlew assemble --stacktrace
 
       - name: Run unit tests
-        run: ./gradlew testDebugUnitTest --stacktrace --continue --no-daemon
+        run: ./gradlew testDebugUnitTest --stacktrace --no-daemon
+
+      - name: Check static analysis with detekt and lint
+        run: ./gradlew detekt lintDebug --continue --no-daemon
+        if: always()
 
       - name: Upload detekt report
         uses: github/codeql-action/upload-sarif@v2
