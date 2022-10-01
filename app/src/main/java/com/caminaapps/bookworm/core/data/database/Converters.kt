@@ -10,5 +10,4 @@ object Converters {
 
     @TypeConverter
     fun instantToLong(instant: Instant?): Long? = instant?.toEpochMilliseconds()
-
 }

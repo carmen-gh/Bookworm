@@ -27,5 +27,4 @@ class UserPreferencesRepositoryImpl @Inject constructor(
                 preferences[bookshelfSortOrderKey] ?: BookshelfSortOrder.getDefault().name
             BookshelfSortOrder.valueOf(sortOrder)
         }
-
 }

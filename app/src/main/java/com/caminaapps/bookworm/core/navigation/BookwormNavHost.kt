@@ -44,14 +44,12 @@ fun BookwormNavHost(
         }
 
         composable(Screen.BookDetail.route) {
-            BookDetailsScreen {
-                navController.navigateUp()
-            }
+            BookDetailsScreen(onUpNavigationClick = navController::navigateUp)
         }
 
         composable(Screen.SearchIsbnBookResult.route) {
             BookBarcodeResultScreen(
-                onCloseScreen = { navController.navigateUp() },
+                onCloseScreen = navController::navigateUp,
                 onScanBarcode = {
                     navController.navigate(Screen.Camera.createRoute()) {
                         popUpTo(Screen.SearchIsbnBookResult.route) { inclusive = true }
@@ -62,7 +60,7 @@ fun BookwormNavHost(
 
         composable(Screen.Camera.route) {
             CameraScreen(
-                onClose = { navController.navigateUp() },
+                onClose = navController::navigateUp,
                 onBarcodeDetection = { isbn ->
                     navController.navigate(Screen.SearchIsbnBookResult.createRoute(isbn)) {
                         popUpTo(Screen.Camera.route) { inclusive = true }
@@ -72,11 +70,11 @@ fun BookwormNavHost(
         }
 
         composable(Screen.SearchBookByTitle.route) {
-            SearchForBookTitleScreen(onNavigateUp = { navController.navigateUp() })
+            SearchForBookTitleScreen(onNavigateUp = navController::navigateUp)
         }
 
         composable(Screen.EnterBook.route) {
-            EnterBookScreen(onUpNavigationClick = { navController.navigateUp() })
+            EnterBookScreen(onUpNavigationClick = navController::navigateUp)
         }
 
         // Wishlist -----------------------------------------------------------------------------------

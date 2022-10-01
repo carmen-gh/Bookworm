@@ -88,7 +88,7 @@ fun BookItemPreview() {
         BookListItem(
             title = "Die 7 Wege zur Effektivität - Workbook",
             author = "Stephen R. Covey",
-            imageUrl = "https://books.google.com/books/content?id=f94S3a1SzvoC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+            imageUrl = "https://tinyurl.com/yv8t5scy",
             isFinished = true,
             onClick = {}
         )

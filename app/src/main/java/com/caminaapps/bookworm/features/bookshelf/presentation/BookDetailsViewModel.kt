@@ -27,8 +27,6 @@ class BookViewModel @Inject constructor(
     private val deleteBook: DeleteBookUseCase
 ) : ViewModel() {
 
-    val Test = "test"
-
     private val bookId: String = checkNotNull(savedStateHandle["bookId"])
     private val bookStream: Flow<Result<Book?>> = getBookDetails(bookId).asResult()
 

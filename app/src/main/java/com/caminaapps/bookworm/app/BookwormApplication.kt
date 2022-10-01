@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.app
 
 import android.app.Application
-import com.caminaapps.bookworm.util.CrashReportingTree
+import com.caminaapps.bookworm.util.CrashlyticsLogging
 import com.google.firebase.BuildConfig
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
@@ -21,7 +21,7 @@ class BookwormApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         } else {
-            Timber.plant(CrashReportingTree())
+            Timber.plant(CrashlyticsLogging())
         }
     }
 
