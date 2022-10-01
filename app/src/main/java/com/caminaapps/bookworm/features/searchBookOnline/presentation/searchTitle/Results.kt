@@ -39,7 +39,7 @@ import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParamete
 fun SearchResults(
     searchResults: List<Book>,
     onResultClick: (Book) -> Unit,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         Text(
@@ -72,7 +72,9 @@ private fun SearchResult(
             .fillMaxWidth()
             .padding(horizontal = 24.dp)
     ) {
-        val (divider, image, name, tag, priceSpacer, price, add) = createRefs()
+        val (divider, image, name) = createRefs()
+        val (tag, priceSpacer, price) = createRefs()
+        val add = createRef()
         createVerticalChain(name, tag, priceSpacer, price, chainStyle = ChainStyle.Packed)
         if (showDivider) {
             Divider(
@@ -201,6 +203,5 @@ private fun SearchResultPreview(
 fun NoResultPreview() {
     BookwormTheme {
         NoResults(query = "foobar")
-
     }
 }

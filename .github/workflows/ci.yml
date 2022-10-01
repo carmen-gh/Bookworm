@@ -1,4 +1,4 @@
-name: Run tests
+name: continuous integration
 
 on:
   pull_request:
@@ -8,11 +8,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  qa:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up JDK 11
@@ -25,14 +25,29 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Check static analysis with detekt
-        run: ./gradlew detekt --continue --no-daemon
-
-      - name: Check lint
-        run: ./gradlew lintDebug --stacktrace
+      - name: Build app variants
+        run: ./gradlew assemble --stacktrace
 
       - name: Run unit tests
-        run: ./gradlew testDebugUnitTest --stacktrace --continue --no-daemon
+        run: ./gradlew testDebugUnitTest --stacktrace --no-daemon
+
+      - name: Check static analysis with detekt and lint
+        run: ./gradlew detekt lintDebug --continue --no-daemon
+        if: always()
+
+      - name: Upload detekt report
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: app/build/reports/detekt/detekt.sarif
+          category: detekt
+
+      - name: Upload lint report
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: app/build/reports/lint-results-debug.sarif
+          category: lint
 
 
   android_tests:

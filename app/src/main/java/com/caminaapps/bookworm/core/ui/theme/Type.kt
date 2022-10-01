@@ -101,7 +101,6 @@ val Typography = Typography(
     ),
 )
 
-
 @Preview(name = "Typography test", widthDp = 720, showBackground = true)
 @Composable
 fun TypographyThemeTest() {

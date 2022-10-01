@@ -34,6 +34,7 @@ class BookViewModel @Inject constructor(
         when (result) {
             is Success -> result.data?.let { BookDetailsUiState.Success(it) }
                 ?: BookDetailsUiState.NotFound
+
             is Loading -> BookDetailsUiState.Loading
             is Error -> BookDetailsUiState.Error
         }

@@ -38,9 +38,9 @@ import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParamete
 
 @Composable
 fun BookBarcodeResultScreen(
-    viewModel: BookBarcodeResultViewModel = hiltViewModel(),
     onCloseScreen: () -> Unit,
-    onScanBarcode: () -> Unit
+    onScanBarcode: () -> Unit,
+    viewModel: BookBarcodeResultViewModel = hiltViewModel(),
 ) {
     Scaffold(
         topBar = {
@@ -85,7 +85,7 @@ fun BookResultContent(
     book: Book,
     onSaveClick: () -> Unit,
     onSaveAndScanClick: () -> Unit,
-    modifier: Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

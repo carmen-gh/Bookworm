@@ -8,7 +8,6 @@ import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SaveBookFromOnlineSearchUseCase
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SearchBookByTitleUseCase
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Empty
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Error
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Loading
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.NoResults
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Success
@@ -19,6 +18,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import timber.log.Timber
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,8 +55,12 @@ class SearchForBookTitleViewModel @Inject constructor(
                     true -> _uiState.update { NoResults }
                     false -> _uiState.update { Success(books = result) }
                 }
-            } catch (e: Throwable) {
-                _uiState.update { Error(message = R.string.error_general_text) }
+            } catch (e: HttpException) {
+                Timber.e(e)
+                _uiState.update { SearchForBookTitleUiState.Error(message = R.string.error_general_text) }
+            } catch (e: IOException) {
+                Timber.e(e)
+                _uiState.update { SearchForBookTitleUiState.Error(message = R.string.error_network_issue) }
             }
         }
     }

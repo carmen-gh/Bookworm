@@ -33,10 +33,8 @@ class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
         )
     )
 
-
     override suspend fun getBookByISBN(isbn: String): Book? =
         if (shouldReturnResult) searchResultByIsbn else null
-
 
     override suspend fun getBooksByTitle(title: String): List<Book> =
         if (shouldReturnResult) {
@@ -44,5 +42,4 @@ class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
         } else {
             emptyList()
         }
-
 }

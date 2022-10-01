@@ -98,7 +98,6 @@ class BookViewModelTest {
     }
 }
 
-
 private val testInputBookNotMatching =
     Book(
         id = "different id",

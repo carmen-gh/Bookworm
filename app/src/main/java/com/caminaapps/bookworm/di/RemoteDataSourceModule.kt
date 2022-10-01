@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.di
 
+import com.caminaapps.bookworm.core.data.network.NetworkLogging
 import com.caminaapps.bookworm.core.data.network.OpenLibraryAPI
-import com.caminaapps.bookworm.core.data.network.interceptor.LoggingInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -47,7 +47,7 @@ object RemoteDataSourceModule {
     }
 
     @Provides
-    fun provideHttpLoggingInterceptor(loggingInterceptor: LoggingInterceptor): HttpLoggingInterceptor {
+    fun provideHttpLoggingInterceptor(loggingInterceptor: NetworkLogging): HttpLoggingInterceptor {
         val interceptor = HttpLoggingInterceptor(loggingInterceptor)
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor

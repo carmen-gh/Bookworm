@@ -1,6 +1,8 @@
 package com.caminaapps.bookworm.app
 
 import android.app.Application
+import com.caminaapps.bookworm.util.CrashlyticsLogging
+import com.google.firebase.BuildConfig
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
@@ -16,7 +18,11 @@ class BookwormApplication : Application() {
     }
 
     private fun initLogger() {
-        Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            Timber.plant(CrashlyticsLogging())
+        }
     }
 
     private fun initAppCheck() {
