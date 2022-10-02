@@ -18,6 +18,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.test.logger)
+    alias(libs.plugins.kover)
 }
 
 apply(plugin = "com.google.firebase.crashlytics")
@@ -166,6 +167,32 @@ detekt {
 tasks.detekt.configure {
     reports {
         sarif.required.set(true)
+    }
+}
+
+kover {
+    instrumentation {
+        excludeTasks.add("testReleaseUnitTest")
+    }
+
+    filters {
+        classes {
+            excludes += listOf(
+                "dagger.hilt.internal.aggregatedroot.codegen.*",
+                "hilt_aggregated_deps.*",
+                "com.caminaapps.bookworm.di.*",
+                "com.caminaapps.bookworm.core.ui.theme.*",
+                "com.caminaapps.bookworm.core.ui.icon.*",
+                "com.caminaapps.bookworm.util.previewParameterProvider.*",
+                "*CrashlyticsLogging",
+                "*CoroutineScopeExt",
+                "*BookwormDispatchers",
+                "*ComposableSingletons",
+                "*Hilt_*",
+                "*BuildConfig",
+                ".*_Factory.*",
+            )
+        }
     }
 }
 

@@ -24,6 +24,7 @@ google-service-plugin = "4.3.14"
 hilt = "2.44"
 hilt-navigation-compose = "1.0.0"
 junit = "4.13.2"
+kover = "0.6.0"
 kotlin = "1.7.10"
 kotlin-kapt = "1.7.0"
 kotlinx-coroutines = "1.6.4"
@@ -112,3 +113,4 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 test-logger = { id = "com.adarshr.test-logger", version.ref = "test-logger" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
