@@ -184,15 +184,19 @@ kover {
                 "com.caminaapps.bookworm.core.ui.theme.*",
                 "com.caminaapps.bookworm.core.ui.icon.*",
                 "com.caminaapps.bookworm.util.previewParameterProvider.*",
+                "com.caminaapps.bookworm.*.*_Impl*",
+                "com.caminaapps.bookworm.*.*_Factory*",
                 "*CrashlyticsLogging",
-                "*CoroutineScopeExt",
+                "*CoroutineScopeExt*",
                 "*BookwormDispatchers",
-                "*ComposableSingletons",
+                "*ComposableSingletons*",
+                "*_HiltModules*",
                 "*Hilt_*",
                 "*BuildConfig",
                 ".*_Factory.*",
             )
         }
+
     }
 }
 
