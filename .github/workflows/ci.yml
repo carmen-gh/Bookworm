@@ -55,6 +55,18 @@ jobs:
           sarif_file: app/build/reports/lint-results-debug.sarif
           category: lint
 
+      - name: Generate kover coverage report
+        run: ./gradlew koverXmlReport
+
+      - name: Upload coverage report to PR
+        id: kover
+        uses: mi-kas/kover-report@v1
+        with:
+          path: ${{ github.workspace }}/build/reports/kover/report.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: Code Coverage
+          update-comment: true
+
 
   android_tests:
     runs-on: macos-latest
