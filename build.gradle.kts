@@ -24,8 +24,34 @@ plugins {
     alias(libs.plugins.kotlin.serialization).apply(false)
     alias(libs.plugins.detekt).apply(false)
     alias(libs.plugins.kotlin.kapt).apply(false)
+    alias(libs.plugins.kover).apply(true)
 }
+
+
 
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
+}
+
+koverMerged {
+    enable()
+    filters {
+        classes {
+            excludes += listOf(
+                "dagger.hilt.internal.aggregatedroot.codegen.*",
+                "hilt_aggregated_deps.*",
+                "com.caminaapps.bookworm.di.*",
+                "com.caminaapps.bookworm.core.ui.theme.*",
+                "com.caminaapps.bookworm.core.ui.icon.*",
+                "com.caminaapps.bookworm.util.previewParameterProvider.*",
+                "*CrashlyticsLogging",
+                "*CoroutineScopeExt",
+                "*BookwormDispatchers",
+                "*ComposableSingletons",
+                "*Hilt_*",
+                "*BuildConfig",
+                ".*_Factory.*",
+            )
+        }
+    }
 }

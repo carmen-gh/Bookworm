@@ -36,4 +36,5 @@ class BookwormBottomNavigationTest {
 
         composeTestRule.onNodeWithTag(BottomNavigationScreen.Bookshelf.route).assertIsDisplayed()
     }
+
 }

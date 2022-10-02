@@ -31,6 +31,12 @@ jobs:
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace --no-daemon
 
+      - name: Publish Test Report Unit Tests
+        uses: mikepenz/action-junit-report@v3
+        if: always()
+        with:
+          report_paths: 'app/build/test-results/testDebugUnitTest/TEST-*.xml'
+
       - name: Check static analysis with detekt and lint
         run: ./gradlew detekt lintDebug --continue --no-daemon
         if: always()
@@ -48,6 +54,18 @@ jobs:
         with:
           sarif_file: app/build/reports/lint-results-debug.sarif
           category: lint
+
+      - name: Generate kover coverage report
+        run: ./gradlew koverXmlReport
+
+      - name: Upload coverage report to PR
+        id: kover
+        uses: mi-kas/kover-report@v1
+        with:
+          path: app/build/reports/kover/xml/report.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: Code Coverage
+          update-comment: true
 
 
   android_tests:
@@ -71,3 +89,10 @@ jobs:
         with:
           api-level: 29
           script: ./gradlew connectedAndroidTest --continue --no-daemon
+
+      - name: Publish Test Report of Instrumentation Tests
+        uses: mikepenz/action-junit-report@v3
+        if: always()
+        with:
+          check_name: 'Instrumentation Test Report'
+          report_paths: 'app/build/outputs/androidTest-results/connected/TEST-*.xml'
