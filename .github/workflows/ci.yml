@@ -31,6 +31,12 @@ jobs:
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace --no-daemon
 
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v3
+        if: always()
+        with:
+          report_paths: 'app/build/reports/tests/testDebugUnitTest/TEST-*.xml'
+
       - name: Check static analysis with detekt and lint
         run: ./gradlew detekt lintDebug --continue --no-daemon
         if: always()
