@@ -19,7 +19,7 @@ class ExampleUnitTest {
 
     @Test
     fun on_isCorrect() {
-        assertThat(4).isEqualTo(2 + 2)
+        assertThat(4).isEqualTo(2 + 3)
         assertThat("hello").isEqualTo("hello")
         assertThat(false).isFalse()
     }
