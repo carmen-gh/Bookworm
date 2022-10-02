@@ -2,7 +2,6 @@ package com.caminaapps.bookworm
 
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
@@ -38,11 +37,4 @@ class BookwormBottomNavigationTest {
         composeTestRule.onNodeWithTag(BottomNavigationScreen.Bookshelf.route).assertIsDisplayed()
     }
 
-    @Test
-    fun doSomethingFailing() {
-        composeTestRule.onRoot().printToLog("TAG")
-        composeTestRule.onRoot(useUnmergedTree = true).printToLog("TAG")
-
-        composeTestRule.onNodeWithTag(BottomNavigationScreen.Bookshelf.route).assertIsNotDisplayed()
-    }
 }
