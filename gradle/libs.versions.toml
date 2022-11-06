@@ -1,6 +1,5 @@
 [versions]
 accompanist = "0.27.0"
-activity-compose = "1.6.1"
 android-gradle-plugin = "7.3.1"
 android-test = "1.4.0"
 android-test-ext = "1.4.0"
@@ -9,9 +8,9 @@ appcompat = "1.5.1"
 assertk = "0.25"
 camerax = "1.1.0"
 coil-compose = "2.2.2"
-compose = "1.3.0"
-compose-compiler = "1.3.0"
 constraintlayout-compose = "1.0.1"
+compose-bom ="2022.10.00"
+compose-compiler = "1.3.2"
 core = "1.9.0"
 datastore = "1.0.0"
 detekt = "1.21.0"
@@ -24,15 +23,14 @@ google-service-plugin = "4.3.14"
 hilt = "2.44"
 hilt-navigation-compose = "1.0.0"
 junit = "4.13.2"
-kover = "0.6.1"
-kotlin = "1.7.10"
+kotlin = "1.7.20"
 kotlin-kapt = "1.7.0"
 kotlinx-coroutines = "1.6.4"
 kotlinx-datetime = "0.4.0"
 kotlinx-serialization = "1.4.1"
-ksp = "1.7.10-1.0.6"
+kover = "0.6.1"
+ksp = "1.7.20-1.0.8"
 lifecycle-compose = "2.6.0-alpha03"
-material = "1.6.1"
 mlkit-barcode-scanning = '17.0.2'
 navigation-compose = "2.5.3"
 okhttp3-logging = "4.10.0"
@@ -48,7 +46,7 @@ turbine = "0.12.1"
 accompanist-permission = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+activity-compose = { module = "androidx.activity:activity-compose" }
 android-test-core = { module = "androidx.test:core-ktx", version.ref = "android-test" }
 android-test-ext-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "android-test-ext_junit" }
 android-test-rules = { module = "androidx.test:rules", version.ref = "android-test" }
@@ -59,14 +57,15 @@ camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cam
 camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
 camera-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
-compose-material-icons = { module = "androidx.compose.material:material-icons-core", version.ref = "compose" }
-compose-test = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
-compose-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
-compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom"}
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-material = { module = "androidx.compose.material:material" }
+compose-material-icons = { module = "androidx.compose.material:material-icons-core" }
+compose-test = { module = "androidx.compose.ui:ui-test-junit4" }
+compose-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-ui = { module = "androidx.compose.ui:ui" }
 constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
 core = { module = "androidx.core:core-ktx", version.ref = "core" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
@@ -86,7 +85,6 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-compose" }
-material = { module = "com.google.android.material:material", version.ref = "material" }
 mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkit-barcode-scanning" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 okhttp3-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3-logging" }
