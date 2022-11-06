@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package com.caminaapps.bookworm.features.bookshelf.presentation
 
 import android.annotation.SuppressLint
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
@@ -35,16 +38,20 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
 import com.caminaapps.bookworm.core.ui.component.TrackedScreen
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Error
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Loading
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Success
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.AddBookFloatingActionButton
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.BookList
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import timber.log.Timber
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @ExperimentalComposeUiApi
 @ExperimentalPermissionsApi
 @Composable
@@ -57,6 +64,7 @@ fun BookshelfScreen(
 ) {
     TrackedScreen(name = "Bookshelf")
     var sortingMenuExpanded by remember { mutableStateOf(false) }
+    val uiState: BookshelfUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Box(
         modifier = Modifier
@@ -66,7 +74,7 @@ fun BookshelfScreen(
     ) {
         SortingDropDownMenu(
             expanded = sortingMenuExpanded,
-            selectedItem = viewModel.uiState.sortOrder,
+            selectedItem = (uiState as? Success)?.sortOrder,
             onSelectedItem = {
                 sortingMenuExpanded = false
                 viewModel.updateSortOrder(it)
@@ -99,16 +107,16 @@ fun BookshelfScreen(
             )
         }
     ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            when (uiState) {
+                is Success -> BooksContent(
+                    books = (uiState as Success).books,
+                    onBookClick = onBookClick
+                )
 
-        if (viewModel.uiState.books.isNotEmpty()) {
-            Timber.d("books count: ${viewModel.uiState.books.count()}")
-            BookList(
-                modifier = Modifier.padding(innerPadding),
-                books = viewModel.uiState.books,
-                onItemClick = onBookClick,
-            )
-        } else {
-            Text("add some books to get started")
+                is Loading -> CircularProgressIndicator()
+                is Error -> Text(stringResource(R.string.error_general_text))
+            }
         }
     }
 }
@@ -116,7 +124,7 @@ fun BookshelfScreen(
 @Composable
 fun SortingDropDownMenu(
     expanded: Boolean,
-    selectedItem: BookshelfSortOrder,
+    selectedItem: BookshelfSortOrder?,
     onSelectedItem: (BookshelfSortOrder) -> Unit,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
@@ -151,6 +159,24 @@ fun SortingDropDownMenu(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun BooksContent(
+    books: List<Book>,
+    onBookClick: (id: Book) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Box(modifier = modifier) {
+        if (books.isEmpty()) {
+            Text("add some books to get started")
+        } else {
+            BookList(
+                books = books,
+                onItemClick = onBookClick,
+            )
         }
     }
 }

@@ -1,17 +1,21 @@
 package com.caminaapps.bookworm.features.bookshelf.presentation
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
-import com.caminaapps.bookworm.core.model.UserMessage
 import com.caminaapps.bookworm.features.bookshelf.domain.GetAllBooksUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrderUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.UpdateBookshelfSortOrderUseCase
+import com.caminaapps.bookworm.util.Result
+import com.caminaapps.bookworm.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,28 +26,27 @@ class BookshelfViewModel @Inject constructor(
     private val updateBookshelfSortOrder: UpdateBookshelfSortOrderUseCase
 ) : ViewModel() {
 
-    var uiState by mutableStateOf(BookshelfUiState())
-        private set
+    val uiState: StateFlow<BookshelfUiState> = uiStream()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = BookshelfUiState.Loading
+        )
 
-    init {
-        subscribeToBookshelfSortOrder()
-        subscribeToBooks()
-    }
+    private fun uiStream(): Flow<BookshelfUiState> {
+        return combine(getAllBooks(), getBookshelfSortOrder(), ::Pair)
+            .asResult()
+            .map { result ->
+                when (result) {
+                    is Result.Success -> {
+                        val (books, sortOrder) = result.data
+                        BookshelfUiState.Success(books, sortOrder)
+                    }
 
-    private fun subscribeToBooks() {
-        viewModelScope.launch {
-            getAllBooks().collect { bookList ->
-                uiState = uiState.copy(books = bookList)
+                    is Result.Loading -> BookshelfUiState.Loading
+                    is Result.Error -> BookshelfUiState.Error
+                }
             }
-        }
-    }
-
-    private fun subscribeToBookshelfSortOrder() {
-        viewModelScope.launch {
-            getBookshelfSortOrder().collect {
-                uiState = uiState.copy(sortOrder = it)
-            }
-        }
     }
 
     fun updateSortOrder(sortOrder: BookshelfSortOrder) {
@@ -52,15 +55,15 @@ class BookshelfViewModel @Inject constructor(
         }
     }
 
-    // fun onItemDelet(id: String) {
-    //     viewModelScope.launch {
-    //         deleteBookUseCase(id)
-    //     }
-    // }
+//     fun onItemDelet(id: String) {
+//         viewModelScope.launch {
+//             deleteBookUseCase(id)
+//         }
+//     }
 }
 
-data class BookshelfUiState(
-    val books: List<Book> = emptyList(),
-    val sortOrder: BookshelfSortOrder = BookshelfSortOrder.getDefault(),
-    val userMessages: List<UserMessage> = emptyList()
-)
+sealed interface BookshelfUiState {
+    data class Success(val books: List<Book>, val sortOrder: BookshelfSortOrder) : BookshelfUiState
+    object Error : BookshelfUiState
+    object Loading : BookshelfUiState
+}
