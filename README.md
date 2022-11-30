@@ -22,6 +22,7 @@ An app to keep an overview of all your books.
 - Google Analytics
 - Goolge Crashlytics
 - Google AppCheck
+- Code coverage report with Kover
 
 ## Architecture
 
