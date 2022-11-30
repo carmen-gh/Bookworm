@@ -79,7 +79,8 @@ fun SpeedDialFloatingActionButton(
             onClick = {
                 expanded = !expanded
                 onClick()
-            }, content = icon
+            },
+            content = icon
         )
     }
 }
