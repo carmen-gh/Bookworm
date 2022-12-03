@@ -24,7 +24,6 @@ fun BookwormNavHost(
     modifier: Modifier = Modifier
 ) {
     NavHost(navController, startDestination = BottomNavigationScreen.Bookshelf.route, modifier) {
-
         // Bookshelf -------------------------------------------------------------------------------
         composable(BottomNavigationScreen.Bookshelf.route) {
             BookshelfScreen(

@@ -17,11 +17,12 @@ An app to keep an overview of all your books.
 - CameraX
 - DataStore
 - MLKit detecting Barcodes
-- Static code analysis (with detekt)
 - Gradle setup with Kotlin DSL and Gradle version catalog
 - Google Analytics
 - Goolge Crashlytics
 - Google AppCheck
+- Code coverage report with Kover
+- Static analysis with Detekt
 
 ## Architecture
 

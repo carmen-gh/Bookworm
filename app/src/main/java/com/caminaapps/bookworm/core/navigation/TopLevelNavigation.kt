@@ -20,7 +20,6 @@ fun BookwormBottomNavigation(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-
     val bottomNavigationItems = listOf(
         BottomNavigationScreen.Bookshelf,
         BottomNavigationScreen.Wishlist,

@@ -50,7 +50,8 @@ fun IconTextField(
 fun IconTextField_Preview() {
     BookwormTheme {
         IconTextField(
-            value = "", onValueChange = {},
+            value = "",
+            onValueChange = {},
             label = R.string.textfield_label_author,
             imageResource = R.drawable.ic_baseline_book_24
         )
