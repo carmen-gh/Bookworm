@@ -1,16 +1,9 @@
 package com.caminaapps.bookworm.features.bookshelf.presentation
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
@@ -32,10 +25,7 @@ import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationUp
 import com.caminaapps.bookworm.core.ui.component.TrackedScreen
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Error
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Loading
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.NotFound
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Success
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.*
 import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
@@ -69,6 +59,8 @@ fun BookContent(
     onDeleteBookClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val scrollState = rememberScrollState()
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -89,7 +81,8 @@ fun BookContent(
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             AsyncImage(
