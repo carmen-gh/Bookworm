@@ -2,10 +2,9 @@ package com.caminaapps.bookworm.core.data.database
 
 import androidx.room.Dao
 import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import androidx.room.Update
+import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -31,7 +30,7 @@ interface BookDao {
     @Query("SELECT * FROM book WHERE id = :bookId")
     fun getBookStream(bookId: String): Flow<BookEntity?>
 
-    @Insert(onConflict = REPLACE)
+    @Upsert
     suspend fun insertBook(book: BookEntity)
 
     @Update
