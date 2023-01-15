@@ -1,13 +1,7 @@
 package com.caminaapps.bookworm.features.bookshelf.presentation.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
@@ -75,8 +69,8 @@ fun BookListItem(
                 Image(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
-                        .padding(8.dp),
-                    painter = painterResource(id = R.drawable.ic_baseline_check_circle_24),
+                        .padding(16.dp),
+                    painter = painterResource(id = R.drawable.ic_baseline_task_24),
                     contentDescription = "circle done",
                     colorFilter = ColorFilter.tint(MaterialTheme.colors.secondary)
                 )
