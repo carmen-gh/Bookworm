@@ -38,7 +38,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.model.Book
@@ -51,7 +50,6 @@ import com.caminaapps.bookworm.features.bookshelf.presentation.components.AddBoo
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.BookList
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @ExperimentalComposeUiApi
 @ExperimentalPermissionsApi
 @Composable

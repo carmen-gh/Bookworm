@@ -35,7 +35,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.component.FullScreenLoading
@@ -48,7 +47,6 @@ import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitl
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.NoResults
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Success
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun SearchForBookTitleScreen(
     onNavigateUp: () -> Unit,

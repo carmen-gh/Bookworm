@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.model.Book
@@ -35,7 +34,6 @@ import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.BookSaved
 import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.ErrorTitleMissing
 
-@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun EnterBookScreen(
     onUpNavigationClick: () -> Unit,

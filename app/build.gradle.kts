@@ -113,7 +113,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.app.check)
     implementation(libs.firebase.crashlytics)
-    implementation(libs.hilt)
+    implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
