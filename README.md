@@ -19,13 +19,13 @@ An app to keep an overview of all your books.
 - MLKit detecting Barcodes
 - Gradle setup with Kotlin DSL and Gradle version catalog
 - Google Analytics
-- Goolge Crashlytics
+- Google Crashlytics
 - Google AppCheck
 - Code coverage report with Kover
 - Static analysis with Detekt
 
 ## Architecture
 
-- Following Google Architecure Guide
+- Following Google Architecture Guide
 - Data, Domain, Presentation layers approach
 - Unidirectional DataFlow  
