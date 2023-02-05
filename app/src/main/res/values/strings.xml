@@ -17,10 +17,6 @@
     <string name="button_maybe_later">Maybe later</string>
     <string name="camera_permission_title">Scan barcodes</string>
     <string name="camera_permission_text">To be able to scan the barcodes on a book, the bookworm app needs Manifest.permission to access your camera.</string>
-    <string name="textfield_label_title">Title</string>
-    <string name="textfield_label_subtitle">Subtitle</string>
-    <string name="textfield_label_author">Author</string>
-    <string name="textfield_label_published_date">Published</string>
     <string name="text_search_no_result">No results found</string>
     <string name="error_general_text">Ups, something went wrong</string>
     <string name="error_network_issue">Ups, something went wrong. Check your internet connection</string>

@@ -3,13 +3,13 @@ package com.caminaapps.bookworm.features.bookshelf.domain
 import com.caminaapps.bookworm.core.data.repository.BookRepository
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
-import com.caminaapps.bookworm.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
+
 import javax.inject.Inject
 
 class SearchBookshelfUseCase @Inject constructor(
