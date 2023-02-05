@@ -2,16 +2,32 @@ package com.caminaapps.bookworm.features.bookshelf.domain
 
 import com.caminaapps.bookworm.core.data.repository.BookRepository
 import com.caminaapps.bookworm.core.model.Book
-import com.caminaapps.bookworm.core.model.BookshelfSortOrder.TITLE_ASC
-import kotlinx.coroutines.flow.Flow
+import com.caminaapps.bookworm.core.model.BookshelfSortOrder
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 import javax.inject.Inject
 
 class SearchBookshelfUseCase @Inject constructor(
     private val bookRepository: BookRepository,
 ) {
-    operator fun invoke(query: String): Flow<List<Book>> =
-        bookRepository
-            .getAllBooksStream(TITLE_ASC)
-//            .filter {  }
+    suspend operator fun invoke(query: String): List<Book> {
+        if (query.isBlank()) return emptyList()
 
+        return bookRepository.getAllBooksStream(BookshelfSortOrder.TITLE_ASC)
+            .map { books ->
+                books.filter { matching(it, query) }
+            }
+            .onEach {
+                Timber.i("Searched Bookshelf for $query, found ${it.count()} results.")
+            }
+            .first()
+    }
+
+    private fun matching(book: Book, query: String): Boolean {
+        return book.title.contains(query, ignoreCase = true) ||
+                book.subtitle.contains(query, ignoreCase = true) ||
+                book.author.contains(query, ignoreCase = true)
+    }
 }
