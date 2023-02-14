@@ -17,8 +17,10 @@ import kotlinx.coroutines.flow.map
 
 class FakeBookRepository : BookRepository {
 
-    private var booksFlow =
-        MutableSharedFlow<List<Book>>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private var booksFlow = MutableSharedFlow<List<Book>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
     private val currentBooks: List<Book>
         get() = booksFlow.replayCache.firstOrNull() ?: emptyList()
