@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfSearchScreen
 import com.caminaapps.bookworm.features.enterBook.EnterBookScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.BookBarcodeResultScreen
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.CameraScreen
@@ -27,7 +28,7 @@ fun BookwormNavHost(
         // Bookshelf -------------------------------------------------------------------------------
         composable(BottomNavigationScreen.Bookshelf.route) {
             BookshelfScreen(
-                onBookClick = { book ->
+                onBook = { book ->
                     navController.navigate(Screen.BookDetail.createRoute(bookId = book.id))
                 },
                 onScanBarcode = {
@@ -38,6 +39,9 @@ fun BookwormNavHost(
                 },
                 onEnterBook = {
                     navController.navigate(Screen.EnterBook.createRoute())
+                },
+                onSearchList = {
+                    navController.navigate(Screen.SearchBookshelf.createRoute())
                 }
             )
         }
@@ -74,6 +78,15 @@ fun BookwormNavHost(
 
         composable(Screen.EnterBook.route) {
             EnterBookScreen(onUpNavigationClick = navController::navigateUp)
+        }
+
+        composable(Screen.SearchBookshelf.route) {
+            BookshelfSearchScreen(
+                onSearchResultSelected = { bookId ->
+                    navController.navigate(Screen.BookDetail.createRoute(bookId = bookId))
+                },
+                onUpNavigationClick = navController::navigateUp
+            )
         }
 
         // Wishlist -----------------------------------------------------------------------------------

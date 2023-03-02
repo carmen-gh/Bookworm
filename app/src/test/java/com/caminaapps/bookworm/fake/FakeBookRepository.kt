@@ -27,9 +27,7 @@ class FakeBookRepository : BookRepository {
 
     var shouldReturnError: Boolean = false
 
-    fun send(books: List<Book>) {
-        booksFlow.tryEmit(books)
-    }
+    suspend fun send(books: List<Book>) = booksFlow.emit(books)
 
     override fun getAllBooksStream(sortOrder: BookshelfSortOrder): Flow<List<Book>> {
         return if (shouldReturnError) {

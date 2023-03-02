@@ -1,8 +1,8 @@
 package com.caminaapps.bookworm.app
 
 import android.app.Application
+import com.caminaapps.bookworm.BuildConfig
 import com.caminaapps.bookworm.util.CrashlyticsLogging
-import com.google.firebase.BuildConfig
 import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory

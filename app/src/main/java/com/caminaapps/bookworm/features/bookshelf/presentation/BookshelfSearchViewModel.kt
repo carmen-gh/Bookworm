@@ -10,9 +10,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterNot
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,35 +19,23 @@ class BookshelfSearchViewModel @Inject constructor(
     private val searchBookshelfUseCase: SearchBookshelfUseCase
 ) : ViewModel() {
 
-    private val timeOut: Long = 300
+    private val searchDelayMillis: Long = 500
     private val searchText = MutableStateFlow("")
     private val _searchResult = MutableStateFlow<List<Book>>(emptyList())
     val searchResults = _searchResult.asStateFlow()
 
     init {
-        searchText
-            .debounce(timeOut)
-            .filterNot { it.isBlank() }
-            .distinctUntilChanged()
-            .onEach {
-                searchBooks(it)
-            }
-            .launchIn(viewModelScope)
-    }
-
-    private fun searchBooks(query: String) {
         viewModelScope.launch {
-            _searchResult.value = searchBookshelfUseCase(query)
+            searchText
+                .debounce(searchDelayMillis)
+                .distinctUntilChanged()
+                .collect {
+                    _searchResult.value = searchBookshelfUseCase(it)
+                }
         }
     }
 
     fun onSearch(query: String) {
         searchText.value = query
     }
-
-    fun onClearSearch() {
-        searchText.value = ""
-        _searchResult.value = emptyList()
-    }
-
 }

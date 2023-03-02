@@ -17,14 +17,15 @@ class SearchBookshelfUseCase @Inject constructor(
     @IoDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(query: String): List<Book> {
-        if (query.isBlank()) return emptyList()
+        if (query.isBlank()) return bookRepository.getAllBooksStream(BookshelfSortOrder.TITLE_ASC)
+            .first()
 
         return bookRepository.getAllBooksStream(BookshelfSortOrder.TITLE_ASC)
             .map { books ->
                 books.filter { matching(it, query) }
             }
             .onEach {
-                Timber.i("Searched Bookshelf for $query, found ${it.count()} results.")
+                Timber.d("Searched Bookshelf for $query, found ${it.count()} results.")
             }
             .flowOn(defaultDispatcher)
             .first()
