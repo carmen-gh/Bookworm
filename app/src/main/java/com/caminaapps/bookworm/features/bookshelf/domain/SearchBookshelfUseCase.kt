@@ -35,7 +35,7 @@ class SearchBookshelfUseCase @Inject constructor(
 
     private fun matching(book: Book, query: String): Boolean {
         return book.title.contains(query, ignoreCase = true) ||
-                book.subtitle.contains(query, ignoreCase = true) ||
-                book.author.contains(query, ignoreCase = true)
+            book.subtitle.contains(query, ignoreCase = true) ||
+            book.author.contains(query, ignoreCase = true)
     }
 }
