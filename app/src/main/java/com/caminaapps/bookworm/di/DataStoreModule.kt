@@ -7,8 +7,6 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.caminaapps.bookworm.util.BookwormDispatchers.IO
-import com.caminaapps.bookworm.util.Dispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,7 +27,7 @@ object DataStoreModule {
     @Provides
     fun providePreferencesDataStore(
         @ApplicationContext appContext: Context,
-        @Dispatcher(IO) ioDispatcher: CoroutineDispatcher
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): DataStore<Preferences> =
         PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler(

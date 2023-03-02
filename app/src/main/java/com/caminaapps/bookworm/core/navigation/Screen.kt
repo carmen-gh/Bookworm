@@ -53,4 +53,8 @@ sealed class Screen(
     object EnterBook : Screen("enterBook") {
         fun createRoute() = route
     }
+
+    object SearchBookshelf : Screen("searchBookshelf") {
+        fun createRoute() = route
+    }
 }

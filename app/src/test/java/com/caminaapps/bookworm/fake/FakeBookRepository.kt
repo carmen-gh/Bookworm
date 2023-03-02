@@ -17,17 +17,17 @@ import kotlinx.coroutines.flow.map
 
 class FakeBookRepository : BookRepository {
 
-    private var booksFlow =
-        MutableSharedFlow<List<Book>>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private var booksFlow = MutableSharedFlow<List<Book>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
     private val currentBooks: List<Book>
         get() = booksFlow.replayCache.firstOrNull() ?: emptyList()
 
     var shouldReturnError: Boolean = false
 
-    fun send(books: List<Book>) {
-        booksFlow.tryEmit(books)
-    }
+    suspend fun send(books: List<Book>) = booksFlow.emit(books)
 
     override fun getAllBooksStream(sortOrder: BookshelfSortOrder): Flow<List<Book>> {
         return if (shouldReturnError) {

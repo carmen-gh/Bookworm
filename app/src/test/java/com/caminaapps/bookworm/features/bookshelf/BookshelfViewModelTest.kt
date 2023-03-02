@@ -35,7 +35,7 @@ class BookshelfViewModelTest {
     private val userPreferencesRepository = FakeUserPreferencesRepository()
     private val getAllBooksUseCase = GetAllBooksUseCase(bookRepository, userPreferencesRepository)
     private val getBookshelfSortOrder = GetBookshelfSortOrderUseCase(userPreferencesRepository)
-    private val udpateBookshelfSortOrder =
+    private val updateBookshelfSortOrder =
         UpdateBookshelfSortOrderUseCase(userPreferencesRepository)
     private lateinit var viewModel: BookshelfViewModel
 
@@ -44,7 +44,7 @@ class BookshelfViewModelTest {
         viewModel = BookshelfViewModel(
             getAllBooksUseCase,
             getBookshelfSortOrder,
-            udpateBookshelfSortOrder
+            updateBookshelfSortOrder
         )
     }
 

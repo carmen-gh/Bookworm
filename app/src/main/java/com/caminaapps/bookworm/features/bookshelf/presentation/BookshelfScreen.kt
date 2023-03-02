@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package com.caminaapps.bookworm.features.bookshelf.presentation
 
 import android.annotation.SuppressLint
@@ -57,7 +55,8 @@ fun BookshelfScreen(
     onScanBarcode: () -> Unit,
     onSearchOnline: () -> Unit,
     onEnterBook: () -> Unit,
-    onBookClick: (id: Book) -> Unit,
+    onBook: (id: Book) -> Unit, // change to id: bookId
+    onSearchList: () -> Unit,
     viewModel: BookshelfViewModel = hiltViewModel()
 ) {
     TrackedScreen(name = "Bookshelf")
@@ -81,16 +80,26 @@ fun BookshelfScreen(
         )
     }
 
+    // TODO() move out to own component
     Scaffold(
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { onSearchList() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_baseline_search_42),
+                            contentDescription = stringResource(id = R.string.button_search),
+                            modifier = Modifier.padding(14.dp)
+                        )
+                    }
+                },
                 title = { Text(text = "") },
                 actions = {
                     IconButton(onClick = { sortingMenuExpanded = !sortingMenuExpanded }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_sort_48),
                             contentDescription = null,
-                            modifier = Modifier.padding(8.dp)
+                            modifier = Modifier.padding(12.dp)
                         )
                     }
                 }
@@ -109,7 +118,7 @@ fun BookshelfScreen(
             when (uiState) {
                 is Success -> BooksContent(
                     books = (uiState as Success).books,
-                    onBookClick = onBookClick
+                    onBookClick = onBook
                 )
 
                 is Loading -> CircularProgressIndicator()
@@ -161,6 +170,7 @@ fun SortingDropDownMenu(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BooksContent(
     books: List<Book>,

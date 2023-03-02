@@ -60,7 +60,7 @@ fun BookDetailsScreen(
         }
 
         is Error -> {
-            TODO()
+            // handle error case
         }
     }
 }
