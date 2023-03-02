@@ -82,7 +82,7 @@ fun BookwormNavHost(
 
         composable(Screen.SearchBookshelf.route) {
             BookshelfSearchScreen(
-                onSearchResultSelected = { bookId ->
+                onSearchResultSelection = { bookId ->
                     navController.navigate(Screen.BookDetail.createRoute(bookId = bookId))
                 },
                 onUpNavigationClick = navController::navigateUp

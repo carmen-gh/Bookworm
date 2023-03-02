@@ -26,14 +26,12 @@ class BookshelfSearchViewModelTest {
     private lateinit var searchUseCase: SearchBookshelfUseCase
     private lateinit var viewModel: BookshelfSearchViewModel
 
-
     @Before
     fun setUp() {
         bookRepository = FakeBookRepository()
         searchUseCase = SearchBookshelfUseCase(bookRepository, mainDispatcherRule.testDispatcher)
         viewModel = BookshelfSearchViewModel(searchUseCase)
     }
-
 
     @Test
     fun searchResults_whenInitialized_thenAllBooks() = runTest {
@@ -86,9 +84,7 @@ class BookshelfSearchViewModelTest {
             assertThat(result).hasSize(1)
         }
     }
-
 }
-
 
 val testBooks = listOf(
     Book(

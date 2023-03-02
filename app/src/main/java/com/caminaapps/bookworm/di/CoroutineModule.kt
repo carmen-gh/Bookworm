@@ -11,7 +11,6 @@ import kotlinx.coroutines.SupervisorJob
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
 annotation class DefaultDispatcher
@@ -23,7 +22,6 @@ annotation class IoDispatcher
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
 annotation class MainDispatcher
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -40,7 +38,6 @@ object CoroutinesDispatchersModule {
     @MainDispatcher
     fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 }
-
 
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier

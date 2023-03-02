@@ -17,8 +17,10 @@ class SearchBookshelfUseCase @Inject constructor(
     @IoDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(query: String): List<Book> {
-        if (query.isBlank()) return bookRepository.getAllBooksStream(BookshelfSortOrder.TITLE_ASC)
-            .first()
+        if (query.isBlank()) {
+            return bookRepository.getAllBooksStream(BookshelfSortOrder.TITLE_ASC)
+                .first()
+        }
 
         return bookRepository.getAllBooksStream(BookshelfSortOrder.TITLE_ASC)
             .map { books ->

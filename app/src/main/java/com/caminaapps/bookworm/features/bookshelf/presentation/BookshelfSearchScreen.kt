@@ -23,7 +23,7 @@ import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitl
 @Composable
 fun BookshelfSearchScreen(
     onUpNavigationClick: () -> Unit,
-    onSearchResultSelected: (id: BookId) -> Unit,
+    onSearchResultSelection: (id: BookId) -> Unit,
     viewModel: BookshelfSearchViewModel = hiltViewModel(),
 ) {
     TrackedScreen(name = "Bookshelf Search")
@@ -31,9 +31,9 @@ fun BookshelfSearchScreen(
     val searchResults: List<Book> by viewModel.searchResults.collectAsStateWithLifecycle()
 
     BookshelfSearchContent(
-        onQueryChanged = { viewModel.onSearch(it) },
+        onSearchQueryChange = { viewModel.onSearch(it) },
         results = searchResults,
-        onResultSelected = { onSearchResultSelected(it) },
+        onResultSelection = { onSearchResultSelection(it) },
         onUpNavigationClick = { onUpNavigationClick() }
     )
 }
@@ -41,12 +41,11 @@ fun BookshelfSearchScreen(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BookshelfSearchContent(
-    onQueryChanged: (query: String) -> Unit,
+    onSearchQueryChange: (query: String) -> Unit,
     results: List<Book>,
-    onResultSelected: (id: BookId) -> Unit,
+    onResultSelection: (id: BookId) -> Unit,
     onUpNavigationClick: () -> Unit
 ) {
-
     var query by rememberSaveable { mutableStateOf("") }
 
     Scaffold(topBar = {
@@ -56,7 +55,7 @@ fun BookshelfSearchContent(
                     modifier = Modifier.padding(vertical = 4.dp),
                     onValueChange = {
                         query = it
-                        onQueryChanged(it)
+                        onSearchQueryChange(it)
                     },
                     value = query,
                     onSearchKeyboardAction = { },
@@ -70,7 +69,7 @@ fun BookshelfSearchContent(
     }) { innerPadding ->
         BookList(
             books = results,
-            onItemClick = { onResultSelected(it.id) },
+            onItemClick = { onResultSelection(it.id) },
             modifier = Modifier.padding(innerPadding)
         )
     }
