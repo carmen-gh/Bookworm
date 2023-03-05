@@ -3,6 +3,7 @@ package com.caminaapps.bookworm.features.bookshelf.domain
 import com.caminaapps.bookworm.core.data.repository.BookRepository
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
+import com.caminaapps.bookworm.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOn
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 class SearchBookshelfUseCase @Inject constructor(
     private val bookRepository: BookRepository,
-    @IoDispatcher private val defaultDispatcher: CoroutineDispatcher
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(query: String): List<Book> {
         if (query.isBlank()) {
