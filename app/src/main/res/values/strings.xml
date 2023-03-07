@@ -16,17 +16,13 @@
     <string name="button_close">Close</string>
     <string name="button_maybe_later">Maybe later</string>
     <string name="camera_permission_title">Scan barcodes</string>
-    <string name="camera_permission_text">To be able to scan the barcodes on a book, the bookworm app needs Manifest.permission to access your camera.</string>
-    <string name="textfield_label_title">Title</string>
-    <string name="textfield_label_subtitle">Subtitle</string>
+    <string name="camera_permission_text">To be able to scan the barcodes on a book, the bookworm app needs your permission to access your camera.</string>
     <string name="textfield_label_author">Author</string>
-    <string name="textfield_label_published_date">Published</string>
     <string name="text_search_no_result">No results found</string>
     <string name="error_general_text">Ups, something went wrong</string>
     <string name="error_network_issue">Ups, something went wrong. Check your internet connection</string>
     <string name="search_placeholder">Search for title</string>
     <string name="search_no_matches">No matches for “%1s”</string>
-    <string name="search_count">%1d items</string>
     <string name="search_engine_text">find your book on</string>
     <string name="book_sort_order_date_asc">Date added - newest to oldest</string>
     <string name="book_sort_order_date_desc">Date added - oldest to newest</string>
@@ -41,4 +37,9 @@
     <string name="book_author">Author</string>
     <string name="book_published">Published</string>
     <string name="book_enter_title">enter your book</string>
+
+    <plurals name="search_count">
+        <item quantity="one">$d item</item>
+        <item quantity="other">$d items</item>
+    </plurals>
 </resources>
