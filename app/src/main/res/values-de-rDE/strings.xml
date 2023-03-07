@@ -23,7 +23,6 @@
     <string name="error_network_issue">Ups, etwas lief schief. Prüfe deine Internetverbindung</string>
     <string name="search_placeholder">nach Title suchen</string>
     <string name="search_no_matches">Keine Treffer für \"%1s\"</string>
-    <string name="search_count">%1d Treffer</string>
     <string name="search_engine_text">finde dein Buch auf</string>
     <string name="book_sort_order_date_asc">Datum hinzugefügt - neuste zuerst</string>
     <string name="book_sort_order_date_desc">Datum hinzugefügt - älteste zuerst</string>
@@ -39,4 +38,9 @@
     <string name="book_published">Veröffentlicht</string>
     <string name="book_enter_title">Buch eingeben</string>
     <string name="textfield_label_author">Autor</string>
+
+    <plurals name="search_count">
+        <item quantity="one">$d Treffer</item>
+        <item quantity="other">$d Treffer</item>
+    </plurals>
 </resources>
