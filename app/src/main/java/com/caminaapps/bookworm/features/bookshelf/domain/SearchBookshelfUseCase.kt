@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
-
 import javax.inject.Inject
 
 class SearchBookshelfUseCase @Inject constructor(
