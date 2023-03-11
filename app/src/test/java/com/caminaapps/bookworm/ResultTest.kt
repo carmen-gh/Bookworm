@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-class ResultKtTest {
+class ResultTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test

@@ -15,7 +15,7 @@ import org.junit.Test
 class BookEntityTest {
 
     @Test
-    fun bookEnitity_can_be_mapped_to_bookDomain() {
+    fun bookEntity_can_be_mapped_to_bookDomain() {
         val bookEntity = BookEntity(
             id = "an id",
             title = "My title",
@@ -41,7 +41,7 @@ class BookEntityTest {
     }
 
     @Test
-    fun bookDomain_can_be_mapped_bookEnity() {
+    fun bookDomain_can_be_mapped_bookEntity() {
         val book = Book(
             id = "an id",
             title = "My title",
