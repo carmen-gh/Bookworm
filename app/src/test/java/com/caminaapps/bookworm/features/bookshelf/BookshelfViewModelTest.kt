@@ -1,9 +1,7 @@
 package com.caminaapps.bookworm.features.bookshelf
 
-import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import assertk.assertions.isInstanceOf
 import assertk.assertions.isNotEqualTo
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
@@ -69,28 +67,18 @@ class BookshelfViewModelTest {
     @Test
     fun uiState_whenBooksLoaded_thenSuccess() = runTest {
         bookRepository.send(bookList.sortedBy { it.author })
-//        val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
-//
-//        bookRepository.send(bookList.sortedBy { it.author })
-//
-//        userPreferencesRepository.send(testSortOrderAuthorAsc)
-//
-//        assertThat((viewModel.uiState.value as BookshelfUiState.Success).books)
-//            .isEqualTo(bookList)
-//        assertThat((viewModel.uiState.value as BookshelfUiState.Success).sortOrder)
-//            .isEqualTo(testSortOrderAuthorAsc)
-//
-//        collectJob.cancel()
+        val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
 
-        viewModel.uiState.test {
-            assertThat(awaitItem()).isInstanceOf(Loading::class)
-//            bookRepository.send(bookList.sortedBy { it.author })
-//            viewModel.updateSortOrder(BookshelfSortOrder.TITLE_ASC)
-            awaitItem()
-//            assertThat(awaitItem()).isInstanceOf(BookshelfUiState.Success::class)
-//            assertThat(viewModel.uiState.value as)
-//            userPreferencesRepository.send(testSortOrderAuthorAsc)
-        }
+        bookRepository.send(bookList.sortedBy { it.author })
+
+        userPreferencesRepository.send(testSortOrderAuthorAsc)
+
+        assertThat((viewModel.uiState.value as BookshelfUiState.Success).books)
+            .isEqualTo(bookList)
+        assertThat((viewModel.uiState.value as BookshelfUiState.Success).sortOrder)
+            .isEqualTo(testSortOrderAuthorAsc)
+
+        collectJob.cancel()
     }
 
     @Test
