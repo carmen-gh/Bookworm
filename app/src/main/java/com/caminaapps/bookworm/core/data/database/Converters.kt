@@ -1,13 +1,13 @@
 package com.caminaapps.bookworm.core.data.database
 
 import androidx.room.TypeConverter
-import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 
 object Converters {
 
     @TypeConverter
-    fun longToInstant(value: Long?): Instant? = value?.let(Instant::fromEpochMilliseconds)
+    fun intToLocalDate(value: Int?): LocalDate? = value?.let(LocalDate::fromEpochDays)
 
     @TypeConverter
-    fun instantToLong(instant: Instant?): Long? = instant?.toEpochMilliseconds()
+    fun localDateToInt(localDate: LocalDate?): Int? = localDate?.toEpochDays()
 }
