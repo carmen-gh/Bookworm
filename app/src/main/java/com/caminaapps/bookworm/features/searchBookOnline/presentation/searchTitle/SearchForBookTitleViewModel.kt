@@ -11,9 +11,9 @@ import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitl
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Loading
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.NoResults
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Success
+import com.caminaapps.bookworm.util.WhileUiSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -32,7 +32,7 @@ class SearchForBookTitleViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<SearchForBookTitleUiState>(Empty)
     val uiState: StateFlow<SearchForBookTitleUiState> = _uiState.stateIn(
         scope = viewModelScope,
-        started = WhileSubscribed(5_000),
+        started = WhileUiSubscribed,
         initialValue = Empty
     )
 

@@ -13,17 +13,16 @@ import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.google.service)
+    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kover)
     alias(libs.plugins.ksp)
     alias(libs.plugins.test.logger)
-    alias(libs.plugins.kover)
 }
-
-apply(plugin = "com.google.firebase.crashlytics")
-apply(plugin = "com.google.gms.google-services")
-apply(plugin = "dagger.hilt.android.plugin")
 
 android {
     namespace = "com.caminaapps.bookworm"
