@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.bookshelf.domain.SearchBookshelfUseCase
+import com.caminaapps.bookworm.util.WhileUiSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -26,7 +26,7 @@ class BookshelfSearchViewModel @Inject constructor(
     private val _searchResult = MutableStateFlow<List<Book>>(emptyList())
     val searchResults = _searchResult.stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
+        started = WhileUiSubscribed,
         initialValue = emptyList()
     )
 

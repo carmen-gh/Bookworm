@@ -8,10 +8,10 @@ import com.caminaapps.bookworm.features.bookshelf.domain.GetAllBooksUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrderUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.UpdateBookshelfSortOrderUseCase
 import com.caminaapps.bookworm.util.Result
+import com.caminaapps.bookworm.util.WhileUiSubscribed
 import com.caminaapps.bookworm.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -29,7 +29,7 @@ class BookshelfViewModel @Inject constructor(
     val uiState: StateFlow<BookshelfUiState> = uiStream()
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
+            started = WhileUiSubscribed,
             initialValue = BookshelfUiState.Loading
         )
 

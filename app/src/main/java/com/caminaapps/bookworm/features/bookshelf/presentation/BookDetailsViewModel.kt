@@ -10,10 +10,10 @@ import com.caminaapps.bookworm.util.Result
 import com.caminaapps.bookworm.util.Result.Error
 import com.caminaapps.bookworm.util.Result.Loading
 import com.caminaapps.bookworm.util.Result.Success
+import com.caminaapps.bookworm.util.WhileUiSubscribed
 import com.caminaapps.bookworm.util.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -40,7 +40,7 @@ class BookViewModel @Inject constructor(
         }
     }.stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
+        started = WhileUiSubscribed,
         initialValue = BookDetailsUiState.Loading
     )
 
