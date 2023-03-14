@@ -2,11 +2,14 @@ package com.caminaapps.bookworm.fake
 
 import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepository
 import com.caminaapps.bookworm.core.model.Book
+import java.io.IOException
 
 class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
 
-    private var shouldReturnResult = true
-    private var searchResultByIsbn = Book(
+    var shouldThrowException = false
+    var shouldReturnResult = true
+
+    private var fakeBookResult = Book(
         id = "123",
         title = "Random book",
         subtitle = "",
@@ -14,7 +17,7 @@ class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
         publishedDate = "2009",
         coverUrl = null
     )
-    private var searchResultByTitle = listOf(
+    private var fakeBookListResult = listOf(
         Book(
             id = "123",
             title = "Random book",
@@ -33,13 +36,22 @@ class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
         )
     )
 
-    override suspend fun getBookByISBN(isbn: String): Book? =
-        if (shouldReturnResult) searchResultByIsbn else null
+    override suspend fun getBookByISBN(isbn: String): Book? {
+        if (shouldThrowException) {
+            throw IOException()
+        }
+        return if (shouldReturnResult) fakeBookResult else null
+    }
 
-    override suspend fun getBooksByTitle(title: String): List<Book> =
-        if (shouldReturnResult) {
-            searchResultByTitle.map { it.copy(title = title) }
+    override suspend fun getBooksByTitle(title: String): List<Book> {
+        if (shouldThrowException) {
+            throw IOException()
+        }
+
+        return if (shouldReturnResult) {
+            fakeBookListResult.map { it.copy(title = title) }
         } else {
             emptyList()
         }
+    }
 }
