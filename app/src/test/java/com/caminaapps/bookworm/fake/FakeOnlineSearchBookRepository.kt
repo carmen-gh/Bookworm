@@ -2,11 +2,10 @@ package com.caminaapps.bookworm.fake
 
 import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepository
 import com.caminaapps.bookworm.core.model.Book
-import java.io.IOException
 
 class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
 
-    var shouldThrowException = false
+    var throwException: Exception? = null
     var shouldReturnResult = true
 
     private var fakeBookResult = Book(
@@ -37,16 +36,12 @@ class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
     )
 
     override suspend fun getBookByISBN(isbn: String): Book? {
-        if (shouldThrowException) {
-            throw IOException()
-        }
+        throwException?.let { throw it }
         return if (shouldReturnResult) fakeBookResult else null
     }
 
     override suspend fun getBooksByTitle(title: String): List<Book> {
-        if (shouldThrowException) {
-            throw IOException()
-        }
+        throwException?.let { throw it }
 
         return if (shouldReturnResult) {
             fakeBookListResult.map { it.copy(title = title) }

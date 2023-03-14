@@ -19,8 +19,12 @@ class FakeBookRepository : BookRepository {
 
     private var booksFlow = MutableSharedFlow<List<Book>>(
         replay = 1,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST
+        onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
+
+    init {
+        booksFlow.tryEmit(emptyList())
+    }
 
     private val currentBooks: List<Book>
         get() = booksFlow.replayCache.firstOrNull() ?: emptyList()
