@@ -31,16 +31,21 @@ class BookshelfViewModelTest {
     @get:Rule
     val dispatcherRule = MainDispatcherRule()
 
-    private val bookRepository = FakeBookRepository()
-    private val userPreferencesRepository = FakeUserPreferencesRepository()
-    private val getAllBooksUseCase = GetAllBooksUseCase(bookRepository, userPreferencesRepository)
-    private val getBookshelfSortOrder = GetBookshelfSortOrderUseCase(userPreferencesRepository)
-    private val updateBookshelfSortOrder =
-        UpdateBookshelfSortOrderUseCase(userPreferencesRepository)
+    private lateinit var bookRepository: FakeBookRepository
+    private lateinit var userPreferencesRepository: FakeUserPreferencesRepository
+    private lateinit var getAllBooksUseCase: GetAllBooksUseCase
+    private lateinit var getBookshelfSortOrder: GetBookshelfSortOrderUseCase
+    private lateinit var updateBookshelfSortOrder: UpdateBookshelfSortOrderUseCase
     private lateinit var viewModel: BookshelfViewModel
 
     @Before
     fun setUp() {
+        bookRepository = FakeBookRepository()
+        userPreferencesRepository = FakeUserPreferencesRepository()
+        getAllBooksUseCase = GetAllBooksUseCase(bookRepository, userPreferencesRepository)
+        getBookshelfSortOrder = GetBookshelfSortOrderUseCase(userPreferencesRepository)
+        updateBookshelfSortOrder = UpdateBookshelfSortOrderUseCase(userPreferencesRepository)
+
         viewModel = BookshelfViewModel(
             getAllBooksUseCase,
             getBookshelfSortOrder,
@@ -60,10 +65,12 @@ class BookshelfViewModelTest {
     }
 
     @Test
-    fun uiState_whenBooks_thenSuccess() = runTest {
+    fun uiState_whenBooksLoaded_thenSuccess() = runTest {
+        bookRepository.send(bookList.sortedBy { it.author })
         val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
 
         bookRepository.send(bookList.sortedBy { it.author })
+
         userPreferencesRepository.send(testSortOrderAuthorAsc)
 
         assertThat((viewModel.uiState.value as BookshelfUiState.Success).books)

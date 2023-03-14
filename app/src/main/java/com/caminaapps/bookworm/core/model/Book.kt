@@ -1,8 +1,10 @@
 package com.caminaapps.bookworm.core.model
 
 import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import java.util.*
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.todayIn
+import java.util.UUID
 
 typealias BookId = String
 
@@ -15,5 +17,5 @@ data class Book(
     val coverUrl: String?,
     val finishedReading: Boolean = false,
     val isFavourite: Boolean = false,
-    val addedToBookshelf: Instant = Clock.System.now()
+    val addedToBookshelf: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault())
 )

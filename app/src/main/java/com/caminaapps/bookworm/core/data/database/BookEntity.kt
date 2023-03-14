@@ -4,11 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.caminaapps.bookworm.core.model.Book
-import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 
-@Entity(
-    tableName = "book"
-)
+@Entity(tableName = "book")
 data class BookEntity(
     @PrimaryKey
     val id: String,
@@ -24,7 +22,7 @@ data class BookEntity(
     @ColumnInfo(name = "favourite")
     val isFavourite: Boolean,
     @ColumnInfo(name = "added_date")
-    val addedToBookshelf: Instant
+    val addedToBookshelf: LocalDate
 )
 
 fun BookEntity.toBook() = Book(

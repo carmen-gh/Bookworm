@@ -5,8 +5,10 @@ import com.caminaapps.bookworm.core.model.Book
 
 class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
 
-    private var shouldReturnResult = true
-    private var searchResultByIsbn = Book(
+    var throwException: Exception? = null
+    var shouldReturnResult = true
+
+    private var fakeBookResult = Book(
         id = "123",
         title = "Random book",
         subtitle = "",
@@ -14,7 +16,7 @@ class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
         publishedDate = "2009",
         coverUrl = null
     )
-    private var searchResultByTitle = listOf(
+    private var fakeBookListResult = listOf(
         Book(
             id = "123",
             title = "Random book",
@@ -33,13 +35,18 @@ class FakeOnlineSearchBookRepository : OnlineSearchBookRepository {
         )
     )
 
-    override suspend fun getBookByISBN(isbn: String): Book? =
-        if (shouldReturnResult) searchResultByIsbn else null
+    override suspend fun getBookByISBN(isbn: String): Book? {
+        throwException?.let { throw it }
+        return if (shouldReturnResult) fakeBookResult else null
+    }
 
-    override suspend fun getBooksByTitle(title: String): List<Book> =
-        if (shouldReturnResult) {
-            searchResultByTitle.map { it.copy(title = title) }
+    override suspend fun getBooksByTitle(title: String): List<Book> {
+        throwException?.let { throw it }
+
+        return if (shouldReturnResult) {
+            fakeBookListResult.map { it.copy(title = title) }
         } else {
             emptyList()
         }
+    }
 }

@@ -13,17 +13,16 @@ import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.google.service)
+    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kover)
     alias(libs.plugins.ksp)
     alias(libs.plugins.test.logger)
-    alias(libs.plugins.kover)
 }
-
-apply(plugin = "com.google.firebase.crashlytics")
-apply(plugin = "com.google.gms.google-services")
-apply(plugin = "dagger.hilt.android.plugin")
 
 android {
     namespace = "com.caminaapps.bookworm"
@@ -78,6 +77,15 @@ android {
     packagingOptions {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+            excludes.add("META-INF/DEPENDENCIES")
+            excludes.add("META-INF/LICENSE.md")
+            excludes.add("META-INF/LICENSE.txt")
+            excludes.add("META-INF/license.txt")
+            excludes.add("META-INF/LICENSE-notice.md")
+            excludes.add("META-INF/NOTICE")
+            excludes.add("META-INF/NOTICE.txt")
+            excludes.add("META-INF/notice.txt")
+            excludes.add("META-INF/*.kotlin_module")
         }
     }
 
@@ -135,6 +143,8 @@ dependencies {
     testImplementation(libs.hilt.testing)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk.agent)
+    testImplementation(libs.mockk.android)
     testImplementation(libs.room.testing)
     testImplementation(libs.turbine)
 
@@ -144,9 +154,12 @@ dependencies {
     androidTestImplementation(libs.android.test.ext.junit)
     androidTestImplementation(libs.android.test.rules)
     androidTestImplementation(libs.android.test.runner)
+    androidTestImplementation(libs.assertk)
     androidTestImplementation(libs.compose.test)
     androidTestImplementation(libs.espresso)
     androidTestImplementation(libs.hilt.testing)
+    androidTestImplementation(libs.mockk.agent)
+    androidTestImplementation(libs.mockk.android)
     androidTestImplementation(platform(libs.compose.bom))
 
     kaptAndroidTest(libs.hilt.testing)

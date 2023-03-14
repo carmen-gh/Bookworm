@@ -1,12 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-buildscript {
-    dependencies {
-        classpath(libs.hilt.plugin)
-        classpath(libs.google.service.plugin)
-        classpath(libs.firebase.crashlytics.plugin)
-    }
-}
+//buildscript {
+//    dependencies {
+//        classpath(libs.hilt.plugin)
+//        classpath(libs.google.service.plugin)
+//        classpath(libs.firebase.crashlytics.plugin)
+//    }
+//}
 
 // Without these suppressions version catalog usage here and in other build
 // files is marked red by IntelliJ:
@@ -20,10 +20,13 @@ buildscript {
 plugins {
     alias(libs.plugins.android.application).apply(false)
     alias(libs.plugins.android.library).apply(false)
-    alias(libs.plugins.kotlin.android).apply(false)
-    alias(libs.plugins.kotlin.serialization).apply(false)
     alias(libs.plugins.detekt).apply(false)
+    alias(libs.plugins.firebase.crashlytics).apply(false)
+    alias(libs.plugins.google.service).apply(false)
+    alias(libs.plugins.hilt).apply(false)
+    alias(libs.plugins.kotlin.android).apply(false)
     alias(libs.plugins.kotlin.kapt).apply(false)
+    alias(libs.plugins.kotlin.serialization).apply(false)
     alias(libs.plugins.kover).apply(true)
 }
 
