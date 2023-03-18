@@ -10,6 +10,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 
 @Composable
 fun TrackedScreen(
@@ -19,6 +20,7 @@ fun TrackedScreen(
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_START) {
+                Timber.d("tracked screen $name")
                 Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
                     param(FirebaseAnalytics.Param.SCREEN_NAME, name)
                     param(FirebaseAnalytics.Param.SCREEN_CLASS, name)
