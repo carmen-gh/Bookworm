@@ -192,6 +192,7 @@ kover {
     filters {
         classes {
             excludes += listOf(
+                "*Activity",
                 "dagger.hilt.internal.aggregatedroot.codegen.*",
                 "hilt_aggregated_deps.*",
                 "com.caminaapps.bookworm.di.*",
@@ -210,7 +211,6 @@ kover {
                 ".*_Factory.*",
             )
         }
-
     }
 }
 
