@@ -5,8 +5,6 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isNotEqualTo
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
-import com.caminaapps.bookworm.fake.FakeBookRepository
-import com.caminaapps.bookworm.fake.FakeUserPreferencesRepository
 import com.caminaapps.bookworm.features.bookshelf.domain.GetAllBooksUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrderUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.UpdateBookshelfSortOrderUseCase
@@ -14,7 +12,9 @@ import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Error
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Loading
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfViewModel
-import com.caminaapps.bookworm.util.MainDispatcherRule
+import com.caminaapps.bookworm.testing.FakeBookRepository
+import com.caminaapps.bookworm.testing.FakeUserPreferencesRepository
+import com.caminaapps.bookworm.testing.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

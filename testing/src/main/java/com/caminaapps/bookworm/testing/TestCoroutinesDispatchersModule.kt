@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.testing.di
+package com.caminaapps.bookworm.testing
 
 import com.caminaapps.bookworm.di.CoroutinesDispatchersModule
 import com.caminaapps.bookworm.di.DefaultDispatcher

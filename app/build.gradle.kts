@@ -123,6 +123,7 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.lifecycle.compose)
@@ -169,6 +170,9 @@ dependencies {
 
     detektPlugins(libs.detekt.compose.plugin)
     detektPlugins(libs.detekt.formatting.plugin)
+
+    testImplementation(project(":testing"))
+    androidTestImplementation(project(":testing"))
 }
 
 detekt {
