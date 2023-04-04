@@ -215,7 +215,8 @@ koverAndroid {
                     "*Hilt_*",
                     "*BuildConfig",
                     ".*_Factory.*",
-                    "*_MembersInjector"
+                    "*_MembersInjector",
+                    "*AppDatabase"
                 )
                 annotatedBy("*Composable*")
             }
