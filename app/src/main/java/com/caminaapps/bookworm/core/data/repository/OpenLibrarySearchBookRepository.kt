@@ -5,7 +5,7 @@ import com.caminaapps.bookworm.core.data.network.dto.toBook
 import com.caminaapps.bookworm.core.model.Book
 import javax.inject.Inject
 
-class OnlineSearchBookRepositoryImpl @Inject constructor(
+class OpenLibrarySearchBookRepository @Inject constructor(
     private val openLibraryAPI: OpenLibraryAPI,
 ) : OnlineSearchBookRepository {
 
