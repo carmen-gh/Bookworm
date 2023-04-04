@@ -1,6 +1,6 @@
 package com.caminaapps.bookworm.di
 
-import com.caminaapps.bookworm.util.CrashlyticsLogging
+import com.caminaapps.bookworm.logging.CrashlyticsLogging
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
