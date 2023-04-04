@@ -188,32 +188,43 @@ tasks.detekt.configure {
     }
 }
 
-kover {
-    instrumentation {
-        excludeTasks.add("testReleaseUnitTest")
-    }
-
-    filters {
-        classes {
-            excludes += listOf(
-                "*Activity",
-                "dagger.hilt.internal.aggregatedroot.codegen.*",
-                "hilt_aggregated_deps.*",
-                "com.caminaapps.bookworm.di.*",
-                "com.caminaapps.bookworm.core.ui.theme.*",
-                "com.caminaapps.bookworm.core.ui.icon.*",
-                "com.caminaapps.bookworm.util.previewParameterProvider.*",
-                "com.caminaapps.bookworm.*.*_Impl*",
-                "com.caminaapps.bookworm.*.*_Factory*",
-                "*CrashlyticsLogging",
-                "*CoroutineScopeExt*",
-                "*BookwormDispatchers",
-                "*ComposableSingletons*",
-                "*_HiltModules*",
-                "*Hilt_*",
-                "*BuildConfig",
-                ".*_Factory.*",
-            )
+koverAndroid {
+    report("release") {
+        filters {
+            excludes {
+                classes(
+                    "*Fragment",
+                    "*Fragment\$*",
+                    "*Activity",
+                    "*Activity\$*",
+                    "*.databinding.*",
+                    "*.BuildConfig",
+                    "dagger.hilt.internal.aggregatedroot.codegen.*",
+                    "hilt_aggregated_deps.*",
+                    "com.caminaapps.bookworm.di.*",
+                    "com.caminaapps.bookworm.core.ui.theme.*",
+                    "com.caminaapps.bookworm.core.ui.icon.*",
+                    "com.caminaapps.bookworm.util.previewParameterProvider.*",
+                    "com.caminaapps.bookworm.*.*_Impl*",
+                    "com.caminaapps.bookworm.*.*_Factory*",
+                    "*CrashlyticsLogging",
+                    "*CoroutineScopeExt*",
+                    "*BookwormDispatchers",
+                    "*ComposableSingletons*",
+                    "*_HiltModules*",
+                    "*Hilt_*",
+                    "*BuildConfig",
+                    ".*_Factory.*",
+                    "*_MembersInjector"
+                )
+                annotatedBy("*Composable*")
+            }
+        }
+        html {
+            onCheck = true
+        }
+        verify {
+            onCheck = true
         }
     }
 }

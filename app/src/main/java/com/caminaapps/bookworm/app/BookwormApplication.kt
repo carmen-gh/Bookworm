@@ -9,10 +9,9 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.appcheck.FirebaseAppCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
 import org.jetbrains.annotations.VisibleForTesting
 import timber.log.Timber
-
+import javax.inject.Inject
 
 @HiltAndroidApp
 class BookwormApplication : Application() {
@@ -24,7 +23,6 @@ class BookwormApplication : Application() {
     @ProdLogger
     @Inject
     lateinit var prodLogger: Logger
-
 
     override fun onCreate() {
         super.onCreate()
