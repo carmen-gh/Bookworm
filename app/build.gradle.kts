@@ -26,12 +26,12 @@ plugins {
 
 android {
     namespace = "com.caminaapps.bookworm"
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.caminaapps.bookworm"
-        minSdk = 28
-        targetSdk = 33
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
