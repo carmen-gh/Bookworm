@@ -1,7 +1,7 @@
 package com.caminaapps.bookworm.di
 
-import com.caminaapps.bookworm.core.data.network.NetworkLogging
 import com.caminaapps.bookworm.core.data.network.OpenLibraryAPI
+import com.caminaapps.bookworm.logging.NetworkLogging
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides

@@ -4,13 +4,13 @@ import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.caminaapps.bookworm.core.model.Book
-import com.caminaapps.bookworm.fake.FakeBookRepository
 import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.BookSaved
 import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.EnterBookInfo
 import com.caminaapps.bookworm.features.enterBook.EnterBookUiState.ErrorTitleMissing
 import com.caminaapps.bookworm.features.enterBook.EnterBookViewModel
 import com.caminaapps.bookworm.features.enterBook.SaveEnteredBookUseCase
-import com.caminaapps.bookworm.util.MainDispatcherRule
+import com.caminaapps.bookworm.testing.FakeBookRepository
+import com.caminaapps.bookworm.testing.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before

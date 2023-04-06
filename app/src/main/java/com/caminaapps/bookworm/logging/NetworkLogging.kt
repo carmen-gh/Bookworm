@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.core.data.network
+package com.caminaapps.bookworm.logging
 
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber

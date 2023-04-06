@@ -7,11 +7,11 @@ import assertk.assertions.isEmpty
 import assertk.assertions.isInstanceOf
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
-import com.caminaapps.bookworm.fake.FakeBookRepository
-import com.caminaapps.bookworm.fake.FakeOnlineSearchBookRepository
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SaveBookFromOnlineSearchUseCase
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SearchBookByTitleUseCase
-import com.caminaapps.bookworm.util.MainDispatcherRule
+import com.caminaapps.bookworm.testing.FakeBookRepository
+import com.caminaapps.bookworm.testing.FakeOnlineSearchBookRepository
+import com.caminaapps.bookworm.testing.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.advanceUntilIdle

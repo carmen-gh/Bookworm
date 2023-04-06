@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.fake
+package com.caminaapps.bookworm.testing
 
 import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepository
 import com.caminaapps.bookworm.core.model.Book

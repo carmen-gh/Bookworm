@@ -26,12 +26,12 @@ plugins {
 
 android {
     namespace = "com.caminaapps.bookworm"
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.caminaapps.bookworm"
-        minSdk = 28
-        targetSdk = 33
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -123,6 +123,7 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
+    implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.lifecycle.compose)
@@ -169,6 +170,9 @@ dependencies {
 
     detektPlugins(libs.detekt.compose.plugin)
     detektPlugins(libs.detekt.formatting.plugin)
+
+    testImplementation(project(":testing"))
+    androidTestImplementation(project(":testing"))
 }
 
 detekt {
@@ -184,33 +188,45 @@ tasks.detekt.configure {
     }
 }
 
-kover {
-    instrumentation {
-        excludeTasks.add("testReleaseUnitTest")
-    }
-
-    filters {
-        classes {
-            excludes += listOf(
-                "dagger.hilt.internal.aggregatedroot.codegen.*",
-                "hilt_aggregated_deps.*",
-                "com.caminaapps.bookworm.di.*",
-                "com.caminaapps.bookworm.core.ui.theme.*",
-                "com.caminaapps.bookworm.core.ui.icon.*",
-                "com.caminaapps.bookworm.util.previewParameterProvider.*",
-                "com.caminaapps.bookworm.*.*_Impl*",
-                "com.caminaapps.bookworm.*.*_Factory*",
-                "*CrashlyticsLogging",
-                "*CoroutineScopeExt*",
-                "*BookwormDispatchers",
-                "*ComposableSingletons*",
-                "*_HiltModules*",
-                "*Hilt_*",
-                "*BuildConfig",
-                ".*_Factory.*",
-            )
+koverAndroid {
+    report("release") {
+        filters {
+            excludes {
+                classes(
+                    "*Fragment",
+                    "*Fragment\$*",
+                    "*Activity",
+                    "*Activity\$*",
+                    "*.databinding.*",
+                    "*.BuildConfig",
+                    "dagger.hilt.internal.aggregatedroot.codegen.*",
+                    "hilt_aggregated_deps.*",
+                    "com.caminaapps.bookworm.di.*",
+                    "com.caminaapps.bookworm.core.ui.theme.*",
+                    "com.caminaapps.bookworm.core.ui.icon.*",
+                    "com.caminaapps.bookworm.util.previewParameterProvider.*",
+                    "com.caminaapps.bookworm.*.*_Impl*",
+                    "com.caminaapps.bookworm.*.*_Factory*",
+                    "*CrashlyticsLogging",
+                    "*CoroutineScopeExt*",
+                    "*BookwormDispatchers",
+                    "*ComposableSingletons*",
+                    "*_HiltModules*",
+                    "*Hilt_*",
+                    "*BuildConfig",
+                    ".*_Factory.*",
+                    "*_MembersInjector",
+                    "*AppDatabase"
+                )
+                annotatedBy("*Composable*")
+            }
         }
-
+        html {
+            onCheck = true
+        }
+        verify {
+            onCheck = true
+        }
     }
 }
 

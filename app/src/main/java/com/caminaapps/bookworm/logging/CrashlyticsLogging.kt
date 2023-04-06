@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.util
+package com.caminaapps.bookworm.logging
 
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics

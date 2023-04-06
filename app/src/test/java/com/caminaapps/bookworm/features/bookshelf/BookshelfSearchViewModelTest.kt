@@ -6,10 +6,10 @@ import assertk.assertions.hasSameSizeAs
 import assertk.assertions.hasSize
 import assertk.assertions.isEmpty
 import com.caminaapps.bookworm.core.model.Book
-import com.caminaapps.bookworm.fake.FakeBookRepository
 import com.caminaapps.bookworm.features.bookshelf.domain.SearchBookshelfUseCase
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfSearchViewModel
-import com.caminaapps.bookworm.util.MainDispatcherRule
+import com.caminaapps.bookworm.testing.FakeBookRepository
+import com.caminaapps.bookworm.testing.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before

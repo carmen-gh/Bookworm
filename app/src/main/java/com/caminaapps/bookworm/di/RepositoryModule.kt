@@ -1,11 +1,11 @@
 package com.caminaapps.bookworm.di
 
 import com.caminaapps.bookworm.core.data.repository.BookRepository
-import com.caminaapps.bookworm.core.data.repository.BookRepositoryImpl
+import com.caminaapps.bookworm.core.data.repository.DefaultBookRepository
+import com.caminaapps.bookworm.core.data.repository.DefaultUserPreferencesRepository
 import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepository
-import com.caminaapps.bookworm.core.data.repository.OnlineSearchBookRepositoryImpl
+import com.caminaapps.bookworm.core.data.repository.OpenLibrarySearchBookRepository
 import com.caminaapps.bookworm.core.data.repository.UserPreferencesRepository
-import com.caminaapps.bookworm.core.data.repository.UserPreferencesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -18,18 +18,18 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindOnlineSearchBookRepository(
-        onlineSearchBookRepositoryImpl: OnlineSearchBookRepositoryImpl
+        onlineSearchBookRepositoryImpl: OpenLibrarySearchBookRepository
     ): OnlineSearchBookRepository
 
     @Binds
     @Singleton
     abstract fun bindBookRepository(
-        bookRepositoryImpl: BookRepositoryImpl
+        bookRepositoryImpl: DefaultBookRepository
     ): BookRepository
 
     @Binds
     @Singleton
     abstract fun bindUserPreferencesRepository(
-        userPreferencesRepositoryImpl: UserPreferencesRepositoryImpl
+        userPreferencesRepositoryImpl: DefaultUserPreferencesRepository
     ): UserPreferencesRepository
 }

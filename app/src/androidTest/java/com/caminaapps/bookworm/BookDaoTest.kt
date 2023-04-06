@@ -1,8 +1,9 @@
 package com.caminaapps.bookworm
 
-import android.content.Context
 import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.SmallTest
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo
@@ -11,34 +12,38 @@ import assertk.assertions.isNotZero
 import assertk.assertions.isNull
 import assertk.assertions.isZero
 import com.caminaapps.bookworm.core.data.database.AppDatabase
-import com.caminaapps.bookworm.core.data.database.BookDao
 import com.caminaapps.bookworm.core.data.database.BookEntity
 import com.caminaapps.bookworm.core.data.database.toBook
+import com.caminaapps.bookworm.testing.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
 @OptIn(ExperimentalCoroutinesApi::class)
+@RunWith(AndroidJUnit4::class)
+@SmallTest
 class BookDaoTest {
 
-    private lateinit var bookDao: BookDao
-    private lateinit var db: AppDatabase
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    val mainCoroutineRule = MainDispatcherRule()
+
+    private val database = Room.inMemoryDatabaseBuilder(
+        getApplicationContext(),
+        AppDatabase::class.java
+    ).allowMainThreadQueries().build()
 
     @Before
-    fun createDb() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(
-            context,
-            AppDatabase::class.java
-        ).build()
-        bookDao = db.bookDao()
-    }
+    fun initDb() = database.clearAllTables()
 
     @Test
     fun bookDao_fetches_books_by_date_asc() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
@@ -76,6 +81,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_fetches_books_by_date_desc() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
@@ -113,6 +119,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_fetches_books_by_author_asc() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
@@ -150,6 +157,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_fetches_books_by_author_desc() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
@@ -187,6 +195,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_fetches_books_by_title_asc() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
@@ -224,6 +233,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_fetches_books_by_title_desc() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
@@ -261,6 +271,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_fetches_bookById_isNotNull() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
@@ -291,6 +302,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_fetches_bookById_isNull() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
@@ -319,6 +331,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_update_book() = runTest {
+        val bookDao = database.bookDao()
         val bookEntity = testBookEntity(
             id = "2",
             title = "Zebras"
@@ -334,6 +347,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_deleteById_removes_book() = runTest {
+        val bookDao = database.bookDao()
         val bookEntity = testBookEntity(
             id = "2",
             title = "Zebras"
@@ -348,6 +362,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_delete_removes_book() = runTest {
+        val bookDao = database.bookDao()
         val bookEntity = testBookEntity(
             id = "2",
             title = "Zebras"
@@ -362,6 +377,7 @@ class BookDaoTest {
 
     @Test
     fun bookDao_deleteAll_removes_book() = runTest {
+        val bookDao = database.bookDao()
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
