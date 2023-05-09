@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: 17
           cache: 'gradle'
 
       - name: Setup Gradle
@@ -78,7 +78,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: 17
           cache: 'gradle'
 
       - name: Setup Gradle
@@ -88,6 +88,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
+          disable-animations: true
+          disk-size: 6000M
+          heap-size: 600M
           script: ./gradlew connectedAndroidTest --continue --no-daemon
 
       - name: Publish Test Report of Instrumentation Tests

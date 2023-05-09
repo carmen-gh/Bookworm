@@ -1,5 +1,6 @@
 import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 // Without these suppressions version catalog usage here and in other build
 // files is marked red by IntelliJ:
@@ -61,11 +62,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
-
     buildFeatures {
         compose = true
     }
@@ -98,6 +97,12 @@ android {
 // Allow references to generated code (room)
 kapt {
     correctErrorTypes = true
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
 }
 
 dependencies {

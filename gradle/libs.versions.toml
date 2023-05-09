@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.30.1"
-android-gradle-plugin = "8.0.0"
+android-gradle-plugin = "8.0.1"
 android-test = "1.5.0"
 android-test-runner = "1.5.2"
 android-test-ext = "1.4.0"
