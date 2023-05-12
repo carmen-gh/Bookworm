@@ -2,6 +2,15 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="BookshelfViewModelTest.uiState_whenBooksLoaded_thenSuccess_new">
+        <State />
+      </entry>
+      <entry key="BookshelfViewModelTest.uiState_whenException_thenError">
+        <State />
+      </entry>
+      <entry key="BookshelfViewModelTest.uiState_whenSortChange_thenUpdatedSuccessData">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <targetSelectedWithDropDown>

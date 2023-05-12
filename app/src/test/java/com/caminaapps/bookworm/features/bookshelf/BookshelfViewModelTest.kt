@@ -1,24 +1,22 @@
 package com.caminaapps.bookworm.features.bookshelf
 
+import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import assertk.assertions.isNotEqualTo
+import assertk.assertions.isInstanceOf
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.model.BookshelfSortOrder
 import com.caminaapps.bookworm.features.bookshelf.domain.GetAllBooksUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrderUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.UpdateBookshelfSortOrderUseCase
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Error
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Loading
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Success
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfViewModel
 import com.caminaapps.bookworm.testing.FakeBookRepository
 import com.caminaapps.bookworm.testing.FakeUserPreferencesRepository
 import com.caminaapps.bookworm.testing.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -66,51 +64,46 @@ class BookshelfViewModelTest {
 
     @Test
     fun uiState_whenBooksLoaded_thenSuccess() = runTest {
-        bookRepository.send(bookList.sortedBy { it.author })
-        val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
 
-        bookRepository.send(bookList.sortedBy { it.author })
+        viewModel.uiState.test {
+            awaitItem() // initial state
 
-        userPreferencesRepository.send(testSortOrderAuthorAsc)
+            bookRepository.send(bookList.sortedBy { it.author })
+            userPreferencesRepository.send(testSortOrderAuthorAsc)
 
-        assertThat((viewModel.uiState.value as BookshelfUiState.Success).books)
-            .isEqualTo(bookList)
-        assertThat((viewModel.uiState.value as BookshelfUiState.Success).sortOrder)
-            .isEqualTo(testSortOrderAuthorAsc)
-
-        collectJob.cancel()
+            val uiState = awaitItem() as Success
+            assertThat(uiState.books).isEqualTo(bookList)
+            assertThat(uiState.sortOrder).isEqualTo(testSortOrderAuthorAsc)
+        }
     }
 
     @Test
     fun uiState_whenSortChange_thenUpdatedSuccessData() = runTest {
-        val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
+        viewModel.uiState.test {
+            awaitItem() // initial state
 
-        bookRepository.send(bookList.sortedBy { it.author })
-        userPreferencesRepository.send(testSortOrderAuthorAsc)
-        assertThat((viewModel.uiState.value as BookshelfUiState.Success).books)
-            .isEqualTo(bookList)
-        assertThat((viewModel.uiState.value as BookshelfUiState.Success).sortOrder)
-            .isEqualTo(testSortOrderAuthorAsc)
+            bookRepository.send(bookList.sortedBy { it.author })
+            userPreferencesRepository.send(testSortOrderAuthorAsc)
 
-        userPreferencesRepository.send(testSortOrderTitleAsc)
+            val uiState1 = awaitItem() as Success
+            assertThat(uiState1.sortOrder).isEqualTo(testSortOrderAuthorAsc)
 
-        assertThat((viewModel.uiState.value as BookshelfUiState.Success).books)
-            .isNotEqualTo(bookList)
-        assertThat((viewModel.uiState.value as BookshelfUiState.Success).sortOrder)
-            .isEqualTo(testSortOrderTitleAsc)
-
-        collectJob.cancel()
+            userPreferencesRepository.send(testSortOrderTitleAsc)
+            skipItems(1)
+            val uiState = awaitItem() as Success
+            assertThat(uiState.sortOrder).isEqualTo(testSortOrderTitleAsc)
+            assertThat(uiState.books).isEqualTo(bookList.sortedBy { it.title })
+        }
     }
 
     @Test
     fun uiState_whenException_thenError() = runTest {
         bookRepository.shouldReturnError = true
-        val collectJob = launch(UnconfinedTestDispatcher()) { viewModel.uiState.collect() }
-
-        viewModel.updateSortOrder(BookshelfSortOrder.TITLE_ASC)
-        assertThat(viewModel.uiState.value).isEqualTo(Error)
-
-        collectJob.cancel()
+        viewModel.uiState.test {
+            awaitItem() // initial state
+            viewModel.updateSortOrder(BookshelfSortOrder.TITLE_ASC)
+            assertThat(awaitItem()).isInstanceOf(BookshelfUiState.Error::class)
+        }
     }
 }
 

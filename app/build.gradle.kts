@@ -89,6 +89,7 @@ android {
     }
 
     lint {
+        xmlReport = true
         sarifReport = true
         checkDependencies = true
     }
