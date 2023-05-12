@@ -1,5 +1,6 @@
 import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 // Without these suppressions version catalog usage here and in other build
 // files is marked red by IntelliJ:
@@ -58,14 +59,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
+    kotlin {
+        jvmToolchain(17)
     }
-
     buildFeatures {
         compose = true
     }
@@ -74,7 +73,7 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
             excludes.add("META-INF/DEPENDENCIES")
@@ -98,6 +97,12 @@ android {
 // Allow references to generated code (room)
 kapt {
     correctErrorTypes = true
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
 }
 
 dependencies {
@@ -222,6 +227,9 @@ koverAndroid {
             }
         }
         html {
+            onCheck = true
+        }
+        xml {
             onCheck = true
         }
         verify {
