@@ -55,7 +55,7 @@ jobs:
           category: lint
 
       - name: Generate kover coverage report
-        run: ./gradlew koverXmlReport
+        run: ./gradlew koverXmlReportDebug
 
       - name: Upload coverage report to PR
         id: kover
