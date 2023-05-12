@@ -229,6 +229,9 @@ koverAndroid {
         html {
             onCheck = true
         }
+        xml {
+            onCheck = true
+        }
         verify {
             onCheck = true
         }
