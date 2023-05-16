@@ -2,13 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="BookshelfViewModelTest.uiState_whenBooksLoaded_thenSuccess_new">
+      <entry key="KotlinExtensionsTest">
         <State />
       </entry>
-      <entry key="BookshelfViewModelTest.uiState_whenException_thenError">
+      <entry key="KotlinExtensionsTest.replaceFirst_when_predicate_matching_then_first_is_replaced">
         <State />
       </entry>
-      <entry key="BookshelfViewModelTest.uiState_whenSortChange_thenUpdatedSuccessData">
+      <entry key="KotlinExtensionsTest.replaceFirst_when_predicate_not_matching">
+        <State />
+      </entry>
+      <entry key="KotlinExtensionsTest.replace_when_predicate_matching">
+        <State />
+      </entry>
+      <entry key="KotlinExtensionsTest.replace_when_predicate_no_match">
         <State />
       </entry>
       <entry key="app">
