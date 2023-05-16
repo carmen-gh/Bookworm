@@ -194,8 +194,8 @@ tasks.detekt.configure {
     }
 }
 
-koverAndroid {
-    report("debug") {
+koverReport {
+    androidReports("debug") {
         filters {
             excludes {
                 classes(
