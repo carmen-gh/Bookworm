@@ -89,6 +89,7 @@ android {
     }
 
     lint {
+        xmlReport = true
         sarifReport = true
         checkDependencies = true
     }
@@ -193,8 +194,8 @@ tasks.detekt.configure {
     }
 }
 
-koverAndroid {
-    report("debug") {
+koverReport {
+    androidReports("debug") {
         filters {
             excludes {
                 classes(

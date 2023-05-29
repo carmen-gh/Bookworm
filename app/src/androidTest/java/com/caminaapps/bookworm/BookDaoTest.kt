@@ -199,7 +199,7 @@ class BookDaoTest {
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
-                title = "Destination"
+                title = "destination"
             ),
             testBookEntity(
                 id = "1",
@@ -225,7 +225,7 @@ class BookDaoTest {
         assertThat(datesAdded)
             .containsExactly(
                 "Android",
-                "Destination",
+                "destination",
                 "Stars",
                 "Zebras"
             )
@@ -237,7 +237,7 @@ class BookDaoTest {
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
-                title = "Destination"
+                title = "destination"
             ),
             testBookEntity(
                 id = "1",
@@ -264,7 +264,7 @@ class BookDaoTest {
             .containsExactly(
                 "Zebras",
                 "Stars",
-                "Destination",
+                "destination",
                 "Android"
             )
     }
@@ -275,7 +275,7 @@ class BookDaoTest {
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
-                title = "Destination"
+                title = "destination"
             ),
             testBookEntity(
                 id = "1",
@@ -306,7 +306,7 @@ class BookDaoTest {
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
-                title = "Destination"
+                title = "destination"
             ),
             testBookEntity(
                 id = "1",
@@ -381,7 +381,7 @@ class BookDaoTest {
         val bookEntities = listOf(
             testBookEntity(
                 id = "0",
-                title = "Destination"
+                title = "destination"
             ),
             testBookEntity(
                 id = "1",
