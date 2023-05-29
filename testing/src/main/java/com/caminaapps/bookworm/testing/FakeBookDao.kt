@@ -16,33 +16,33 @@ class FakeBookDao : BookDao {
 
     override fun getAllBooksStreamSortedByDateAsc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedBy { it.addedToBookshelf }
+            list.sortedBy(BookEntity::addedToBookshelf)
         }
 
     override fun getAllBooksStreamSortedByDateDesc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedByDescending { it.addedToBookshelf }
+            list.sortedByDescending(BookEntity::addedToBookshelf)
         }
 
     override fun getAllBooksStreamSortedByTitleAsc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedBy { it.title }
+            list.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, BookEntity::title))
         }
 
     override fun getAllBooksStreamSortedByTitleDesc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedByDescending { it.title }
+            list.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER, BookEntity::title))
         }
 
 
     override fun getAllBooksStreamSortedByAuthorAsc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedBy { it.author }
+            list.sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER, BookEntity::author))
         }
 
     override fun getAllBooksStreamSortedByAuthorDesc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedByDescending { it.author }
+            list.sortedWith(compareByDescending(String.CASE_INSENSITIVE_ORDER, BookEntity::author))
         }
 
     override fun getBookStream(bookId: String): Flow<BookEntity?> =

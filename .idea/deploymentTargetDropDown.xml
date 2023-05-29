@@ -2,36 +2,14 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="KotlinExtensionsTest">
-        <State />
-      </entry>
-      <entry key="KotlinExtensionsTest.replaceFirst_when_predicate_matching_then_first_is_replaced">
-        <State />
-      </entry>
-      <entry key="KotlinExtensionsTest.replaceFirst_when_predicate_not_matching">
-        <State />
-      </entry>
-      <entry key="KotlinExtensionsTest.replace_when_predicate_matching">
-        <State />
-      </entry>
-      <entry key="KotlinExtensionsTest.replace_when_predicate_no_match">
+      <entry key="All Tests">
         <State />
       </entry>
       <entry key="app">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="$USER_HOME$/.android/avd/Pixel_4_API_31.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2023-05-11T20:12:08.533291Z" />
-        </State>
+        <State />
+      </entry>
+      <entry key="bookDao_fetches_books_by_title_asc()">
+        <State />
       </entry>
     </value>
   </component>

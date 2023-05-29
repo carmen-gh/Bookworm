@@ -112,7 +112,6 @@ class BookRepositoryTest {
         }
     }
 
-
     @Test
     fun getAllBooksStream_sortOrder_is_title_asc() = runTest {
         val book0 = testBookEntity(
@@ -128,7 +127,6 @@ class BookRepositoryTest {
             title = "Zebra"
         )
         val expectedList = listOf(book1, book0, book2).map { it.toBook() }
-        // 1,2,0
 
         bookRepo.getAllBooksStream(TITLE_ASC).test {
             awaitItem()
