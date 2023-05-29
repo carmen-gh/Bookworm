@@ -2,13 +2,10 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="All Tests">
+      <entry key="All Instrumented Tests">
         <State />
       </entry>
       <entry key="app">
-        <State />
-      </entry>
-      <entry key="bookDao_fetches_books_by_title_asc()">
         <State />
       </entry>
     </value>

@@ -86,7 +86,6 @@ class BookRepositoryTest {
             bookDao.insertBooks(listOf(book0, book1, book2))
             assertThat(awaitItem()).isEqualTo(expectedList)
         }
-
     }
 
     @Test

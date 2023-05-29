@@ -64,7 +64,6 @@ class BookshelfViewModelTest {
 
     @Test
     fun uiState_whenBooksLoaded_thenSuccess() = runTest {
-
         viewModel.uiState.test {
             awaitItem() // initial state
 
