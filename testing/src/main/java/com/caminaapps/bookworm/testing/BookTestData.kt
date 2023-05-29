@@ -3,7 +3,7 @@ package com.caminaapps.bookworm.testing
 import com.caminaapps.bookworm.core.data.database.BookEntity
 import kotlinx.datetime.LocalDate
 
-private fun testBookEntity(
+fun testBookEntity(
     id: String = "0",
     title: String = "",
     dateAdded: LocalDate = LocalDate(2023, 1, 3),

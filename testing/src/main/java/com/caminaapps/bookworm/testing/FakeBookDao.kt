@@ -16,17 +16,17 @@ class FakeBookDao : BookDao {
 
     override fun getAllBooksStreamSortedByDateAsc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedBy { it.publishedDate }
+            list.sortedBy { it.addedToBookshelf }
         }
 
     override fun getAllBooksStreamSortedByDateDesc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedByDescending { it.publishedDate }
+            list.sortedByDescending { it.addedToBookshelf }
         }
 
     override fun getAllBooksStreamSortedByTitleAsc(): Flow<List<BookEntity>> =
         entitiesStateFlow.map { list ->
-            list.sortedBy { it.author }
+            list.sortedBy { it.title }
         }
 
     override fun getAllBooksStreamSortedByTitleDesc(): Flow<List<BookEntity>> =
@@ -53,6 +53,11 @@ class FakeBookDao : BookDao {
     override suspend fun insertBook(book: BookEntity) =
         entitiesStateFlow.update {
             (it + book).distinctBy(BookEntity::id)
+        }
+
+    suspend fun insertBooks(books: List<BookEntity>) =
+        entitiesStateFlow.update { list ->
+            (list + books).distinctBy(BookEntity::id)
         }
 
     override suspend fun updateBook(book: BookEntity) =
