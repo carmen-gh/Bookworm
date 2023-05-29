@@ -41,7 +41,7 @@ retrofit-serialization-converter = "1.0.0"
 room = "2.5.0"
 test-logger = "3.2.0"
 timber = "5.0.1"
-turbine = "0.12.3"
+turbine = "0.13.0"
 androidx-test-ext-junit = "1.1.5"
 material = "1.5.0"
 
