@@ -66,6 +66,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: Code Coverage
           update-comment: true
+          coverage-counter-type: LINE
 
 
   android_tests:
