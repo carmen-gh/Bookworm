@@ -58,7 +58,7 @@ jobs:
         run: ./gradlew koverXmlReportDebug
 
       - name: Upload coverage report to PR
-        if: ${{ github.event.pull_request.user.login != 'dependabot' }}
+        if: ${{ GITHUB_REPOSITORY_OWNER == GITHUB_ACTOR }}
         id: kover
         uses: mi-kas/kover-report@v1
         with:
