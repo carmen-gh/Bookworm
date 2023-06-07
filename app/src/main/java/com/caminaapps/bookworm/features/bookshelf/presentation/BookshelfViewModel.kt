@@ -7,9 +7,9 @@ import com.caminaapps.bookworm.core.model.BookshelfSortOrder
 import com.caminaapps.bookworm.features.bookshelf.domain.GetAllBooksUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookshelfSortOrderUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.UpdateBookshelfSortOrderUseCase
-import com.caminaapps.bookworm.util.Result
+import com.caminaapps.bookworm.util.AsyncResult
 import com.caminaapps.bookworm.util.WhileUiSubscribed
-import com.caminaapps.bookworm.util.asResult
+import com.caminaapps.bookworm.util.asAsyncResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
@@ -35,16 +35,15 @@ class BookshelfViewModel @Inject constructor(
 
     private fun uiStream(): Flow<BookshelfUiState> {
         return combine(getAllBooks(), getBookshelfSortOrder(), ::Pair)
-            .asResult()
+            .asAsyncResult()
             .map { result ->
                 when (result) {
-                    is Result.Success -> {
+                    is AsyncResult.Success -> {
                         val (books, sortOrder) = result.data
                         BookshelfUiState.Success(books, sortOrder)
                     }
-
-                    is Result.Loading -> BookshelfUiState.Loading
-                    is Result.Error -> BookshelfUiState.Error
+                    is AsyncResult.Loading -> BookshelfUiState.Loading
+                    is AsyncResult.Failure -> BookshelfUiState.Error
                 }
             }
     }

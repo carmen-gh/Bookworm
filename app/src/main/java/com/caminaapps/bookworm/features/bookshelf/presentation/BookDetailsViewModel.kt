@@ -6,12 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.bookshelf.domain.DeleteBookUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookDetailsUseCase
-import com.caminaapps.bookworm.util.Result
-import com.caminaapps.bookworm.util.Result.Error
-import com.caminaapps.bookworm.util.Result.Loading
-import com.caminaapps.bookworm.util.Result.Success
+import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.*
+import com.caminaapps.bookworm.util.AsyncResult
+import com.caminaapps.bookworm.util.AsyncResult.Failure
+import com.caminaapps.bookworm.util.AsyncResult.Loading
+import com.caminaapps.bookworm.util.AsyncResult.Success
 import com.caminaapps.bookworm.util.WhileUiSubscribed
-import com.caminaapps.bookworm.util.asResult
+import com.caminaapps.bookworm.util.asAsyncResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,15 +29,13 @@ class BookViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val bookId: String = checkNotNull(savedStateHandle["bookId"])
-    private val bookStream: Flow<Result<Book?>> = getBookDetails(bookId).asResult()
+    private val bookStream: Flow<AsyncResult<Book?>> = getBookDetails(bookId).asAsyncResult()
 
     val uiState: StateFlow<BookDetailsUiState> = bookStream.map { result ->
         when (result) {
-            is Success -> result.data?.let { BookDetailsUiState.Success(it) }
-                ?: BookDetailsUiState.NotFound
-
+            is Success -> result.data?.let { BookDetailsUiState.Success(it) } ?: NotFound
             is Loading -> BookDetailsUiState.Loading
-            is Error -> BookDetailsUiState.Error
+            is Failure -> Error
         }
     }.stateIn(
         scope = viewModelScope,
