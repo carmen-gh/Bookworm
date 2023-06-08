@@ -150,4 +150,94 @@ class AsyncResultTest {
         }
         assertThat(gotExecuted).isTrue()
     }
+
+    @Test
+    fun onSuccessFlow_gets_executed_for_success_item() = runTest {
+        var gotExecuted = 0
+        flow {
+            emit(AsyncResult.Loading)
+            emit(AsyncResult.Success(true))
+        }.onSuccess {
+            gotExecuted += 1
+        }.test {
+            awaitItem() // loading
+            awaitItem() // success
+            awaitComplete()
+            assertThat(gotExecuted).isEqualTo(1)
+        }
+    }
+
+    @Test
+    fun onSuccessFlow_gets_not_executed_for_not_success_items() = runTest {
+        flow {
+            emit(AsyncResult.Failure())
+            emit(AsyncResult.Loading)
+        }.onSuccess {
+            fail("onSuccess was executed, expected to be skipped")
+        }.test {
+            awaitItem() // failure
+            awaitItem() // loading
+            awaitComplete()
+        }
+    }
+
+    @Test
+    fun onFailureFlow_gets_not_executed_for_not_failure_items() = runTest {
+        flow {
+            emit(AsyncResult.Success(true))
+            emit(AsyncResult.Loading)
+        }.onFailure {
+            fail("onFailure was executed, expected to be skipped")
+        }.test {
+            awaitItem() // success
+            awaitItem() // loading
+            awaitComplete()
+        }
+    }
+
+    @Test
+    fun onFailureFlow_gets_executed_for_failure_item() = runTest {
+        var gotExecuted = 0
+        flow {
+            emit(AsyncResult.Loading)
+            emit(AsyncResult.Failure())
+        }.onFailure {
+            gotExecuted += 1
+        }.test {
+            awaitItem() // loading
+            awaitItem() // failure
+            awaitComplete()
+            assertThat(gotExecuted).isEqualTo(1)
+        }
+    }
+
+    @Test
+    fun onLoadingFlow_gets_not_executed_for_not_loading_items() = runTest {
+        flow {
+            emit(AsyncResult.Success(true))
+            emit(AsyncResult.Failure())
+        }.onLoading {
+            fail("onLoading was executed, expected to be skipped")
+        }.test {
+            awaitItem() // success
+            awaitItem() // failure
+            awaitComplete()
+        }
+    }
+
+    @Test
+    fun onLoadingFlow_gets_executed_for_loading_item() = runTest {
+        var gotExecuted = 0
+        flow {
+            emit(AsyncResult.Loading)
+            emit(AsyncResult.Failure())
+        }.onFailure {
+            gotExecuted += 1
+        }.test {
+            awaitItem() // loading
+            awaitItem() // failure
+            awaitComplete()
+            assertThat(gotExecuted).isEqualTo(1)
+        }
+    }
 }

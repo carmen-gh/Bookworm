@@ -6,6 +6,7 @@ import com.caminaapps.bookworm.util.AsyncResult.Success
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 
 /**
@@ -90,4 +91,37 @@ inline fun <T> AsyncResult<T>.onFailure(action: (exception: Throwable?) -> Unit)
         action(it.exception)
     }
     return this
+}
+
+/**
+ * Returns a flow that invokes the given action if the upstream emits an item of type [AsyncResult.Success]
+ */
+fun <T> Flow<AsyncResult<T>>.onSuccess(action: suspend (T) -> Unit): Flow<AsyncResult<T>> {
+    return this.onEach { result ->
+        (result as? Success)?.let {
+            action(it.data)
+        }
+    }
+}
+
+/**
+ * Returns a flow that invokes the given action if the upstream emits an item of type [AsyncResult.Failure]
+ */
+fun <T> Flow<AsyncResult<T>>.onFailure(action: suspend (Throwable?) -> Unit): Flow<AsyncResult<T>> {
+    return this.onEach { result ->
+        (result as? Failure)?.let {
+            action(it.exception)
+        }
+    }
+}
+
+/**
+ * Returns a flow that invokes the given action if the upstream emits an item of type [AsyncResult.Loading]
+ */
+fun <T> Flow<AsyncResult<T>>.onLoading(action: suspend () -> Unit): Flow<AsyncResult<T>> {
+    return this.onEach { result ->
+        if (result.isLoading) {
+            action()
+        }
+    }
 }
