@@ -15,16 +15,16 @@ interface BookDao {
     @Query("SELECT * FROM book ORDER BY added_date DESC")
     fun getAllBooksStreamSortedByDateDesc(): Flow<List<BookEntity>>
 
-    @Query("SELECT * FROM book ORDER BY title ASC")
+    @Query("SELECT * FROM book ORDER BY title COLLATE NOCASE ASC")
     fun getAllBooksStreamSortedByTitleAsc(): Flow<List<BookEntity>>
 
-    @Query("SELECT * FROM book ORDER BY title DESC")
+    @Query("SELECT * FROM book ORDER BY title COLLATE NOCASE DESC")
     fun getAllBooksStreamSortedByTitleDesc(): Flow<List<BookEntity>>
 
-    @Query("SELECT * FROM book ORDER BY author ASC")
+    @Query("SELECT * FROM book ORDER BY author COLLATE NOCASE ASC")
     fun getAllBooksStreamSortedByAuthorAsc(): Flow<List<BookEntity>>
 
-    @Query("SELECT * FROM book ORDER BY author DESC")
+    @Query("SELECT * FROM book ORDER BY author COLLATE NOCASE DESC")
     fun getAllBooksStreamSortedByAuthorDesc(): Flow<List<BookEntity>>
 
     @Query("SELECT * FROM book WHERE id = :bookId")

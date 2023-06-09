@@ -1,5 +1,7 @@
 ### Little fun project to learn and play around with new things...
 
+## Work in progress 🚧
+
 # Bookworm 📚🪱
 
 An app to keep an overview of all your books.
