@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.bookshelf.domain.DeleteBookUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookDetailsUseCase
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.*
 import com.caminaapps.bookworm.util.AsyncResult
 import com.caminaapps.bookworm.util.AsyncResult.Failure
 import com.caminaapps.bookworm.util.AsyncResult.Loading
@@ -25,7 +24,7 @@ import javax.inject.Inject
 class BookViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getBookDetails: GetBookDetailsUseCase,
-    private val deleteBook: DeleteBookUseCase
+    private val deleteBook: DeleteBookUseCase,
 ) : ViewModel() {
 
     private val bookId: String = checkNotNull(savedStateHandle["bookId"])
@@ -33,9 +32,11 @@ class BookViewModel @Inject constructor(
 
     val uiState: StateFlow<BookDetailsUiState> = bookStream.map { result ->
         when (result) {
-            is Success -> result.data?.let { BookDetailsUiState.Success(it) } ?: NotFound
+            is Success -> result.data?.let { BookDetailsUiState.Success(it) }
+                ?: BookDetailsUiState.NotFound
+
             is Loading -> BookDetailsUiState.Loading
-            is Failure -> Error
+            is Failure -> BookDetailsUiState.Error
         }
     }.stateIn(
         scope = viewModelScope,
