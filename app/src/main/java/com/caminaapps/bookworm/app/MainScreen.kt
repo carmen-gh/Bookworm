@@ -15,7 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.caminaapps.bookworm.core.navigation.BookwormBottomNavigation
 import com.caminaapps.bookworm.core.navigation.BookwormNavHost
 import com.caminaapps.bookworm.core.navigation.Screen
-import com.caminaapps.bookworm.core.navigation.Screen.Camera
+import com.caminaapps.bookworm.core.navigation.Screen.BarcodeScanner
 import com.caminaapps.bookworm.core.navigation.Screen.SearchBookByTitle
 import com.caminaapps.bookworm.core.navigation.Screen.SearchIsbnBookResult
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
@@ -34,7 +34,7 @@ fun MainScreen() {
             SearchBookByTitle.route -> false
             SearchIsbnBookResult.route -> false
             Screen.EnterBook.route -> false
-            Camera.route -> false
+            BarcodeScanner.route -> false
             else -> true
         }
 
