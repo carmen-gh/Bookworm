@@ -133,7 +133,6 @@ dependencies {
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.lifecycle.compose)
-    implementation(libs.mlkit.barcode.scanning)
     implementation(libs.navigation.compose)
     implementation(libs.okhttp3.logging)
     implementation(libs.play.services.code.scanner)

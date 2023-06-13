@@ -34,7 +34,6 @@ kover = "0.7.1"
 ksp = "1.8.10-1.0.9"
 lifecycle-compose = "2.6.1"
 material = "1.5.0"
-mlkit-barcode-scanning = "17.1.0"
 mockk = "1.13.5"
 navigation-compose = "2.6.0"
 okhttp3-logging = "4.11.0"
@@ -97,7 +96,6 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 lifecycle-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-compose" }
-mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkit-barcode-scanning" }
 mockk-agent = { module = "io.mockk:mockk-agent", version.ref = "mockk" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
