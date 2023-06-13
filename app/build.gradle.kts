@@ -136,6 +136,7 @@ dependencies {
     implementation(libs.mlkit.barcode.scanning)
     implementation(libs.navigation.compose)
     implementation(libs.okhttp3.logging)
+    implementation(libs.play.services.code.scanner)
     implementation(libs.retrofit)
     implementation(libs.retrofit.serialization.converter)
     implementation(libs.room)
@@ -183,7 +184,7 @@ dependencies {
 
 detekt {
     autoCorrect = true
-    config = rootProject.files("config/detekt/detekt.yml")
+    config.setFrom(rootProject.files("config/detekt/detekt.yml"))
     buildUponDefaultConfig = true
     ignoredBuildTypes = listOf("release")
 }
@@ -238,7 +239,6 @@ koverReport {
         }
     }
 }
-
 
 testlogger {
     theme = MOCHA
