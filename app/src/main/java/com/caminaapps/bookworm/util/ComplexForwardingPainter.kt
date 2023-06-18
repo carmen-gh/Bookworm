@@ -5,7 +5,6 @@ import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 
-
 // https://coil-kt.github.io/coil/recipes/#transforming-painters
 // Transforming Painters¶
 // Both AsyncImage and AsyncImagePainter have placeholder/error/fallback arguments that accept
@@ -33,7 +32,7 @@ private class ForwardingPainter(
     private val painter: Painter,
     private var alpha: Float,
     private var colorFilter: ColorFilter?,
-    private val onDraw: DrawScope.(ForwardingDrawInfo) -> Unit,
+    private val onDrawAction: DrawScope.(ForwardingDrawInfo) -> Unit,
 ) : Painter() {
 
     private var info = newInfo()
@@ -56,7 +55,7 @@ private class ForwardingPainter(
         return true
     }
 
-    override fun DrawScope.onDraw() = onDraw(info)
+    override fun DrawScope.onDraw() = onDrawAction(info)
 
     private fun newInfo() = ForwardingDrawInfo(painter, alpha, colorFilter)
 }

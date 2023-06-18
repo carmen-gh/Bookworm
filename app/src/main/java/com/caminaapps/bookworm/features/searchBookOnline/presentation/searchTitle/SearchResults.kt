@@ -119,13 +119,8 @@ private fun SearchResultItem(
             style = MaterialTheme.typography.subtitle1,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.constrainAs(name) {
-                linkTo(
-                    start = image.end,
-                    startMargin = 16.dp,
-                    end = add.start,
-                    endMargin = 16.dp,
-                    bias = 0f
-                )
+                start.linkTo(image.end, margin = 16.dp)
+                end.linkTo(add.start, margin = 16.dp)
             }
         )
         Text(
@@ -133,20 +128,16 @@ private fun SearchResultItem(
             style = MaterialTheme.typography.body1,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.constrainAs(tag) {
-                linkTo(
-                    start = image.end,
-                    startMargin = 16.dp,
-                    end = add.start,
-                    endMargin = 16.dp,
-                    bias = 0f
-                )
+                start.linkTo(image.end, margin = 16.dp)
+                end.linkTo(add.start, goneMargin = 16.dp)
             }
         )
         Spacer(
             Modifier
                 .height(8.dp)
                 .constrainAs(priceSpacer) {
-                    linkTo(top = tag.bottom, bottom = price.top)
+                    top.linkTo(tag.bottom)
+                    bottom.linkTo(price.top)
                 }
         )
         Text(
@@ -154,13 +145,8 @@ private fun SearchResultItem(
             style = MaterialTheme.typography.subtitle1,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.constrainAs(price) {
-                linkTo(
-                    start = image.end,
-                    startMargin = 16.dp,
-                    end = add.start,
-                    endMargin = 16.dp,
-                    bias = 0f
-                )
+                start.linkTo(image.end, margin = 16.dp)
+                end.linkTo(add.start, margin = 16.dp)
             }
         )
     }
