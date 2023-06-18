@@ -1,7 +1,6 @@
 package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,13 +11,14 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -35,9 +35,9 @@ import coil.request.ImageRequest
 import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
+import com.caminaapps.bookworm.util.forwardingPainter
 import com.caminaapps.bookworm.util.previewParameterProvider.BookPreviewParameterProvider
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SearchResults(
     searchResults: List<Book>,
@@ -46,14 +46,18 @@ fun SearchResults(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = pluralStringResource(R.plurals.search_count, searchResults.size, searchResults.size),
+            text = pluralStringResource(
+                R.plurals.search_count,
+                searchResults.size,
+                searchResults.size
+            ),
             style = MaterialTheme.typography.h6,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
         )
         LazyColumn {
             itemsIndexed(searchResults) { index, book ->
-                SearchResult(
+                SearchResultItem(
                     book = book,
                     showDivider = index != 0,
                     modifier = Modifier.clickable { onResultClick(book) }
@@ -63,12 +67,12 @@ fun SearchResults(
     }
 }
 
-// TODO simplify layout with final designf
+// TODO simplify layout with final design
 @Composable
-private fun SearchResult(
+private fun SearchResultItem(
     book: Book,
     showDivider: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -93,7 +97,10 @@ private fun SearchResult(
                 .data(book.coverUrl)
                 .crossfade(true)
                 .build(),
-            placeholder = painterResource(R.drawable.ic_baseline_book_24),
+            placeholder = forwardingPainter(
+                painter = painterResource(id = R.drawable.ic_baseline_book_24),
+                colorFilter = ColorFilter.tint(MaterialTheme.colors.onBackground),
+            ),
             contentDescription = book.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier.constrainAs(image) {
@@ -112,13 +119,8 @@ private fun SearchResult(
             style = MaterialTheme.typography.subtitle1,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.constrainAs(name) {
-                linkTo(
-                    start = image.end,
-                    startMargin = 16.dp,
-                    end = add.start,
-                    endMargin = 16.dp,
-                    bias = 0f
-                )
+                start.linkTo(image.end, margin = 16.dp)
+                end.linkTo(add.start, margin = 16.dp)
             }
         )
         Text(
@@ -126,20 +128,16 @@ private fun SearchResult(
             style = MaterialTheme.typography.body1,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.constrainAs(tag) {
-                linkTo(
-                    start = image.end,
-                    startMargin = 16.dp,
-                    end = add.start,
-                    endMargin = 16.dp,
-                    bias = 0f
-                )
+                start.linkTo(image.end, margin = 16.dp)
+                end.linkTo(add.start, goneMargin = 16.dp)
             }
         )
         Spacer(
             Modifier
                 .height(8.dp)
                 .constrainAs(priceSpacer) {
-                    linkTo(top = tag.bottom, bottom = price.top)
+                    top.linkTo(tag.bottom)
+                    bottom.linkTo(price.top)
                 }
         )
         Text(
@@ -147,13 +145,8 @@ private fun SearchResult(
             style = MaterialTheme.typography.subtitle1,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier.constrainAs(price) {
-                linkTo(
-                    start = image.end,
-                    startMargin = 16.dp,
-                    end = add.start,
-                    endMargin = 16.dp,
-                    bias = 0f
-                )
+                start.linkTo(image.end, margin = 16.dp)
+                end.linkTo(add.start, margin = 16.dp)
             }
         )
     }
@@ -162,7 +155,7 @@ private fun SearchResult(
 @Composable
 fun NoResults(
     query: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -170,7 +163,7 @@ fun NoResults(
             .wrapContentSize()
             .padding(24.dp)
     ) {
-        Image(
+        Icon(
             painterResource(R.drawable.ic_baseline_search_42), // empty search
             contentDescription = null
         )
@@ -189,11 +182,11 @@ fun NoResults(
 @Preview("large font", fontScale = 2f)
 @Composable
 private fun SearchResultPreview(
-    @PreviewParameter(BookPreviewParameterProvider::class, limit = 1) book: Book
+    @PreviewParameter(BookPreviewParameterProvider::class, limit = 1) book: Book,
 ) {
     BookwormTheme {
         Surface {
-            SearchResult(
+            SearchResultItem(
                 book = book,
                 showDivider = false
             )

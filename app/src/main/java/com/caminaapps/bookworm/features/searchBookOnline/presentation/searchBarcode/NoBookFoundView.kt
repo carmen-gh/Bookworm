@@ -2,7 +2,6 @@ package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBar
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
@@ -21,8 +20,8 @@ import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 @Composable
 fun NoBookFoundView(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = stringResource(id = R.string.text_search_no_result),

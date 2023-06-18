@@ -45,7 +45,7 @@ fun BookBarcodeResultScreen(
     Scaffold(
         topBar = {
             TopAppBarNavigationClose(
-                title = "Book details",
+                title = if (viewModel.uiState.book != null) "Book details" else "",
                 onClose = onCloseScreen
             )
         },
@@ -69,14 +69,23 @@ fun BookBarcodeResultScreen(
                 }
             )
         }
-    }
 
-    if (viewModel.uiState.book == null && !viewModel.uiState.isLoading) {
-        NoBookFoundView(modifier = Modifier.fillMaxSize())
-    }
-
-    if (viewModel.uiState.errorOcured) {
-        Text("Error", modifier = Modifier.fillMaxSize())
+        if (viewModel.uiState.book == null && !viewModel.uiState.isLoading) {
+            NoBookFoundView(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+                    .padding(vertical = 160.dp)
+            )
+        }
+        if (viewModel.uiState.errorOcured) {
+            Text(
+                "Error",
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+            )
+        }
     }
 }
 
@@ -116,7 +125,7 @@ fun BookResultContent(
 
 @Composable
 fun SearchBookResultContent(
-    book: Book
+    book: Book,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -152,7 +161,7 @@ fun SearchBookResultContent(
 @Preview(showBackground = true)
 @Composable
 fun SearchBookIsbnContentPreview(
-    @PreviewParameter(BookPreviewParameterProvider::class, limit = 2) book: Book
+    @PreviewParameter(BookPreviewParameterProvider::class, limit = 2) book: Book,
 ) {
     BookwormTheme {
         BookResultContent(

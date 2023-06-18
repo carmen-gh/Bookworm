@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -47,11 +48,12 @@ import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitl
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.NoResults
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleUiState.Success
 
+@Suppress("MagicNumber")
 @Composable
 fun SearchForBookTitleScreen(
     onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: SearchForBookTitleViewModel = hiltViewModel()
+    viewModel: SearchForBookTitleViewModel = hiltViewModel(),
 ) {
     TrackedScreen(name = "Search book online by title")
     var query by remember { mutableStateOf("") }
@@ -86,8 +88,9 @@ fun SearchForBookTitleScreen(
                     .padding(innerPadding)
                     .fillMaxWidth()
             )
+
             is Loading -> FullScreenLoading()
-            is NoResults -> NoResults(query)
+            is NoResults -> NoResults(query, modifier = modifier.fillMaxHeight(0.5f))
             is Success -> {
                 SearchResults(
                     modifier = Modifier.padding(innerPadding),
@@ -98,6 +101,7 @@ fun SearchForBookTitleScreen(
                     }
                 )
             }
+
             is Error -> Text(text = stringResource((uiState as Error).message))
         }
     }
