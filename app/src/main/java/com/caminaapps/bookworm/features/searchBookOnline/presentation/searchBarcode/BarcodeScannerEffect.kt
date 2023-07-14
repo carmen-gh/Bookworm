@@ -4,11 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import com.caminaapps.bookworm.features.searchBookOnline.BarcodeScanner
 import timber.log.Timber
 
 @Composable
-fun BarcodeScannerLauncher(
+fun BarcodeScannerEffect(
     onBarcodeDetection: (String) -> Unit,
     onCancel: () -> Unit,
 ) {
