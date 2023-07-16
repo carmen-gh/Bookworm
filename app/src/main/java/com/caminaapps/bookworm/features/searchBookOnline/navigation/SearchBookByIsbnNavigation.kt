@@ -16,7 +16,7 @@ private const val ISBN_ARG = "isbn"
 
 class SearchBookByIsbnArgs(val isbn: String) {
     constructor(savedStateHandle: SavedStateHandle, decoder: StringDecoder) :
-            this(decoder.decode(checkNotNull(savedStateHandle[ISBN_ARG])))
+        this(decoder.decode(checkNotNull(savedStateHandle[ISBN_ARG])))
 }
 
 fun NavController.navigateToSearchBookByIsbn(isbn: String, navOptions: NavOptions) {

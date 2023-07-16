@@ -18,7 +18,7 @@ internal const val BOOK_DETAILS_ROUTE = "book_details_route"
 
 class BookDetailsArgs(val bookId: BookId) {
     constructor(savedStateHandle: SavedStateHandle, decoder: StringDecoder) :
-            this(decoder.decode(checkNotNull(savedStateHandle[BOOK_ID_ARG])))
+        this(decoder.decode(checkNotNull(savedStateHandle[BOOK_ID_ARG])))
 }
 
 fun NavController.navigateToBookDetails(bookId: BookId) {
