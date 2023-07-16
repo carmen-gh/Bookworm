@@ -3,100 +3,97 @@ package com.caminaapps.bookworm.core.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfScreen
-import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfSearchScreen
-import com.caminaapps.bookworm.features.enterBook.EnterBookScreen
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.BarcodeScannerLauncher
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.BookBarcodeResultScreen
-import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchTitle.SearchForBookTitleScreen
-import com.caminaapps.bookworm.features.settings.SettingsScreen
-import com.caminaapps.bookworm.features.wishlist.WishlistScreen
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import androidx.navigation.navOptions
+import com.caminaapps.bookworm.app.BookwormAppState
+import com.caminaapps.bookworm.features.bookshelf.navigation.BOOKSHELF_ROUTE
+import com.caminaapps.bookworm.features.bookshelf.navigation.bookDetailsDestination
+import com.caminaapps.bookworm.features.bookshelf.navigation.bookshelfDestination
+import com.caminaapps.bookworm.features.bookshelf.navigation.bookshelfSearchDestination
+import com.caminaapps.bookworm.features.bookshelf.navigation.navigateToBookDetails
+import com.caminaapps.bookworm.features.bookshelf.navigation.navigateToBookshelfSearch
+import com.caminaapps.bookworm.features.enterBook.navigation.enterBookDestination
+import com.caminaapps.bookworm.features.enterBook.navigation.navigateToEnterBook
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.BARCODE_SCANNER_ROUTE
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.SEARCH_BOOK_BY_ISBN_ROUTE
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.barcodeScannerDestination
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.navigateToBarcodeScanner
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.navigateToSearchBookByIsbn
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.navigateToSearchBookByTitle
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.searchBookByIsbnDestination
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.searchBookByTitleDestination
+import com.caminaapps.bookworm.features.settings.navigation.settingsDestination
+import com.caminaapps.bookworm.features.wishlist.navigation.wishlistDestination
 
 @ExperimentalComposeUiApi
-@ExperimentalPermissionsApi
 @Composable
 fun BookwormNavHost(
-    navController: NavHostController,
+    appState: BookwormAppState,
     modifier: Modifier = Modifier,
+    startDestination: String = BOOKSHELF_ROUTE,
 ) {
-    NavHost(navController, startDestination = BottomNavigationScreen.Bookshelf.route, modifier) {
+    val navController = appState.navController
+
+    NavHost(
+        navController = navController,
+        startDestination = startDestination,
+        modifier = modifier
+    ) {
         // Bookshelf -------------------------------------------------------------------------------
-        composable(BottomNavigationScreen.Bookshelf.route) {
-            BookshelfScreen(
-                onBook = { book ->
-                    navController.navigate(Screen.BookDetail.createRoute(bookId = book.id))
-                },
-                onScanBarcode = {
-                    navController.navigate(Screen.BarcodeScanner.createRoute())
-                },
-                onSearchOnline = {
-                    navController.navigate(Screen.SearchBookByTitle.createRoute())
-                },
-                onEnterBook = {
-                    navController.navigate(Screen.EnterBook.createRoute())
-                },
-                onSearchList = {
-                    navController.navigate(Screen.SearchBookshelf.createRoute())
-                }
-            )
-        }
+        bookshelfDestination(
+            onScanBarcode = navController::navigateToBarcodeScanner,
+            onSearchOnline = navController::navigateToSearchBookByTitle,
+            onEnterBook = navController::navigateToEnterBook,
+            onBook = { navController.navigateToBookDetails(it.id) },
+            onSearchList = navController::navigateToBookshelfSearch
+        )
 
-        composable(Screen.BookDetail.route) {
-            BookDetailsScreen(onUpNavigationClick = navController::navigateUp)
-        }
-
-        composable(Screen.SearchIsbnBookResult.route) {
-            BookBarcodeResultScreen(
-                onCloseScreen = navController::navigateUp,
-                onScanBarcode = {
-                    navController.navigate(Screen.BarcodeScanner.createRoute()) {
-                        popUpTo(Screen.SearchIsbnBookResult.route) { inclusive = true }
+        barcodeScannerDestination(
+            onBarcodeDetection = { isbn ->
+                navController.navigateToSearchBookByIsbn(
+                    isbn = isbn,
+                    navOptions {
+                        popUpTo(BARCODE_SCANNER_ROUTE) { inclusive = true }
                     }
-                }
-            )
-        }
+                )
+            },
+            onCancel = navController::navigateUp
+        )
 
-        composable(Screen.BarcodeScanner.route) {
-            BarcodeScannerLauncher(
-                onCancel = navController::navigateUp,
-                onBarcodeDetection = { isbn ->
-                    navController.navigate(Screen.SearchIsbnBookResult.createRoute(isbn)) {
-                        popUpTo(Screen.BarcodeScanner.route) { inclusive = true }
+        searchBookByIsbnDestination(
+            onCloseScreen = navController::navigateUp,
+            onScanBarcode = {
+                navController.navigateToBarcodeScanner(
+                    navOptions {
+                        popUpTo(SEARCH_BOOK_BY_ISBN_ROUTE) { inclusive = true }
                     }
-                }
-            )
-        }
+                )
+            }
+        )
 
-        composable(Screen.SearchBookByTitle.route) {
-            SearchForBookTitleScreen(onNavigateUp = navController::navigateUp)
-        }
+        searchBookByTitleDestination(
+            onUpNavigation = navController::navigateUp
+        )
 
-        composable(Screen.EnterBook.route) {
-            EnterBookScreen(onUpNavigationClick = navController::navigateUp)
-        }
+        bookshelfSearchDestination(
+            onUpNavigation = navController::navigateUp,
+            onSearchResultSelection = { bookId ->
+                navController.navigateToBookDetails(bookId)
+            }
+        )
 
-        composable(Screen.SearchBookshelf.route) {
-            BookshelfSearchScreen(
-                onSearchResultSelection = { bookId ->
-                    navController.navigate(Screen.BookDetail.createRoute(bookId = bookId))
-                },
-                onUpNavigationClick = navController::navigateUp
-            )
-        }
+        enterBookDestination(
+            onUpNavigation = navController::navigateUp
+        )
+
+        bookDetailsDestination(
+            onUpNavigation = navController::navigateUp
+        )
 
         // Wishlist -----------------------------------------------------------------------------------
-        composable(BottomNavigationScreen.Wishlist.route) {
-            WishlistScreen()
-        }
+        wishlistDestination()
 
         // Settings --------------------------------------------------------------------------------
-        composable(BottomNavigationScreen.Settings.route) {
-            SettingsScreen()
-        }
+        settingsDestination()
     }
 }

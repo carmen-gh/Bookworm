@@ -13,15 +13,14 @@ import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiStat
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsUiState.Success
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookViewModel
 import com.caminaapps.bookworm.testing.FakeBookRepository
+import com.caminaapps.bookworm.testing.FakeStringDecoder
 import com.caminaapps.bookworm.testing.MainDispatcherRule
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class BookViewModelTest {
 
     @get:Rule
@@ -36,6 +35,7 @@ class BookViewModelTest {
     fun setUp() {
         viewModel = BookViewModel(
             savedStateHandle = SavedStateHandle(mapOf("bookId" to testInputBookMatching.id)),
+            stringDecoder = FakeStringDecoder(),
             getBookDetails = getBookUseCase,
             deleteBook = deleteBookUseCase
         )
@@ -88,6 +88,7 @@ class BookViewModelTest {
         bookRepository.shouldReturnError = true
         viewModel = BookViewModel(
             savedStateHandle = SavedStateHandle(mapOf("bookId" to testInputBookMatching.id)),
+            stringDecoder = FakeStringDecoder(),
             getBookDetails = getBookUseCase,
             deleteBook = deleteBookUseCase
         )

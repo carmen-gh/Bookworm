@@ -46,10 +46,8 @@ import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookshelfUiState.Success
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.AddBookFloatingActionButton
 import com.caminaapps.bookworm.features.bookshelf.presentation.components.BookList
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
 @ExperimentalComposeUiApi
-@ExperimentalPermissionsApi
 @Composable
 fun BookshelfScreen(
     onScanBarcode: () -> Unit,

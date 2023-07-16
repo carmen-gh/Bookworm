@@ -6,10 +6,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.caminaapps.bookworm.core.common.decoder.StringDecoder
 import com.caminaapps.bookworm.core.model.Book
-import com.caminaapps.bookworm.core.navigation.Screen
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SaveBookFromOnlineSearchUseCase
 import com.caminaapps.bookworm.features.searchBookOnline.domain.SearchBookByIsbnUseCase
+import com.caminaapps.bookworm.features.searchBookOnline.navigation.SearchBookByIsbnArgs
 import com.caminaapps.bookworm.util.createExceptionHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,19 +20,20 @@ import javax.inject.Inject
 @HiltViewModel
 class BookBarcodeResultViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
+    stringDecoder: StringDecoder,
     private val searchBook: SearchBookByIsbnUseCase,
-    private val saveBook: SaveBookFromOnlineSearchUseCase
+    private val saveBook: SaveBookFromOnlineSearchUseCase,
 ) : ViewModel() {
 
     var uiState by mutableStateOf(SearchBookIsbnUiState())
         private set
 
+    private val searchArgs: SearchBookByIsbnArgs =
+        SearchBookByIsbnArgs(savedStateHandle, stringDecoder)
+    private val isbn = searchArgs.isbn
+
     init {
-        Screen.SearchIsbnBookResult.argumentKey?.let { argumentKey ->
-            savedStateHandle.get<String>(argumentKey)?.let { isbn ->
-                loadBook(isbn)
-            }
-        }
+        loadBook(isbn)
     }
 
     private fun loadBook(isbn: String) {
@@ -50,7 +52,7 @@ class BookBarcodeResultViewModel @Inject constructor(
     private fun onFailure(e: Throwable) {
 //        TODO("proper error message to the user")
         Timber.e(e.localizedMessage)
-        uiState = SearchBookIsbnUiState(isLoading = false, errorOcured = true)
+        uiState = SearchBookIsbnUiState(isLoading = false, errorOccurred = true)
     }
 
     fun saveBook() {
@@ -71,5 +73,5 @@ class BookBarcodeResultViewModel @Inject constructor(
 data class SearchBookIsbnUiState(
     val isLoading: Boolean = false,
     val book: Book? = null,
-    val errorOcured: Boolean = false
+    val errorOccurred: Boolean = false,
 )

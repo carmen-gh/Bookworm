@@ -78,7 +78,7 @@ fun BookBarcodeResultScreen(
                     .padding(vertical = 160.dp)
             )
         }
-        if (viewModel.uiState.errorOcured) {
+        if (viewModel.uiState.errorOccurred) {
             Text(
                 "Error",
                 modifier = Modifier

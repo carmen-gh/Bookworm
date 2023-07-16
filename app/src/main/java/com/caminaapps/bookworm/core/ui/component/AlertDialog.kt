@@ -1,48 +1,11 @@
 package com.caminaapps.bookworm.core.ui.component
 
-import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.caminaapps.bookworm.R
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.PermissionState
-import com.google.accompanist.permissions.shouldShowRationale
-
-@ExperimentalPermissionsApi
-@Composable
-fun CameraPermissionAlertDialog(
-    onDismissRequest: () -> Unit,
-    onConfirm: () -> Unit,
-    cameraPermissionState: PermissionState,
-) {
-    val context = LocalContext.current
-
-    ConfirmAlertDialog(
-        onDismissRequest = onDismissRequest,
-        onConfirm = {
-            if (cameraPermissionState.status.shouldShowRationale) {
-                context.startActivity(
-                    Intent(
-                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                        Uri.fromParts("package", context.packageName, null)
-                    )
-                )
-            } else if (!cameraPermissionState.status.shouldShowRationale) {
-                cameraPermissionState.launchPermissionRequest()
-            }
-            onConfirm()
-        },
-        titleText = stringResource(R.string.camera_permission_title),
-        messageText = stringResource(R.string.camera_permission_text),
-        cancelButtonText = stringResource(R.string.button_maybe_later)
-    )
-}
 
 @Composable
 fun ConfirmAlertDialog(
@@ -51,7 +14,7 @@ fun ConfirmAlertDialog(
     titleText: String,
     messageText: String,
     confirmButtonText: String = stringResource(R.string.button_ok),
-    cancelButtonText: String = stringResource(R.string.button_cancel)
+    cancelButtonText: String = stringResource(R.string.button_cancel),
 ) {
     AlertDialog(
         onDismissRequest = onDismissRequest,

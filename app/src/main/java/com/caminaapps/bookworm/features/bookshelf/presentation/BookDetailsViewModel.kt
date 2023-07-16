@@ -3,9 +3,11 @@ package com.caminaapps.bookworm.features.bookshelf.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.caminaapps.bookworm.core.common.decoder.StringDecoder
 import com.caminaapps.bookworm.core.model.Book
 import com.caminaapps.bookworm.features.bookshelf.domain.DeleteBookUseCase
 import com.caminaapps.bookworm.features.bookshelf.domain.GetBookDetailsUseCase
+import com.caminaapps.bookworm.features.bookshelf.navigation.BookDetailsArgs
 import com.caminaapps.bookworm.util.AsyncResult
 import com.caminaapps.bookworm.util.AsyncResult.Failure
 import com.caminaapps.bookworm.util.AsyncResult.Loading
@@ -23,11 +25,14 @@ import javax.inject.Inject
 @HiltViewModel
 class BookViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
+    stringDecoder: StringDecoder,
     getBookDetails: GetBookDetailsUseCase,
     private val deleteBook: DeleteBookUseCase,
 ) : ViewModel() {
 
-    private val bookId: String = checkNotNull(savedStateHandle["bookId"])
+    private val bookDetailsArgs: BookDetailsArgs = BookDetailsArgs(savedStateHandle, stringDecoder)
+    val bookId = bookDetailsArgs.bookId
+
     private val bookStream: Flow<AsyncResult<Book?>> = getBookDetails(bookId).asAsyncResult()
 
     val uiState: StateFlow<BookDetailsUiState> = bookStream.map { result ->

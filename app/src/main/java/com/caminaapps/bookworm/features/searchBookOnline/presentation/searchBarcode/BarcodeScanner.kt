@@ -1,4 +1,4 @@
-package com.caminaapps.bookworm.features.searchBookOnline
+package com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode
 
 import android.content.Context
 import com.google.mlkit.vision.barcode.common.Barcode

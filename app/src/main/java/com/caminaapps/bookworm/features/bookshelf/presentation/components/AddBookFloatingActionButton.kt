@@ -12,9 +12,7 @@ import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.component.SpeedDialFloatingActionButton
 import com.caminaapps.bookworm.core.ui.component.SpeedDialItem
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
 
-@ExperimentalPermissionsApi
 @Composable
 fun AddBookFloatingActionButton(
     onManual: () -> Unit,
@@ -51,7 +49,6 @@ fun AddBookFloatingActionButton(
 }
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@ExperimentalPermissionsApi
 @Preview(showBackground = true, name = "add floating button")
 @Composable
 fun PreviewAddFloatingButton() {

@@ -93,14 +93,11 @@ kapt {
 
 tasks.withType<KotlinCompile>().configureEach {
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 }
 
 dependencies {
-    implementation(libs.accompanist.permission)
-    implementation(libs.accompanist.placeholder)
-    implementation(libs.accompanist.systemuicontroller)
     implementation(libs.activity.compose)
     implementation(libs.appcompat)
     implementation(libs.camera.camera2)
@@ -110,6 +107,7 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.material)
     implementation(libs.compose.material.icons)
+    implementation(libs.compose.material3.window.sizes)
     implementation(libs.compose.tooling.preview)
     implementation(libs.compose.ui)
     implementation(libs.constraintlayout.compose)
