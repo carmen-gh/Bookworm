@@ -8,14 +8,15 @@ import androidx.navigation.NavOptions
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.caminaapps.bookworm.core.common.decoder.StringDecoder
 import com.caminaapps.bookworm.features.searchBookOnline.presentation.searchBarcode.BookBarcodeResultScreen
 
 const val SEARCH_BOOK_BY_ISBN_ROUTE = "search_book_by_isbn_route"
 private const val ISBN_ARG = "isbn"
 
 class SearchBookByIsbnArgs(val isbn: String) {
-    constructor(savedStateHandle: SavedStateHandle) :
-        this(Uri.decode(checkNotNull(savedStateHandle[ISBN_ARG])))
+    constructor(savedStateHandle: SavedStateHandle, decoder: StringDecoder) :
+            this(decoder.decode(checkNotNull(savedStateHandle[ISBN_ARG])))
 }
 
 fun NavController.navigateToSearchBookByIsbn(isbn: String, navOptions: NavOptions) {

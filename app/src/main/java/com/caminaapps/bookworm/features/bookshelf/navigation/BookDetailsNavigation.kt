@@ -8,16 +8,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.caminaapps.bookworm.core.common.decoder.StringDecoder
 import com.caminaapps.bookworm.core.model.BookId
 import com.caminaapps.bookworm.features.bookshelf.presentation.BookDetailsScreen
 
 @VisibleForTesting
-private const val BOOK_ID_ARG = "bookId"
-private const val BOOK_DETAILS_ROUTE = "book_details_route"
+internal const val BOOK_ID_ARG = "bookId"
+internal const val BOOK_DETAILS_ROUTE = "book_details_route"
 
 class BookDetailsArgs(val bookId: BookId) {
-    constructor(savedStateHandle: SavedStateHandle) :
-        this(Uri.decode(checkNotNull(savedStateHandle[BOOK_ID_ARG])))
+    constructor(savedStateHandle: SavedStateHandle, decoder: StringDecoder) :
+            this(decoder.decode(checkNotNull(savedStateHandle[BOOK_ID_ARG])))
 }
 
 fun NavController.navigateToBookDetails(bookId: BookId) {
