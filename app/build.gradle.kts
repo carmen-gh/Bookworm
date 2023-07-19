@@ -14,6 +14,7 @@ plugins {
     alias(libs.plugins.kover)
     alias(libs.plugins.ksp)
     alias(libs.plugins.test.logger)
+    alias(libs.plugins.about.libraries)
 }
 
 android {
@@ -230,4 +231,8 @@ koverReport {
 
 testlogger {
     theme = MOCHA
+}
+
+aboutLibraries {
+    registerAndroidTasks = false
 }

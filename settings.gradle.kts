@@ -15,10 +15,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Bookworm"
-
-include(
-    ":app"
-)
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+include(":app")
 include(":testing")
