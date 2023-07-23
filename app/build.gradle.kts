@@ -99,6 +99,8 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 dependencies {
+    implementation(libs.about.libs)
+    implementation(libs.accompanist.adaptive)
     implementation(libs.activity.compose)
     implementation(libs.appcompat)
     implementation(libs.camera.camera2)

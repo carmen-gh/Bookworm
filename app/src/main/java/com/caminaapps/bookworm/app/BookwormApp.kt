@@ -17,6 +17,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.window.layout.DisplayFeature
 import com.caminaapps.bookworm.core.navigation.BookwormNavHost
 import com.caminaapps.bookworm.core.navigation.TopLevelDestination
 import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
@@ -25,8 +26,10 @@ import com.caminaapps.bookworm.core.ui.theme.BookwormTheme
 @Composable
 fun BookwormApp(
     windowSizeClass: WindowSizeClass,
+    displayFeatures: List<DisplayFeature>,
     appState: BookwormAppState = rememberBookwormAppState(
-        windowSizeClass = windowSizeClass
+        windowSizeClass = windowSizeClass,
+        displayFeatures = displayFeatures,
     ),
 ) {
     BookwormTheme {

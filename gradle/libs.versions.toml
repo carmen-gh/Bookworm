@@ -1,6 +1,7 @@
 [versions]
-about-libraries-plugin = "10.8.3"
-android-gradle-plugin = "8.0.2"
+about-libs = "10.8.3"
+accompanist = "0.30.1"
+android-gradle-plugin = "8.1.2"
 android-test = "1.5.0"
 android-test-ext_junit = "1.1.5"
 android-test-runner = "1.5.2"
@@ -49,6 +50,8 @@ minSdk = "28"
 targetSdk = "33"
 
 [libraries]
+about-libs = { module = "com.mikepenz:aboutlibraries-core", version.ref = "about-libs" }
+accompanist-adaptive = { module = "com.google.accompanist:accompanist-adaptive", version.ref = "accompanist" }
 activity-compose = { module = "androidx.activity:activity-compose" }
 android-test-core = { module = "androidx.test:core-ktx", version.ref = "android-test" }
 android-test-ext-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "android-test-ext_junit" }
@@ -105,7 +108,7 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 
 [plugins]
-about-libraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "about-libraries-plugin" }
+about-libraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "about-libs" }
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

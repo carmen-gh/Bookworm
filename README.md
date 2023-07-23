@@ -6,7 +6,6 @@
 
 An app to keep an overview of all your books.
 
-
 ## Technology
 
 - Android
@@ -30,9 +29,9 @@ An app to keep an overview of all your books.
 
 - Following Google Architecture Guide
 - Data, Domain, Presentation layers approach
-- Unidirectional DataFlow  
+- Unidirectional DataFlow
 
+## Third party licenses
 
-### Third party licenses
 To generate or update the list of used libraries and their licenses run the following command
 `./gradlew app:exportLibraryDefinitions -PaboutLibraries.exportPath=src/main/res/raw/ -PaboutLibraries.exportVariant=release`
