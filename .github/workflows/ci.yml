@@ -31,7 +31,7 @@ jobs:
         run: ./gradlew testDebugUnitTest --stacktrace --no-daemon
 
       - name: Publish Test Report Unit Tests
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always()
         with:
           report_paths: 'app/build/test-results/testDebugUnitTest/TEST-*.xml'
@@ -94,7 +94,7 @@ jobs:
           script: ./gradlew connectedAndroidTest --continue --no-daemon
 
       - name: Publish Test Report of Instrumentation Tests
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always()
         with:
           check_name: 'Instrumentation Test Report'
