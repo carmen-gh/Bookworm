@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import androidx.window.layout.DisplayFeature
 import com.caminaapps.bookworm.core.navigation.TopLevelDestination
 import com.caminaapps.bookworm.features.bookshelf.navigation.BOOKSHELF_ROUTE
 import com.caminaapps.bookworm.features.bookshelf.navigation.navigateToBookshelf
@@ -27,6 +28,7 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun rememberBookwormAppState(
     windowSizeClass: WindowSizeClass,
+    displayFeatures: List<DisplayFeature>,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
 ): BookwormAppState {
@@ -34,11 +36,13 @@ fun rememberBookwormAppState(
         navController,
         coroutineScope,
         windowSizeClass,
+        displayFeatures,
     ) {
         BookwormAppState(
             navController,
             coroutineScope,
             windowSizeClass,
+            displayFeatures,
         )
     }
 }
@@ -48,6 +52,7 @@ class BookwormAppState(
     val navController: NavHostController,
     val coroutineScope: CoroutineScope,
     val windowSizeClass: WindowSizeClass,
+    val displayFeatures: List<DisplayFeature>,
 ) {
     val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination

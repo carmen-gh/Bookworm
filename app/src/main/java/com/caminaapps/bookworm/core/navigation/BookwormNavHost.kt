@@ -22,6 +22,8 @@ import com.caminaapps.bookworm.features.searchBookOnline.navigation.navigateToSe
 import com.caminaapps.bookworm.features.searchBookOnline.navigation.navigateToSearchBookByTitle
 import com.caminaapps.bookworm.features.searchBookOnline.navigation.searchBookByIsbnDestination
 import com.caminaapps.bookworm.features.searchBookOnline.navigation.searchBookByTitleDestination
+import com.caminaapps.bookworm.features.settings.navigation.licensesInfoDestination
+import com.caminaapps.bookworm.features.settings.navigation.navigateToLicensesInfo
 import com.caminaapps.bookworm.features.settings.navigation.settingsDestination
 import com.caminaapps.bookworm.features.wishlist.navigation.wishlistDestination
 
@@ -94,6 +96,14 @@ fun BookwormNavHost(
         wishlistDestination()
 
         // Settings --------------------------------------------------------------------------------
-        settingsDestination()
+        settingsDestination(
+            onLicenseInfo = navController::navigateToLicensesInfo
+        )
+
+        licensesInfoDestination(
+            displayFeatures = appState.displayFeatures,
+            windowSizeClass = appState.windowSizeClass,
+            onUpNavigation = navController::navigateUp
+        )
     }
 }

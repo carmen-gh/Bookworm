@@ -14,6 +14,7 @@ plugins {
     alias(libs.plugins.kover)
     alias(libs.plugins.ksp)
     alias(libs.plugins.test.logger)
+    alias(libs.plugins.about.libraries)
 }
 
 android {
@@ -98,6 +99,8 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 dependencies {
+    implementation(libs.about.libs)
+    implementation(libs.accompanist.adaptive)
     implementation(libs.activity.compose)
     implementation(libs.appcompat)
     implementation(libs.camera.camera2)
@@ -230,4 +233,8 @@ koverReport {
 
 testlogger {
     theme = MOCHA
+}
+
+aboutLibraries {
+    registerAndroidTasks = false
 }

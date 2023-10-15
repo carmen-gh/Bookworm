@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.ExperimentalComposeUiApi
+import com.google.accompanist.adaptive.calculateDisplayFeatures
 import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalComposeUiApi
@@ -17,8 +18,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val displayFeatures = calculateDisplayFeatures(this)
             val windowSizeClass = calculateWindowSizeClass(this)
-            BookwormApp(windowSizeClass)
+            BookwormApp(
+                windowSizeClass = windowSizeClass,
+                displayFeatures = displayFeatures
+            )
         }
     }
 }
