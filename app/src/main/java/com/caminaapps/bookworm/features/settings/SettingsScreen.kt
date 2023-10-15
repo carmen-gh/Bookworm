@@ -6,6 +6,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.component.TrackedScreen
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -22,9 +24,8 @@ fun SettingsScreen(
         }
     ) {
         TrackedScreen(name = "Settings")
-        Text("- Settings -")
         Button(onClick = onLicenseInfoClick) {
-            Text(text = "Licenses") // TODO translate
+            Text(text = stringResource(id = R.string.screen_title_license))
         }
     }
 }

@@ -28,9 +28,11 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.window.layout.DisplayFeature
+import com.caminaapps.bookworm.R
 import com.caminaapps.bookworm.core.ui.component.ListDetail
 import com.caminaapps.bookworm.core.ui.component.SelectionVisibilityState
 import com.caminaapps.bookworm.core.ui.component.TopAppBarNavigationUp
@@ -55,7 +57,7 @@ fun LicenseScreen(
     Scaffold(
         topBar = {
             TopAppBarNavigationUp(
-                title = "lajlsjf",
+                title = stringResource(id = R.string.screen_title_license),
                 onClick = onUpNavigationClick,
             )
         }
@@ -109,7 +111,7 @@ fun LicenseScreen(
                 splitFraction = 1f / 3f,
             ),
             displayFeatures = displayFeatures,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(innerPadding)
         )
     }
 }
