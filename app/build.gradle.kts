@@ -1,6 +1,5 @@
 import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.android.application)
@@ -35,14 +34,14 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
-        getByName("debug") {
+        debug {
             extra["alwaysUpdateBuildId"] = false
             configure<CrashlyticsExtension> {
                 mappingFileUploadEnabled = false
@@ -54,17 +53,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlin {
-        jvmToolchain(17)
+    kotlinOptions {
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
-
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
-
     packaging {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
@@ -84,17 +81,6 @@ android {
         xmlReport = true
         sarifReport = true
         checkDependencies = true
-    }
-}
-
-// Allow references to generated code (room)
-kapt {
-    correctErrorTypes = true
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = "17"
     }
 }
 
