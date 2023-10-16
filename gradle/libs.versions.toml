@@ -1,6 +1,6 @@
 [versions]
 about-libs = "10.8.3"
-accompanist = "0.30.1"
+accompanist = "0.32.0"
 android-gradle-plugin = "8.1.2"
 android-test = "1.5.0"
 android-test-ext_junit = "1.1.5"
