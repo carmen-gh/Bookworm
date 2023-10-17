@@ -37,7 +37,7 @@ play-services-code-scanner = "16.1.0"
 retrofit = "2.9.0"
 retrofit-serialization-converter = "1.0.0"
 room = "2.5.2"
-test-logger = "3.2.0"
+test-logger = "4.0.0"
 timber = "5.0.1"
 turbine = "1.0.0"
 
