@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onStart
  * this is already triggered and still in loading.
  */
 sealed interface AsyncResult<out T> {
-    object Loading : AsyncResult<Nothing>
+    data object Loading : AsyncResult<Nothing>
     data class Success<T>(val data: T) : AsyncResult<T>
     data class Failure(val exception: Throwable? = null) : AsyncResult<Nothing>
 }
