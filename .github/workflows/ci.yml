@@ -22,7 +22,7 @@ jobs:
           java-version: 17
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
 
       - name: Build app variants
         run: ./gradlew assemble --stacktrace
@@ -82,7 +82,7 @@ jobs:
           java-version: 17
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
 
       - name: Instrumentation Tests
         uses: reactivecircus/android-emulator-runner@v2
