@@ -39,7 +39,7 @@ retrofit-serialization-converter = "1.0.0"
 room = "2.6.1"
 test-logger = "4.0.0"
 timber = "5.0.1"
-turbine = "1.0.0"
+turbine = "1.1.0"
 
 # @keep
 compileSdk = "34"
